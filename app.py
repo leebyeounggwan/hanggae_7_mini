@@ -66,9 +66,9 @@ def write_post():
     return jsonify({'msg': 'saved'})
 
 
-@app.route('/drama', methods=["GET"])
-def detail():
-    return render_template("detail.html")
+# @app.route('/drama', methods=["GET"])
+# def detail():
+#     return render_template("detail.html")
 
 
 ############ 재영 로그인 API #################
