@@ -1,1 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    *{
+        background-color: black;
+    }
+.header{
+    /*border: 1px solid white;*/
+    width: auto;
+    height: 100px;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    vertical-align: center;
+}
 
+.logo{
+    /*border: 1px solid white;*/
+    height: 50px;
+}
+
+.button_head{
+    /*border: 1px solid white;*/
+    margin-top: 25px;
+    height: 50px;
+}
+
+.button{
+    color: white;
+    background-color: transparent;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px white;
+}
+
+.body{
+    /*border: 1px solid white;*/
+    width: auto;
+    padding: 30px;
+    height: 600px;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.write{
+    text-align: center;
+    border-radius: 15px;
+    border: 2px solid rgb(255, 27, 0);
+    width: 700px;
+    height: 600px;
+    padding: 25px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.write_head{
+    margin: 35px;
+    vertical-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.write_synop{
+    margin: 20px;
+}
+
+.write_comm{
+    margin: 20px;
+}
+
+.button_write {
+    margin-top: 40px;
+    margin-right: 25px;
+    width: 100px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background: rgb(255, 27, 0);
+    color: white;
+    font-size: 15px;
+    font-family: 'Nanum Gothic', sans-serif;
+    border-radius: 13px;
+}
+
+.button_back{
+    width: 100px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background: rgb(255, 27, 0);
+    color: white;
+    font-size: 15px;
+    font-family: 'Nanum Gothic', sans-serif;
+    border-radius: 13px;
+}
+
+.footer{
+    /*border: 1px solid white;*/
+    width: auto;
+    height: 50px;
+    background-color: black;
+    color: white;
+}
+    </style>
+</head>
+
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    function posting() {
+        let title = $('#title').val()
+        let star = $('#star').val()
+        let synopsis = $('#synopsis').val()
+        let comment = $('#comment').val()
+        let image = $('#image_url').val()
+
+        $.ajax({
+            type: 'POST',
+            url: '/drama',
+            data: { title_give: title, star_give: star, comment_give: comment, synopsis_give: synopsis, image_give: image },
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload()
+            }
+        });
+    }
+</script>
+<div class="header">
+    <div class="logo">
+        <img src="/static/naeflix.png" onclick="" width="25%" style="margin-left: 25px; margin-top: 25px;">
+    </div>
+    <div class="button_head">
+        <button class="button 1" onclick="">Log-in</button>
+        <button class="button 2" onclick="">Write</button>
+    </div>
+</div>
+
+<div class="body">
+    <div class="write">
+        <div style="margin-top: 40px; margin-bottom: 60px;"><label style="font-size: x-large; color: white;"><b>나만의 리뷰 작성 하기</b></label></div>
+        <div class="write_head">
+            <input class="write_title" id="title" placeholder="드라마 제목"
+                   style="width: 300px; height: 8px; border: none; background-color: white; padding: 15px; border-radius: 10px;">
+            <div class="write_sel">
+                <select id="star" style="width:200px; height: 39px; background-color: white;">
+                    <option selected="">나만의 평점</option>
+                    <option value="1">⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                </select>
+            </div>
+        </div>
+        <div class="write_synop">
+            <textarea id="synopsis" placeholder="시놉시스" style="width: 600px; height: 80px; border: none; background-color: white; padding: 15px; border-radius: 10px;"></textarea>
+        </div>
+        <div class="write_comm">
+            <textarea id="comment" placeholder="코멘트" style="width: 600px; height: 80px; border: none; background-color: white; padding: 15px; border-radius: 10px;"></textarea>
+        </div>
+        <div class="write_img">
+            <input id="image_url" placeholder="이미지 url" style="width: 600px; height: 5px; border: none; background-color: white; padding: 15px; border-radius: 10px;">
+        </div>
+        <div>
+            <button onclick="posting()" class="button_write">작성하기</button>
+            <button onclick="" class="button_back">뒤로가기</button>
+        </div>
+    </div>
+</div>
+<div class="footer">
+</div>
+</body>
+</html>
