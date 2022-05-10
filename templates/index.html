@@ -108,7 +108,7 @@
 
         .wrap {
             border: solid 3px rgb(255, 27, 0);
-            border-radius: 8px;
+            border-radius: 10px;
             background-color: black;
             max-width: 1000px;
             width: 900px;
@@ -131,18 +131,21 @@
             /*border: 1px solid white;*/
             width: 250px;
             height: 300px;
+            border-radius: 10px;
         }
         
         .movie_image{
             width: 250px;
             height: 300px;
-            object-fit: cover;            
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .content-box {
             /*border: 1px solid white;*/
             width: 600px;
             height: 300px;
+            border-radius: 10px;
         }
 
         .content {
@@ -222,7 +225,7 @@
                                                     <img class=movie_image src="${image}"/>
                                                 </div>
                                                 <div class="content-box">
-                                                    <p class="content" style="height: 55px; font-size: 20px;">${title}</p>
+                                                    <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
                                                     <p class="content" style="height: 100px;">${synopsis}</p>
                                                     <p class="content" style="height: 100px;">${comment}</p>
                                                 </div>
@@ -266,7 +269,7 @@
                                                         <img class=movie_image src="${image}"/>
                                                     </div>
                                                     <div class="content-box">
-                                                        <p class="content" style="height: 55px; font-size: 20px;">${title}</p>
+                                                        <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
                                                         <p class="content" style="height: 100px;">${synopsis}</p>
                                                         <p class="content" style="height: 100px;">${comment}</p>
                                                     </div>
