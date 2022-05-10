@@ -18,45 +18,76 @@
     <title>회원가입 | Naeflix</title>
 
 
-<style>
+    <style>
 
-    * {
-        background-color: black;
-        color: white;
-    }
+        * {
+            background-color: black;
+            color: white;
+        }
 
-    h1 {
-        margin: 20px 0px 30px 0px;
-    }
+        h1 {
+            margin: 20px 0px 30px 0px;
+        }
 
-    .logo {
-        height: 50px;
-    }
+        .logo {
+            height: 50px;
+        }
 
-    header {
-        padding: 10px 0px 0px 20px;
-    }
+        header {
+            padding: 10px 0px 0px 20px;
+        }
 
-    .register-box {
-        width: 95%;
-        max-width: 700px;
-        padding: 20px;
-        margin: 20px auto;
-        align-items: center;
-        text-align: center;
+        .register-box {
+            width: 95%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 20px auto;
+            align-items: center;
+            text-align: center;
 
-        border-radius: 15px;
-        border: 2px solid red;
-    }
+            border-radius: 15px;
+            border: 2px solid red;
+        }
 
-    .help {
-        text-align: left;
-        padding-bottom: 15px;
-        color: darkgrey;
-    }
+        .help {
+            padding-bottom: 15px;
+            color: darkgrey;
 
+        }
 
-</style>
+        .red-btn {
+
+            width: 100px;
+            height: 30px;
+            margin: 5px;
+            border: none;
+            background: rgb(255, 27, 0);
+            color: white;
+            font-size: 15px;
+            border-radius: 13px;
+        }
+
+        .input-box{
+            width: 350px;
+            height: 20px;
+            border: none;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom : 25px;
+        }
+
+        .input-box-id{
+            width: 245px;
+            height: 20px;
+            border: none;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom : 25px;
+        }
+
+    </style>
 
     <script>
         function sign_up() {
@@ -181,35 +212,23 @@
         <div class="register-box">
             <h1>회원가입</h1>
 
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" id="input-username" placeholder="아이디" aria-label="Recipient's username" aria-describedby="button-addon2">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="check_dup()">중복확인</button>
-            </div>
-
+            <input type="text" class="input-box-id" id="input-username" placeholder="아이디" >
+            <button type="button" onclick="check_dup()" class="red-btn">중복확인</button>
             <p id="help-id" class="help">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
 
-            <div class="input-group mb-3">
-              <input type="password" class="form-control" id="input-password" placeholder="비밀번호" aria-label="Uername" aria-describedby="basic-addon1">
-            </div>
+            <input type="password" class="input-box" id="input-password" placeholder="비밀번호">
+            <p id="help-password" class="help">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요.</p>
 
-            <p id="help-password" class="help">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요. 특수문자(!@#$%^&*)도 사용 가능합니다.</p>
-
-            <div class="input-group mb-3">
-              <input type="password" id="input-password2" class="form-control" placeholder="비밀번호 재입력" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-
+            <input type="password" id="input-password2" class="input-box" placeholder="비밀번호 재입력">
             <p id="help-password2" class="help">비밀번호를 다시 한 번 입력해주세요.</p>
 
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" id="input-nickname" placeholder="닉네임" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+            <input type="text" class="input-box" id="input-nickname" placeholder="닉네임">
 
             <p id="help-nickname" class="help">사용하실 닉네임을 입력해주세요.</p>
 
-            <div>
-                <button type="button" class="btn btn-danger" onclick="sign_up()">가입하기</button>
-                <a href="/"><button type="button" class="btn btn-secondary">메인으로</button></a>
-            </div>
+            <button type="button" class="red-btn" onclick="sign_up()">가입하기</button>
+            <a href="/"><button class="red-btn" type="button">메인으로</button></a>
+
         </div>
     </div>
 </body>
