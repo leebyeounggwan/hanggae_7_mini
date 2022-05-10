@@ -41,19 +41,11 @@ def write_index():
         userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
         print (userinfo)
         return jsonify({'result': 'success', 'userinfo':userinfo['nick']})
-        # return render_template('write_index.html')
 
     except jwt.ExpiredSignatureError:
-        # return render_template('index.html', msg=msg)
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
-        # return render_template('index.html', msg=msg)
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
-
-    # except jwt.ExpiredSignatureError:
-    #     return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    # except jwt.exceptions.DecodeError:
-    #     return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
 
 ########## 게시물 기입 - 천희님 ##########
@@ -100,7 +92,11 @@ def api_login():
             'id': id_receive,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60)
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+
+        #로컬환경(PyCharm)에서는 decode('utf-8')을 제거해줘야 작동합니다.
+        #ubuntu 서버에 올렸을 때는 반드시 해당 부분이 있어야 작동합니다. 원리가 뭘까요? 몰?루
 
         return jsonify({'result': 'success', 'token': token, 'nick': result['nick']})
     else:
