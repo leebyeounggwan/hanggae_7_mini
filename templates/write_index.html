@@ -121,6 +121,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
+    $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "user_check",
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        userinfo = response['userinfo']
+                        console.log(userinfo)
+                    } else {
+                        // 로그인이 안되면 에러메시지를 띄웁니다.
+                        alert(response['msg'])
+                    }
+                }
+            })
+    });
+
     function gomain() {
         window.location.href = "/"
     }
@@ -129,12 +145,12 @@
         if ($("#title").val().length == 0) {
             alert("제목을 입력 하세요");$("#title").focus(); return false;
         } else {
-            ($("#title").val().length == 1)
             posting(); $("#title").focus(); return true;
         }
     }
 
     function posting() {
+        let usernick = userinfo
         let title = $('#title').val()
         let star = $('#star').val()
         let synopsis = $('#synopsis').val()
@@ -144,7 +160,7 @@
         $.ajax({
             type: 'POST',
             url: '/drama',
-            data: { title_give: title, star_give: star, comment_give: comment, synopsis_give: synopsis, image_give: image },
+            data: { usernick_give : usernick, title_give: title, star_give: star, comment_give: comment, synopsis_give: synopsis, image_give: image },
             success: function (response) {
                 alert(response['msg'])
                 window.location.reload()
