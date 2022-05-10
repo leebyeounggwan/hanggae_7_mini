@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a47033c40a.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            background-color: black;
+        }
+
+        .header {
+            /*border: 1px solid white;*/
+            width: auto;
+            height: 100px;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            vertical-align: center;
+        }
+
+        .logo {
+            /*border: 1px solid white;*/
+            height: 50px;
+        }
+
+        .button_head {
+            /*border: 1px solid white;*/
+            margin-top: 25px;
+            height: 50px;
+        }
+
+        .button {
+            color: white;
+            background-color: transparent;
+            font-size: 15px;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px white;
+        }
+
+        .search_box {
+
+            width: auto;
+            padding: 30px;
+            height: 200px;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        .search_bar {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 40%;
+            height: 50px;
+            border-color: red;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .search_icon {
+
+            margin-left: 20px;
+            height: 50px;
+            color: white;
+
+        }
+
+        .wrap {
+            border: solid 1px red;
+            background-color: black;
+            margin: 0 250px;
+            height: 250px;
+            margin-bottom: 30px;
+        }
+
+
+        .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+        }
+
+        .image {
+
+            height: 230px;
+            display: flex;
+            justify-content: center;
+            width: 45%;
+        }
+
+        .content-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .movie_image {
+            object-fit: cover;
+        }
+
+
+
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        function listing() {
+            $('#post-box').empty()
+            $.ajax({
+                type: "GET",
+                url: "/drama",
+                data: {},
+                success: function (response) {
+                    let rows = response['dramas']
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['title']
+                        let image = rows[i]['image']
+                        let star = rows[i]['star']
+                        let synopsis = rows[i]['synopsis']
+                        let comment = rows[i]['comment']
+
+                        let temp_html = `<div class="wrap">
+                                        <div class="image" >
+                                            <img class= movie_image src="${image}"/>
+                                        </div>
+                                        <div class="content-box">
+                                            <p class="content">${title}</p>
+                                            <p class="content">${synopsis}</p>
+                                            <p class="content">${comment}</p>
+                                        </div>
+                                    </div>`
+                        $('#post-box').append(temp_html)
+                    }
+                    console.log(response)
+                }
+            });
+        }
+
+        function find_word() {
+            $('#post-box').empty()
+            let check = false
+            $.ajax({
+                type: 'GET',
+                url: '/drama',
+                data: {},
+                success: function (response) {
+                    // console.log(response['books'])
+                    let rows = response['dramas']
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['title']
+                        let movie_num = rows[i]
+
+                        let movie = $("#search_bars").val()
+
+                        if (title.includes(movie)) {
+                            let title = rows[i]['title']
+                            let image = rows[i]['image']
+                            let star = rows[i]['star']
+                            let synopsis = rows[i]['synopsis']
+                            let comment = rows[i]['comment']
+
+                            let star_img = '💙'.repeat(star)
+
+                            let temp_html = `<div class="wrap">
+                                                <div class="image">
+                                                    <img class= movie_image src="${image}" />
+                                                </div>
+                                                <div class="content-box">
+                                                    <p class="content">${title}</p>
+                                                    <p class="content">${synopsis}</p>
+                                                    <p class="content">${comment}</p>
+                                                </div>
+                                            </div>`
+                            $('#post-box').append(temp_html)
+                            {#$(`#` + movie_num).addClass("highlight")#}
+                            {#$(`#` + movie_num)[0].scrollIntoView()#}
+                            check = true
+                        }
+                    }
+                    if (check === false) {
+                        alert('해당하는 영화가 없습니다')
+                        window.location.href = '/'
+                    }
+                }
+            })
+        }
+
+    </script>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">
+        <img src="/static/naeflix.png" onclick="" width="25%" style="margin-left: 25px; margin-top: 25px;">
+    </div>
+    <div class="button_head">
+        <button class="button 1" onclick="">Log-in</button>
+        <button class="button 2" onclick="">Write</button>
+    </div>
+</div>
+
+<div class="search_box">
+    <input id="search_bars" class="search_bar" type="text" placeholder="영화제목 입력"/>
+    <button class="search_icon" onclick="find_word()"><i class="fa fa-search"></i></button>
+</div>
+
+
+<div id="post-box">
+
+</div>
+
+<div class="footer">
+</div>
+<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+</body>
+</html>
