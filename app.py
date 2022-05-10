@@ -92,11 +92,7 @@ def api_login():
             'id': id_receive,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60)
         }
-        #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-
-        #로컬환경(PyCharm)에서는 decode('utf-8')을 제거해줘야 작동합니다.
-        #ubuntu 서버에 올렸을 때는 반드시 해당 부분이 있어야 작동합니다. 원리가 뭘까요? 몰?루
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         return jsonify({'result': 'success', 'token': token, 'nick': result['nick']})
     else:
