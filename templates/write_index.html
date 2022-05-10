@@ -120,6 +120,11 @@
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+
+    function gomain() {
+        window.location.href = "/"
+    }
+
     function posting() {
         let title = $('#title').val()
         let star = $('#star').val()
@@ -140,7 +145,7 @@
 </script>
 <div class="header">
     <div class="logo">
-        <img src="/static/naeflix.png" onclick="" width="25%" style="margin-left: 25px; margin-top: 25px;">
+        <img src="/static/naeflix.png" onclick="gomain()" width="25%" style="margin-left: 25px; margin-top: 25px;">
     </div>
     <div class="button_head">
         <button class="button 1" onclick="">Log-in</button>
