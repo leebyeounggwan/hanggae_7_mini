@@ -17,7 +17,6 @@
 
     <title>회원가입 | Naeflix</title>
 
-
     <style>
 
         * {
@@ -50,8 +49,9 @@
         }
 
         .help {
-            padding-bottom: 15px;
+            padding-bottom: 10px;
             color: darkgrey;
+            font-size: small;
         }
 
         .red-btn {
@@ -72,7 +72,7 @@
             background-color: white;
             padding: 15px;
             border-radius: 10px;
-            margin-bottom : 25px;
+            margin-bottom : 5px;
         }
 
         .input-box-id{
@@ -82,9 +82,14 @@
             background-color: white;
             padding: 15px;
             border-radius: 10px;
-            margin-bottom : 25px;
+            margin-bottom : 5px;
         }
 
+        .content-box {
+            width: 360px;
+            margin: auto;
+            text-align: left;
+        }
     </style>
 
     <script>
@@ -208,23 +213,24 @@
         <div class="register-box">
             <h1>회원가입</h1>
 
-            <input type="text" class="input-box-id" id="input-username" placeholder="아이디" >
-            <button type="button" onclick="check_dup()" class="red-btn">중복확인</button>
-            <p id="help-id" class="help">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
+            <div class="content-box">
+                <input type="text" class="input-box-id" id="input-username" placeholder="아이디" >
+                <button type="button" onclick="check_dup()" class="red-btn">중복확인</button>
+                <p id="help-id" class="help">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
 
-            <input type="password" class="input-box" id="input-password" placeholder="비밀번호">
-            <p id="help-password" class="help">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요.</p>
+                <input type="password" class="input-box" id="input-password" placeholder="비밀번호">
+                <p id="help-password" class="help">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요. 특수문자(!@#$%^&*)도 사용 가능합니다.</p>
 
-            <input type="password" id="input-password2" class="input-box" placeholder="비밀번호 재입력">
-            <p id="help-password2" class="help">비밀번호를 다시 한 번 입력해주세요.</p>
+                <input type="password" id="input-password2" class="input-box" placeholder="비밀번호 재입력">
+                <p id="help-password2" class="help">비밀번호를 다시 한 번 입력해주세요.</p>
 
-            <input type="text" class="input-box" id="input-nickname" placeholder="닉네임">
+                <input type="text" class="input-box" id="input-nickname" placeholder="닉네임">
 
-            <p id="help-nickname" class="help">사용하실 닉네임을 입력해주세요.</p>
+                <p id="help-nickname" class="help">사용하실 닉네임을 입력해주세요.</p>
 
-            <button type="button" class="red-btn" onclick="sign_up()">가입하기</button>
-            <a href="/"><button class="red-btn" type="button">메인으로</button></a>
-
+                <button type="button" class="red-btn" onclick="sign_up()">가입하기</button>
+                <a href="/"><button class="red-btn" type="button">메인으로</button></a>
+            </div>
         </div>
     </div>
 </body>
