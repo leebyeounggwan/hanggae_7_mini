@@ -143,7 +143,14 @@ def check_dup():
     id_receive = request.form['id_give']
     exists = bool(db.users.find_one({"id": id_receive}))
     return jsonify({'result': 'success', 'exists': exists})
-########################
+
+############ 병관 ############
+
+
+@app.route('/drama', methods=["GET"])
+def drama_get():
+    drama_list = list(db.drama.find({},{'_id':False}))
+    return jsonify({'dramas': drama_list})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
