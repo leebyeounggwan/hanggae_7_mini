@@ -22,11 +22,11 @@
 
         * {
             background-color: black;
-            color: white;
         }
 
         h1 {
             margin: 20px 0px 30px 0px;
+            color: white;
         }
 
         .logo {
@@ -52,11 +52,9 @@
         .help {
             padding-bottom: 15px;
             color: darkgrey;
-
         }
 
         .red-btn {
-
             width: 100px;
             height: 30px;
             margin: 5px;
@@ -108,27 +106,27 @@
 
             // 비밀번호 체크
             if (password == "") {
-                $("#help-password").text("비밀번호를 입력해주세요.")
+                $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
                 $("#help-password").css("color","red")
                 return;
             } else if (!is_password(password)) {
-                $("#help-password").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자")
+                $("#help-password").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자").removeClass("is-safe").addClass("is-danger")
                 $("#help-password").css("color","red")
                 return
             } else {
-                $("#help-password").text("사용할 수 있는 비밀번호입니다.")
+                $("#help-password").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
                 $("#help-password").css("color","green")
             }
             if (password2 == "") {
-                $("#help-password2").text("비밀번호를 입력해주세요.")
+                $("#help-password2").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
                 $("#help-password2").css("color","red")
                 return;
             } else if (password2 != password) {
-                $("#help-password2").text("비밀번호가 일치하지 않습니다.")
+                $("#help-password2").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
                 $("#help-password2").css("color","red")
                 return;
             } else {
-                $("#help-password2").text("비밀번호가 일치합니다.")
+                $("#help-password2").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
                 $("#help-password2").css("color","green")
             }
 
@@ -169,8 +167,6 @@
 
         function check_dup() {
             let username = $("#input-username").val()
-            console.log(username)
-
 
             if (username == "") {
                 $("#help-id").text("아이디를 입력해주세요.")
@@ -186,17 +182,17 @@
             // 서버에 요청해서 이미 존재하는 아이디인지 체크
             $.ajax({
                 type: "POST",
-                url: "/sign_up/check_dup",
+                url: "/api/register/check_dup",
                 data: {
                     id_give: username
                 },
                 success: function (response) {
 
                     if (response["exists"]) {
-                        $("#help-id").text("이미 존재하는 아이디입니다.")
+                        $("#help-id").text("이미 존재하는 아이디입니다.").removeClass("is-safe").addClass("is-danger")
                         $("#help-id").css("color","red")
                     } else {
-                        $("#help-id").text("사용할 수 있는 아이디입니다.")
+                        $("#help-id").text("사용할 수 있는 아이디입니다.").removeClass("is-danger").addClass("is-success")
                         $("#help-id").css("color","green")
                     }
                 }

@@ -136,8 +136,9 @@ def sign_up():
 
     return jsonify({'result': 'success'})
 
+
 # 아이디 중복 확인
-@app.route('/sign_up/check_dup', methods=['POST'])
+@app.route('/api/register/check_dup', methods=['POST'])
 def check_dup():
     id_receive = request.form['id_give']
     exists = bool(db.users.find_one({"id": id_receive}))
