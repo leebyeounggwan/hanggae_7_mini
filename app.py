@@ -53,7 +53,7 @@ def write_post():
         'comment': comment_receive
     }
     db.drama.insert_one(doc)
-    return jsonify({'msg': 'saved'})
+    return jsonify({'msg': '저장 되었습니다.'})
 
 
 # @app.route('/drama', methods=["GET"])
