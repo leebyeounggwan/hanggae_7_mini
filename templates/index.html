@@ -204,7 +204,7 @@
             $.ajax({
                 type: "GET",
                 url: "/drama",
-                data: {},
+
                 success: function (response) {
                     let rows = response['dramas']
                     for (let i = 0; i < rows.length; i++) {
@@ -239,7 +239,7 @@
             $.ajax({
                 type: 'GET',
                 url: '/drama',
-                data: {},
+
                 success: function (response) {
                     // console.log(response['books'])
                     let rows = response['dramas']
