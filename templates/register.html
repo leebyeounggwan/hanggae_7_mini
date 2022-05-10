@@ -43,7 +43,7 @@
         .register-box {
             width: 95%;
             max-width: 600px;
-            padding: 20px;
+            padding: 20px 0px 40px 0px;
             margin: 20px auto;
             align-items: center;
             text-align: center;
@@ -64,6 +64,17 @@
             margin: 5px;
             border: none;
             background: rgb(255, 27, 0);
+            color: white;
+            font-size: 15px;
+            border-radius: 13px;
+        }
+
+        .white-btn {
+            width: 100px;
+            height: 30px;
+            margin: 5px;
+            border: 1px white solid;
+            background: transparent;
             color: white;
             font-size: 15px;
             border-radius: 13px;
@@ -237,8 +248,7 @@
                 <p id="help-nickname" class="help">사용하실 닉네임을 입력해주세요.</p>
             </div>
             <button type="button" class="red-btn" onclick="sign_up()">가입하기</button>
-            <a href="/"><button class="red-btn" type="button">메인으로</button></a>
-
+            <a href="/"><button class="white-btn" type="button">메인으로</button></a>
         </div>
     </div>
 </body>
