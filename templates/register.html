@@ -100,7 +100,7 @@
             let nickname = $("#input-nickname").val()
 
 
-            // 아이디 중복 검사 했는지 체크
+            // 아이디 검사 했는지 체크
             if ($("#help-id").hasClass("is-danger")) {
                 alert("아이디를 다시 확인해주세요.")
                 return;
@@ -110,11 +110,11 @@
             }
 
             // 비밀번호 체크
-            if (password == "") {
+            if (password == "") { // 입력하지 않은 경우
                 $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
                 $("#help-password").css("color","red")
                 return;
-            } else if (!is_password(password)) {
+            } else if (!is_password(password)) {  // 정규표현식에 맞지 않는 경우
                 $("#help-password").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자").removeClass("is-safe").addClass("is-danger")
                 $("#help-password").css("color","red")
                 return
@@ -122,11 +122,13 @@
                 $("#help-password").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
                 $("#help-password").css("color","green")
             }
-            if (password2 == "") {
+
+            // 비밀번호 재입력 체크
+            if (password2 == "") {  // 입력하지 않은 경우
                 $("#help-password2").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
                 $("#help-password2").css("color","red")
                 return;
-            } else if (password2 != password) {
+            } else if (password2 != password) {  // 첫번째 인풋과 일치하진 않는 경우
                 $("#help-password2").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
                 $("#help-password2").css("color","red")
                 return;
@@ -135,12 +137,14 @@
                 $("#help-password2").css("color","green")
             }
 
-            if (nickname == "") {
+            // 닉네임 체크
+            if (nickname == "") {   // 입력하지 않은 경우
                 $("#help-nickname").text("닉네임을 입력해주세요.")
                 $("#help-nickname").css("color","red")
                 return;
             }
 
+            // 모든 조건 통과 시 서버로 정보 전달
             $.ajax({
                 type: "POST",
                 url: "/api/register",
@@ -169,16 +173,16 @@
             return regExp.test(asValue);
         }
 
-
+        // 아이디 검사
         function check_dup() {
             let username = $("#input-username").val()
 
-            if (username == "") {
+            if (username == "") { // 입력하지 않은 경우
                 $("#help-id").text("아이디를 입력해주세요.")
                 $("#help-id").css("color","red")
                 return;
             }
-            if (!is_nickname(username)) {
+            if (!is_nickname(username)) {  // 정규표현식에 맞지 않는 경우
                 $("#help-id").text("아이디의 형식을 확인해주세요. 영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이")
                 $("#help-id").css("color","red")
                 return;
@@ -227,10 +231,10 @@
                 <input type="text" class="input-box" id="input-nickname" placeholder="닉네임">
 
                 <p id="help-nickname" class="help">사용하실 닉네임을 입력해주세요.</p>
-
-                <button type="button" class="red-btn" onclick="sign_up()">가입하기</button>
-                <a href="/"><button class="red-btn" type="button">메인으로</button></a>
             </div>
+            <button type="button" class="red-btn" onclick="sign_up()">가입하기</button>
+            <a href="/"><button class="red-btn" type="button">메인으로</button></a>
+
         </div>
     </div>
 </body>
