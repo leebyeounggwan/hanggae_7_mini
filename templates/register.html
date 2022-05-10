@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <title>회원가입 | Naeflix</title>
+
+
+    <style>
+
+        * {
+            background-color: black;
+        }
+
+        h1 {
+            margin: 20px 0px 30px 0px;
+            color: white;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        header {
+            padding: 10px 0px 0px 20px;
+        }
+
+        .register-box {
+            width: 95%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 20px auto;
+            align-items: center;
+            text-align: center;
+
+            border-radius: 15px;
+            border: 2px solid red;
+        }
+
+        .help {
+            padding-bottom: 15px;
+            color: darkgrey;
+        }
+
+        .red-btn {
+            width: 100px;
+            height: 30px;
+            margin: 5px;
+            border: none;
+            background: rgb(255, 27, 0);
+            color: white;
+            font-size: 15px;
+            border-radius: 13px;
+        }
+
+        .input-box{
+            width: 350px;
+            height: 20px;
+            border: none;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom : 25px;
+        }
+
+        .input-box-id{
+            width: 245px;
+            height: 20px;
+            border: none;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom : 25px;
+        }
+
+    </style>
+
+    <script>
+        function sign_up() {
+            let username = $("#input-username").val()
+            let password = $("#input-password").val()
+            let password2 = $("#input-password2").val()
+            let nickname = $("#input-nickname").val()
+
+
+            // 아이디 중복 검사 했는지 체크
+            if ($("#help-id").hasClass("is-danger")) {
+                alert("아이디를 다시 확인해주세요.")
+                return;
+            } else if (!$("#help-id").hasClass("is-success")) {
+                alert("아이디 중복확인을 해주세요.")
+                return;
+            }
+
+            // 비밀번호 체크
+            if (password == "") {
+                $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                $("#help-password").css("color","red")
+                return;
+            } else if (!is_password(password)) {
+                $("#help-password").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자").removeClass("is-safe").addClass("is-danger")
+                $("#help-password").css("color","red")
+                return
+            } else {
+                $("#help-password").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
+                $("#help-password").css("color","green")
+            }
+            if (password2 == "") {
+                $("#help-password2").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                $("#help-password2").css("color","red")
+                return;
+            } else if (password2 != password) {
+                $("#help-password2").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+                $("#help-password2").css("color","red")
+                return;
+            } else {
+                $("#help-password2").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+                $("#help-password2").css("color","green")
+            }
+
+            if (nickname == "") {
+                $("#help-nickname").text("닉네임을 입력해주세요.")
+                $("#help-nickname").css("color","red")
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/api/register",
+                data: {
+                    id_give: username,
+                    pw_give: password,
+                    nick_give: nickname
+                },
+                success: function (response) {
+                    alert("회원가입을 완료했습니다!")
+                    window.location.replace("/login")
+                }
+            });
+
+        }
+
+        // 정규표현식을 이용하여 아이디, 비밀번호 유효성 검사하기
+        // 영문과 숫자, 일부 특수문자(._-)만 사용 가능, 2-10자 길이. 영문 무조건 포함
+        function is_nickname(asValue) {
+            let regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+            return regExp.test(asValue);
+        }
+        // 영문, 숫자는 1개 씩 무조건 포함, 일부 특수문자 사용 가능, 8-20자 길이
+        function is_password(asValue) {
+            let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+            return regExp.test(asValue);
+        }
+
+
+        function check_dup() {
+            let username = $("#input-username").val()
+
+            if (username == "") {
+                $("#help-id").text("아이디를 입력해주세요.")
+                $("#help-id").css("color","red")
+                return;
+            }
+            if (!is_nickname(username)) {
+                $("#help-id").text("아이디의 형식을 확인해주세요. 영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이")
+                $("#help-id").css("color","red")
+                return;
+            }
+
+            // 서버에 요청해서 이미 존재하는 아이디인지 체크
+            $.ajax({
+                type: "POST",
+                url: "/api/register/check_dup",
+                data: {
+                    id_give: username
+                },
+                success: function (response) {
+
+                    if (response["exists"]) {
+                        $("#help-id").text("이미 존재하는 아이디입니다.").removeClass("is-safe").addClass("is-danger")
+                        $("#help-id").css("color","red")
+                    } else {
+                        $("#help-id").text("사용할 수 있는 아이디입니다.").removeClass("is-danger").addClass("is-success")
+                        $("#help-id").css("color","green")
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <a href="/"><header><img src="../static/naeflix.png" class="logo"></header></a>
+
+    <div class="p-3 mb-2 bg-black">
+        <div class="register-box">
+            <h1>회원가입</h1>
+
+            <input type="text" class="input-box-id" id="input-username" placeholder="아이디" >
+            <button type="button" onclick="check_dup()" class="red-btn">중복확인</button>
+            <p id="help-id" class="help">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
+
+            <input type="password" class="input-box" id="input-password" placeholder="비밀번호">
+            <p id="help-password" class="help">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요.</p>
+
+            <input type="password" id="input-password2" class="input-box" placeholder="비밀번호 재입력">
+            <p id="help-password2" class="help">비밀번호를 다시 한 번 입력해주세요.</p>
+
+            <input type="text" class="input-box" id="input-nickname" placeholder="닉네임">
+
+            <p id="help-nickname" class="help">사용하실 닉네임을 입력해주세요.</p>
+
+            <button type="button" class="red-btn" onclick="sign_up()">가입하기</button>
+            <a href="/"><button class="red-btn" type="button">메인으로</button></a>
+
+        </div>
+    </div>
+</body>
+
+</html>
