@@ -44,7 +44,7 @@
         }
 
         .button_head {
-            border: 1px solid white;
+            
             margin-top: 25px;
             height: 50px;
             margin-right: 40px;
@@ -62,8 +62,8 @@
         .search_box {
 
             width: auto;
-            padding: 30px;
-            height: 200px;
+            padding: 20px;
+            height: 300px;
             background-color: black;
             color: white;
             display: flex;
@@ -215,7 +215,8 @@
                         let synopsis = rows[i]['synopsis']
                         let comment = rows[i]['comment']
 
-                        let temp_html = `<div class="wrap">
+                        let temp_html = `<div class="wrap_head">
+                                            <div class="wrap">
                                                 <div class="image">
                                                     <img class=movie_image src="${image}"/>
                                                 </div>
@@ -258,7 +259,8 @@
 
                             let star_img = '💙'.repeat(star)
 
-                            let temp_html = `<div class="wrap">
+                            let temp_html = `<div class="wrap_head">
+                                                <div class="wrap">
                                                     <div class="image">
                                                         <img class=movie_image src="${image}"/>
                                                     </div>
@@ -298,16 +300,15 @@
         <button class="button 2" onclick="write_index()">Write</button>
     </div>
 </div>
-
-<div id="post-box" class="body">
+<div class="body">
     <div class="search_box">
         <input id="search_bars" class="search_bar" type="text" placeholder="드라마 제목 입력">
         <button class="search_icon" onclick="find_word()"><i class="fa fa-search"></i></button>
     </div>
-    <div class="wrap_head">
-</div>
-
-<div class="footer">
+    <div id="post-box">
+    </div>
+    <div class="footer">
+    </div>
 </div>
 <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 </body>
