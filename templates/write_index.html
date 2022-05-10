@@ -151,14 +151,14 @@
             }
         });
     }
+    
+    function gomain() {
+            window.location.href = "/"
+        }
 </script>
 <div class="header">
     <div class="logo">
         <img src="/static/naeflix.png" onclick="gomain()" width="25%" style="margin-left: 25px; margin-top: 25px;">
-    </div>
-    <div class="button_head">
-        <button class="button 1" onclick="">Log-in</button>
-        <button class="button 2" onclick="">Write</button>
     </div>
 </div>
 
@@ -190,7 +190,7 @@
         </div>
         <div>
             <button onclick="check()" class="button_write">작성하기</button>
-            <button onclick="" class="button_back">뒤로가기</button>
+            <button onclick="gomain()" class="button_back">뒤로가기</button>
         </div>
     </div>
 </div>

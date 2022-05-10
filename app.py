@@ -41,19 +41,11 @@ def write_index():
         userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
         print (userinfo)
         return jsonify({'result': 'success', 'userinfo':userinfo['nick']})
-        # return render_template('write_index.html')
 
     except jwt.ExpiredSignatureError:
-        # return render_template('index.html', msg=msg)
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
-        # return render_template('index.html', msg=msg)
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
-
-    # except jwt.ExpiredSignatureError:
-    #     return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    # except jwt.exceptions.DecodeError:
-    #     return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
 
 ########## 게시물 기입 - 천희님 ##########

@@ -45,9 +45,10 @@
         }
 
         .button_head {
-            /*border: 1px solid white;*/
+            
             margin-top: 25px;
             height: 50px;
+            margin-right: 40px;
         }
 
         .button {
@@ -62,8 +63,8 @@
         .search_box {
 
             width: auto;
-            padding: 30px;
-            height: 200px;
+            padding: 20px;
+            height: 300px;
             background-color: black;
             color: white;
             display: flex;
@@ -76,8 +77,10 @@
             margin-top: 30px;
             margin-bottom: 30px;
             width: 40%;
-            height: 50px;
-            border-color: red;
+            padding: 20px;
+            height: 70px;
+            border: 5px solid rgb(255, 27, 0);
+            border-radius: 15px;
             max-width: 700px;
             display: flex;
             flex-direction: column;
@@ -87,48 +90,72 @@
         }
 
         .search_icon {
-
+            font-size: 250%;
             margin-left: 20px;
-            height: 50px;
-            color: white;
+            color: rgb(255, 27, 0);
+            border: none;
 
         }
 
-        .wrap {
-            border: solid 1px red;
+        .body {
+            /*border: 1px solid white;*/
+            width: auto;
+            padding: 30px;
+            height: auto;
             background-color: black;
-            margin: 0 250px;
-            height: 250px;
-            margin-bottom: 30px;
+            color: white;
+            font-family: 'Nanum Gothic', sans-serif;
         }
 
-
         .wrap {
+            border: solid 3px rgb(255, 27, 0);
+            border-radius: 10px;
+            background-color: black;
+            max-width: 1000px;
+            width: 900px;
+            height: 310px;
             display: flex;
-            align-items: center;
-            justify-content: left;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            margin: 25px;
+        }
+
+        .wrap_head {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
         }
 
         .image {
-
-            height: 230px;
-            display: flex;
-            justify-content: center;
-            width: 45%;
+            /*border: 1px solid white;*/
+            width: 250px;
+            height: 300px;
+            border-radius: 10px;
+        }
+        
+        .movie_image{
+            width: 250px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .content-box {
-            display: flex;
-            flex-direction: column;
+            /*border: 1px solid white;*/
+            width: 600px;
+            height: 300px;
+            border-radius: 10px;
         }
 
-        .movie_image {
-            object-fit: cover;
+        .content {
+            margin-bottom: 20px;
+            padding: 10px;
+            overflow: hidden;
+            /*border: 1px solid white;*/
+            font-size: 15px;
         }
-
-
-
-
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -193,16 +220,18 @@
                         let synopsis = rows[i]['synopsis']
                         let comment = rows[i]['comment']
 
-                        let temp_html = `<div class="wrap">
-                                        <div class="image" >
-                                            <img class= movie_image src="${image}"/>
-                                        </div>
-                                        <div class="content-box">
-                                            <p class="content">${title}</p>
-                                            <p class="content">${synopsis}</p>
-                                            <p class="content">${comment}</p>
-                                        </div>
-                                    </div>`
+                        let temp_html = `<div class="wrap_head">
+                                            <div class="wrap">
+                                                <div class="image">
+                                                    <img class=movie_image src="${image}"/>
+                                                </div>
+                                                <div class="content-box">
+                                                    <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
+                                                    <p class="content" style="height: 100px;">${synopsis}</p>
+                                                    <p class="content" style="height: 100px;">${comment}</p>
+                                                </div>
+                                            </div>
+                                        </div>`
                         $('#post-box').append(temp_html)
                     }
                     console.log(response)
@@ -235,14 +264,16 @@
 
                             let star_img = '💙'.repeat(star)
 
-                            let temp_html = `<div class="wrap">
-                                                <div class="image">
-                                                    <img class= movie_image src="${image}" />
-                                                </div>
-                                                <div class="content-box">
-                                                    <p class="content">${title}</p>
-                                                    <p class="content">${synopsis}</p>
-                                                    <p class="content">${comment}</p>
+                            let temp_html = `<div class="wrap_head">
+                                                <div class="wrap">
+                                                    <div class="image">
+                                                        <img class=movie_image src="${image}"/>
+                                                    </div>
+                                                    <div class="content-box">
+                                                        <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
+                                                        <p class="content" style="height: 100px;">${synopsis}</p>
+                                                        <p class="content" style="height: 100px;">${comment}</p>
+                                                    </div>
                                                 </div>
                                             </div>`
                             $('#post-box').append(temp_html)
@@ -274,18 +305,15 @@
         <button class="button 2" onclick="write_index()">Write</button>
     </div>
 </div>
-
-<div class="search_box">
-    <input id="search_bars" class="search_bar" type="text" placeholder="영화제목 입력"/>
-    <button class="search_icon" onclick="find_word()"><i class="fa fa-search"></i></button>
-</div>
-
-
-<div id="post-box">
-
-</div>
-
-<div class="footer">
+<div class="body">
+    <div class="search_box">
+        <input id="search_bars" class="search_bar" type="text" placeholder="드라마 제목 입력">
+        <button class="search_icon" onclick="find_word()"><i class="fa fa-search"></i></button>
+    </div>
+    <div id="post-box">
+    </div>
+    <div class="footer">
+    </div>
 </div>
 <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 </body>
