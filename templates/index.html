@@ -155,26 +155,20 @@
             window.location.href = '/'
         }
 
-        /* function write_index() {
-            window.location.href = "/write_index"
-        } */
-
-        function write_index() {
-                $.ajax({
-                    type: "GET",
-                    url: "/write_index",
-                    {#data: {},#}
-                    success: function (response) {
-                        if (response['result'] == 'success') {
-                            console.log(response['userinfo'])
-                            window.location.href = '/write_review'
-                        } else {
-                            // 로그인이 안되면 에러메시지를 띄웁니다.
-                            alert(response['msg'])
-                        }
+        function write_click() {
+            $.ajax({
+                type: "GET",
+                url: "/write_click",
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        window.location.href = '/write_index'
+                    } else {
+                        // 로그인이 안되면 에러메시지를 띄웁니다.
+                        alert(response['msg'])
                     }
-                })
-            }
+                }
+            })
+        }
 
 
         function listing() {
@@ -270,7 +264,7 @@
     <div class="button_head">
         <button class="button 1" onclick="login()">Login</button>
         <button class="button 1" onclick="logout()">Logout</button>
-        <button class="button 2" onclick="write_index()">Write</button>
+        <button class="button 2" onclick="write_click()">Write</button>
     </div>
 </div>
 
