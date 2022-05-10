@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
-
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
 </head>
 <style>
     body {
@@ -448,7 +450,7 @@
    }
    .mainList{
        width: auto;
-       height: 400px;
+       height: auto;
        padding: 25px;
        /*border: 1px solid white;*/
        display: flex;
@@ -529,23 +531,23 @@
 </div>
 <div class="header">
     <div class="logo">
-        <img src="/static/naeflix.png" style="width: 100%">
+        <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
     </div>
     <div class="button_box">
-        <button class="buttonTop">Log-in</button>
-        <button class="buttonTop">Sing-in</button>
-        <button class="buttonTop">Write</button>
+        <button class="buttonTop" onclick="login()">Log-in</button>
+        <button class="buttonTop" onclick="signin()">Sing-in</button>
+        <button class="buttonTop" onclick="write_click()">Write</button>
     </div>
 </div>
 <div class="body">
     <div class="bodyInwrap">
         <div class="searchWrap">
             <input class="searchBar">
-            <button class="buttonSearch">S E A R C H</button>
+            <button class="buttonSearch" onclick="find_word()">S E A R C H</button>
             <hr style="width: 650px;">
         </div>
         <div class="mainWrap">
-            <div class="mainList">
+            <div class="mainList" id="main_List">
                 <div class="imgBox">
                     <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
                 </div>
@@ -561,5 +563,129 @@
 </div>
 <div class="footer">
 </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        function gomain() {
+            window.location.href = "/"
+        }
+
+        function signin() {
+            window.location.href = "/register"
+        }
+
+        function login() {
+            window.location.href = "/login"
+        }
+
+        function logout() {
+            $.removeCookie('mytoken');
+            alert('로그아웃!')
+            window.location.href = '/'
+        }
+
+        function write_click() {
+            $.ajax({
+                type: "GET",
+                url: "/write_click",
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        window.location.href = '/write_index'
+                    } else {
+                        // 로그인이 안되면 에러메시지를 띄웁니다.
+                        alert(response['msg'])
+                    }
+                }
+            })
+        }
+
+        function listing() {
+            $('#post-box').empty()
+            $.ajax({
+                type: "GET",
+                url: "/drama",
+
+                success: function (response) {
+                    let rows = response['dramas']
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['title']
+                        let image = rows[i]['image']
+                        let star = rows[i]['star']
+                        let synopsis = rows[i]['synopsis']
+                        let comment = rows[i]['comment']
+
+                        let temp_html = `<div class="mainList" id="main_List">
+                                            <div class="imgBox">
+                                                <img class="imgBox" src="${image}">
+                                            </div>
+                                            <div class="textBox">
+                                                <div class="text1">제목_${title}</div>
+                                                <div class="text2">시놉시스_<br>${synopsis}</div>
+                                                <div class="text3">한줄평가_<br>${comment}</div>
+                                                <div class="text4">작성자_</div>
+                                            </div>
+                                        </div>`
+                        $('#post-box').append(temp_html)
+                    }
+                    console.log(response)
+                }
+            });
+        }
+
+        function find_word() {
+            $('#post-box').empty()
+            let check = false
+            $.ajax({
+                type: 'GET',
+                url: '/drama',
+
+                success: function (response) {
+                    // console.log(response['books'])
+                    let rows = response['dramas']
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['title']
+                        let movie_num = rows[i]
+
+                        let movie = $("#search_bars").val()
+
+                        if (title.includes(movie)) {
+                            let title = rows[i]['title']
+                            let image = rows[i]['image']
+                            let star = rows[i]['star']
+                            let synopsis = rows[i]['synopsis']
+                            let comment = rows[i]['comment']
+
+                            let star_img = '💙'.repeat(star)
+
+                            let temp_html = `<div class="mainList" id="main_List">
+                                            <div class="imgBox">
+                                                <img class="imgBox" src="${image}">
+                                            </div>
+                                            <div class="textBox">
+                                                <div class="text1">제목_${title}</div>
+                                                <div class="text2">시놉시스_<br>${synopsis}</div>
+                                                <div class="text3">한줄평가_<br>${comment}</div>
+                                                <div class="text4">작성자_</div>
+                                            </div>
+                                        </div>`
+                            $('#post-box').append(temp_html)
+                            {#$(`#` + movie_num).addClass("highlight")#}
+                            {#$(`#` + movie_num)[0].scrollIntoView()#}
+                            check = true
+                        }
+                    }
+                    if (check === false) {
+                        alert('해당하는 영화가 없습니다')
+                        window.location.href = '/'
+                    }
+                }
+            })
+        }
+    </script>
 </body>
 </html>
