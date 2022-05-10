@@ -45,7 +45,7 @@
         }
 
         .button_head {
-            
+
             margin-top: 25px;
             height: 50px;
             margin-right: 40px;
@@ -134,7 +134,7 @@
             height: 300px;
             border-radius: 10px;
         }
-        
+
         .movie_image{
             width: 250px;
             height: 300px;
@@ -163,6 +163,27 @@
     <script>
         $(document).ready(function () {
             listing();
+
+            $.ajax({
+                type: "GET",
+                url: "user_check",
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        userinfo = response['userinfo']
+                        console.log(userinfo)
+                        document.getElementById("btn-login").style.display = "none";
+                        const btnElement = document.getElementById('btn-user');
+                        btnElement.innerText = userinfo;
+                        document.getElementById("btn-user").style.display = "";
+                        document.getElementById("btn-logout").style.display = "";
+                    } else {
+                        document.getElementById("btn-login").style.display = "";
+                        document.getElementById("btn-logout").style.display = "none";
+                        document.getElementById("btn-user").style.display = "none";
+                    }
+                }
+            })
+
         });
 
         function gomain() {
@@ -294,8 +315,9 @@
         <img src="/static/naeflix.png" onclick="gomain()" width="25%" style="margin-left: 25px; margin-top: 25px;">
     </div>
     <div class="button_head">
-        <button class="button 1" onclick="login()">Login</button>
-        <button class="button 1" onclick="logout()">Logout</button>
+        <button class="button 1" id="btn-login" onclick="login()">Login</button>
+        <button class="button 1" id="btn-user" onclick="userpage()">mypage</button>
+        <button class="button 1" id="btn-logout" onclick="logout()">Logout</button>
         <button class="button 2" onclick="write_click()">Write</button>
     </div>
 </div>
