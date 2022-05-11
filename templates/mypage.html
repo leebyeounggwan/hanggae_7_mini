@@ -167,8 +167,6 @@
 
     <script>
         $(document).ready(function () {
-            /* listing(); */
-
             $.ajax({
                 type: "GET",
                 url: "user_check",
@@ -188,7 +186,6 @@
                     }
                 }
             })
-
         });
 
         function gomain() {
@@ -203,8 +200,8 @@
             window.location.href = "/login"
         }
 
-        function mypage() {
-            window.location.href = "/mypage"
+        function signout() {
+            window.location.href = "withdraw"
         }
 
         function logout() {
@@ -216,7 +213,7 @@
         function write_click() {
             $.ajax({
                 type: "GET",
-                url: "/write_click",
+                url: "/user_check",
                 success: function (response) {
                     if (response['result'] == 'success') {
                         window.location.href = '/write_index'
@@ -228,92 +225,7 @@
             })
         }
 
-        function listing() {
-            $('#post-box').empty()
-            $.ajax({
-                type: "GET",
-                url: "/drama",
-
-                success: function (response) {
-                    let rows = response['dramas']
-                    for (let i = 0; i < rows.length; i++) {
-                        let title = rows[i]['title']
-                        let image = rows[i]['image']
-                        let star = rows[i]['star']
-                        let synopsis = rows[i]['synopsis']
-                        let comment = rows[i]['comment']
-
-                        let temp_html = `<div class="wrap_head">
-                                            <div class="wrap">
-                                                <div class="image">
-                                                    <img class=movie_image src="${image}"/>
-                                                </div>
-                                                <div class="content-box">
-                                                    <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
-                                                    <p class="content" style="height: 100px;">${synopsis}</p>
-                                                    <p class="content" style="height: 100px;">${comment}</p>
-                                                </div>
-                                            </div>
-                                        </div>`
-                        $('#post-box').append(temp_html)
-                    }
-                    console.log(response)
-                }
-            });
-        }
-
-        function find_word() {
-            $('#post-box').empty()
-            let check = false
-            $.ajax({
-                type: 'GET',
-                url: '/drama',
-
-                success: function (response) {
-                    // console.log(response['books'])
-                    let rows = response['dramas']
-                    for (let i = 0; i < rows.length; i++) {
-                        let title = rows[i]['title']
-                        let movie_num = rows[i]
-
-                        let movie = $("#search_bars").val()
-
-                        if (title.includes(movie)) {
-                            let title = rows[i]['title']
-                            let image = rows[i]['image']
-                            let star = rows[i]['star']
-                            let synopsis = rows[i]['synopsis']
-                            let comment = rows[i]['comment']
-
-                            let star_img = '💙'.repeat(star)
-
-                            let temp_html = `<div class="wrap_head">
-                                                <div class="wrap">
-                                                    <div class="image">
-                                                        <img class=movie_image src="${image}"/>
-                                                    </div>
-                                                    <div class="content-box">
-                                                        <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
-                                                        <p class="content" style="height: 100px;">${synopsis}</p>
-                                                        <p class="content" style="height: 100px;">${comment}</p>
-                                                    </div>
-                                                </div>
-                                            </div>`
-                            $('#post-box').append(temp_html)
-                            {#$(`#` + movie_num).addClass("highlight")#}
-                            {#$(`#` + movie_num)[0].scrollIntoView()#}
-                            check = true
-                        }
-                    }
-                    if (check === false) {
-                        alert('해당하는 영화가 없습니다')
-                        window.location.href = '/'
-                    }
-                }
-            })
-        }
-
-    </script>
+</script>
 </head>
 
 <body>
@@ -323,8 +235,9 @@
         <img src="/static/naeflix.png" onclick="gomain()" width="25%" style="margin-left: 25px; margin-top: 25px;">
     </div>
     <div class="button_head">
-        <button class="button 2" onclick="write_click()">Write</button>
-        <button class="button 1" id="btn-logout" onclick="logout()">Logout</button>
+        <button class="button 2" onclick="write_click()">리뷰쓰기</button>
+        <button class="button 1" id="btn-logout" onclick="logout()">로그아웃</button>
+        <button class="button 1" id="btn-signout" onclick="signout()">회원탈퇴</button>
     </div>
 </div>
 
