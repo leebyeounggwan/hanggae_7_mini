@@ -17,7 +17,8 @@ SECRET_KEY = 'SPARTA'
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    drama_list = list(db.drama.find({}, {'_id': False}))
+    return render_template('/index.html', dramas=drama_list)
 
 @app.route('/login')
 def login():
@@ -152,10 +153,13 @@ def check_dup():
 ############ 병관 ############
 
 
-@app.route('/drama', methods=["GET"])
-def drama_get():
-    drama_list = list(db.drama.find({},{'_id':False}))
-    return jsonify({'dramas': drama_list})
+#검색
+@app.route('/search_drama', methods=["POST"])
+def drama_search():
+    search_d_receive = request.form['search_d_give']
+
+    result = list(db.drama.find({},{'_id': False}))
+    return jsonify({'result':result,'search_d_receive':search_d_receive})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
