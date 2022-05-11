@@ -520,6 +520,10 @@
     </style>
 
 <script>
+    function gomain() {
+            window.location.href = "/"
+        }
+
     function sign_up() {
         let username = $("#input-username").val()
         let password = $("#input-password").val()
@@ -664,7 +668,7 @@
                     <div class="inputInfo">
                         <div class="chk ID">
                             <input class="reg ID" id='userid' placeholder="ID를 입력 합니다">
-                            <button class="Idchk">ID 중복 확인</button>
+                            <button onclick="check_dup()" class="Idchk">ID 중복 확인</button>
                         </div>
                         <p class="pText">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
                     </div>
