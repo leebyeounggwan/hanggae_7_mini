@@ -135,7 +135,7 @@
             border-radius: 10px;
         }
 
-        .movie_image{
+        .movie_image {
             width: 250px;
             height: 300px;
             object-fit: cover;
@@ -162,7 +162,7 @@
 
     <script>
         $(document).ready(function () {
-            listing();
+            //listing();
 
             $.ajax({
                 type: "GET",
@@ -219,23 +219,32 @@
             })
         }
 
-
-        function listing() {
+        function find_word() {
             $('#post-box').empty()
+            let drama = $('#search_bars').val()
             $.ajax({
-                type: "GET",
-                url: "/drama",
-
+                type: 'POST',
+                url: '/search_drama',
+                data: {
+                    search_d_give: drama
+                },
                 success: function (response) {
-                    let rows = response['dramas']
-                    for (let i = 0; i < rows.length; i++) {
-                        let title = rows[i]['title']
-                        let image = rows[i]['image']
-                        let star = rows[i]['star']
-                        let synopsis = rows[i]['synopsis']
-                        let comment = rows[i]['comment']
+                    let rows = response['result']
 
-                        let temp_html = `<div class="wrap_head">
+                    for (let i = 0; i < rows.length; i++) {
+
+                        let title = rows[i]["title"]
+
+                        if (title.includes(drama)) {
+                            let title = rows[i]['title']
+                            let image = rows[i]['image']
+                            let star = rows[i]['star']
+                            let synopsis = rows[i]['synopsis']
+                            let comment = rows[i]['comment']
+
+                            //let star_img = '💙'.repeat(star)
+
+                            let temp_html = `<div class="wrap_head">
                                             <div class="wrap">
                                                 <div class="image">
                                                     <img class=movie_image src="${image}"/>
@@ -247,62 +256,19 @@
                                                 </div>
                                             </div>
                                         </div>`
-                        $('#post-box').append(temp_html)
-                    }
-                    console.log(response)
-                }
-            });
-        }
-
-        function find_word() {
-            $('#post-box').empty()
-            let check = false
-            $.ajax({
-                type: 'GET',
-                url: '/drama',
-
-                success: function (response) {
-                    // console.log(response['books'])
-                    let rows = response['dramas']
-                    for (let i = 0; i < rows.length; i++) {
-                        let title = rows[i]['title']
-                        let movie_num = rows[i]
-
-                        let movie = $("#search_bars").val()
-
-                        if (title.includes(movie)) {
-                            let title = rows[i]['title']
-                            let image = rows[i]['image']
-                            let star = rows[i]['star']
-                            let synopsis = rows[i]['synopsis']
-                            let comment = rows[i]['comment']
-
-                            let star_img = '💙'.repeat(star)
-
-                            let temp_html = `<div class="wrap_head">
-                                                <div class="wrap">
-                                                    <div class="image">
-                                                        <img class=movie_image src="${image}"/>
-                                                    </div>
-                                                    <div class="content-box">
-                                                        <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
-                                                        <p class="content" style="height: 100px;">${synopsis}</p>
-                                                        <p class="content" style="height: 100px;">${comment}</p>
-                                                    </div>
-                                                </div>
-                                            </div>`
                             $('#post-box').append(temp_html)
-                            {#$(`#` + movie_num).addClass("highlight")#}
-                            {#$(`#` + movie_num)[0].scrollIntoView()#}
+
                             check = true
                         }
                     }
                     if (check === false) {
                         alert('해당하는 영화가 없습니다')
-                        window.location.href = '/'
+                        window.location.href = "/"
                     }
                 }
+
             })
+
         }
 
     </script>
@@ -327,6 +293,20 @@
         <button class="search_icon" onclick="find_word()"><i class="fa fa-search"></i></button>
     </div>
     <div id="post-box">
+        {% for drama in dramas %}
+            <div class="wrap_head">
+                <div class="wrap">
+                    <div class="image">
+                        <img class=movie_image src="{{ drama.image }}"/>
+                    </div>
+                    <div class="content-box">
+                        <p class="content" style="height: 55px; font-size: 20px;"><b>{{ drama.title }}</b></p>
+                        <p class="content" style="height: 100px;">{{ drama.synopsis }}</p>
+                        <p class="content" style="height: 100px;">{{ drama.comment }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
     <div class="footer">
     </div>
