@@ -5,11 +5,11 @@
     <title>Title</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 </head>
 <style>
     /* 배경용 CSS입니다. 망가지면 전체 CSS가 꼬입니다. */
@@ -481,6 +481,38 @@
 
     </style>
 
+<script>
+    function gomain() {
+        window.location.href = "/"
+    }
+
+    function signin() {
+        window.location.href = "/register"
+    }
+
+    function login() {
+        $.ajax({
+            type: "POST",
+            url: "/api/login",
+            data: {id_give: $('#userid').val(), pw_give: $('#userpw').val()},
+            success: function (response) {
+                if (response['result'] == 'success') {
+                    // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
+                    // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
+                    $.cookie('mytoken', response['token']);
+
+                    alert('로그인 완료!')
+                    window.location.href = '/'
+                } else {
+                    // 로그인이 안되면 에러메시지를 띄웁니다.
+                    alert(response['msg'])
+                }
+            }
+        })
+    }
+
+</script>
+
 <body>
 <div class="head">
     <div class='light x1'></div>
@@ -506,11 +538,11 @@
             <div class="mainList" id="main_List">
                 <div class="mainContent">
                     <div class="inputInfo">
-                        <input class="login ID" placeholder="ID를 입력해 주세요">
+                        <input class="login ID" id='userid' placeholder="ID를 입력해 주세요">
                         <hr style="width:500px;">
                     </div>
                     <div class="inputInfo">
-                        <input type="password" class="login PW" placeholder="비밀번호를 입력해 주세요">
+                        <input type="password" class="login PW" id="userpw" placeholder="비밀번호를 입력해 주세요">
                         <hr style="width:500px;">
                     </div>
                     <div class="buttonBox">
@@ -524,41 +556,6 @@
 </div>
 <div class="footer">
 </div>
-<script>
-            {% if msg %}
-                alert("{{ msg }}")
-            {% endif %}
 
-            function gomain() {
-                window.location.href = "/"
-            }
-
-            function signin() {
-                window.location.href = "/register"
-            }
-
-
-            function login() {
-                $.ajax({
-                    type: "POST",
-                    url: "/api/login",
-                    data: {id_give: $('#userid').val(), pw_give: $('#userpw').val()},
-                    success: function (response) {
-                        if (response['result'] == 'success') {
-                            // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
-                            // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
-                            $.cookie('mytoken', response['token']);
-
-                            alert('로그인 완료!')
-                            window.location.href = '/'
-                        } else {
-                            // 로그인이 안되면 에러메시지를 띄웁니다.
-                            alert(response['msg'])
-                        }
-                    }
-                })
-            }
-
-        </script>
 </body>
 </html>
