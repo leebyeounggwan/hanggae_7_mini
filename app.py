@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import certifi
 import jwt, datetime, hashlib
+import pandas as pd
 
 ca = certifi.where()
 
@@ -15,9 +16,10 @@ SECRET_KEY = 'SPARTA'
 
 ########## HTML 파일 주기 (단순 페이지 이동 함수들은 여기에 정리) ##########
 
-@app.route('/')
+@app.route('/') ## 병관님 - jinja2 SSR 이 부분에서 처리됨 ##
 def home():
     drama_list = list(db.drama.find({}, {'_id': False}))
+    print (drama_list)
     return render_template('/index.html', dramas=drama_list)
 
 @app.route('/login')
@@ -31,7 +33,15 @@ def register():
 
 @app.route('/mypage')
 def mypage():
-    return render_template('mypage.html')
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+    usernick = userinfo['nick']
+    print(usernick)
+    search_drama = list(db.drama.find({'$or': [{'usernick': {'$regex': usernick}},
+                                               ]}, {'_id': False}))
+    print(search_drama)
+    return render_template('mypage.html', dramas=search_drama)
 
 @app.route('/write_index')
 def write_index():
@@ -95,7 +105,7 @@ def api_login():
 
 ########## 재영 -유저 확인 API ##########
 
-@app.route('/user_check')
+@app.route('/api/login/user_check')
 def user_check():
     token_receive = request.cookies.get('mytoken')
     try:
@@ -108,6 +118,15 @@ def user_check():
         return jsonify({'result': 'fail', 'msg': '로그인 해주세요.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 해주세요.'})
+
+# 마이페이지
+# @app.route('/api/mypage/show', methods=["POST"])
+# def myreview():
+#     keyword_receive = request.form['keyword_give']
+#     search_drama = list(db.drama.find({'$or': [{'usernick': {'$regex': keyword_receive}},
+#                                                ]}, {'_id': False}))
+#     print(search_drama)
+#     return render_template('mypage.html', dramas=search_drama)
 
 
 ############ 혜준 ############
@@ -165,12 +184,11 @@ def withdraw_delete():
 
 ############ 병관 ############
 
-
-#검색
-@app.route('/search_drama', methods=["GET"])
-def drama_get():
-    drama_list = list(db.drama.find({},{'_id':False}))
-    return jsonify({'dramas': drama_list})
+# #검색
+# @app.route('/search_drama', methods=["GET"])
+# def drama_get():
+#     drama_list = list(db.drama.find({},{'_id':False}))
+#     return jsonify({'dramas': drama_list})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
