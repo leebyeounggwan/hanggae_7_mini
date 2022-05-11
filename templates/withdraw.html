@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,93 +11,554 @@
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600&family=Nanum+Gothic&display=swap"
+          rel="stylesheet">
 
-    <title>회원탈퇴 | Naeflix</title>
-
-    <style>
-        * {
-            background-color: black;
-        }
-
-        h1 {
-            margin: 20px 0px 30px 0px;
-            color: white;
-        }
-
-        .logo {
-            height: 50px;
-        }
-
-        header {
-            padding: 10px 0px 0px 20px;
-        }
-
-        .register-box {
-            width: 95%;
-            max-width: 600px;
-            padding: 20px 0px 40px 0px;
-            margin: 20px auto;
-            align-items: center;
-            text-align: center;
-
-            border-radius: 15px;
-            border: 2px solid red;
-        }
-
-        .red-btn {
-            width: 100px;
-            height: 30px;
-            margin: 5px;
-            border: none;
-            background: rgb(255, 27, 0);
-            color: white;
-            font-size: 15px;
-            border-radius: 13px;
-        }
-
-        .content-box {
-            width: 360px;
-            margin: auto;
-            text-align: center;
-            color: white;
-        }
-    </style>
-
-    <script>
-        function delete_user() {
-            let id = `{{ id }}`;
-            let check = $("input[name='check_info']:checked").val();
-            if (check == 'checked') {
-                $.ajax({
-                    type: "POST",
-                    url: "/withdraw/delete",
-                    data: {id_give: id},
-                    success: function (response) {
-                        alert(response["msg"])
-                        window.location.href = "/"
-                    }
-                });
-            } else {
-                alert("안내사항을 확인해주세요.")
-            }
-
-
-        }
-    </script>
 </head>
-<body>
-    <header><a href="/"><img src="../static/naeflix.png" class="logo"></a></header>
-    <div class="register-box">
-        <h1>회원탈퇴</h1>
-        <div class="content-box">
-            <p>탈퇴전 확인해주세요.</p>
-            <p>사용하고 계신 아이디 : {{ id }} </p>
-            <p>탈퇴하실 경우 작성하신 리뷰는 모두 삭제되며, 데이터는 복구할 수 없습니다.</p>
-           <input type="checkbox" name="check_info" value='checked'>
-            안내사항을 모두 확인하였으며, 이에 동의합니다.
-        </div>
-        <button type="button" class="red-btn" onclick="delete_user()">탈퇴하기</button>
-    </div>
-</body>
+<style>
+    /* 배경용 CSS입니다. 망가지면 전체 CSS가 꼬입니다. */
 
+    body {
+        margin: 15px;
+        height: 100vh;
+        background: radial-gradient(firebrick, black);
+        overflow-y: auto;
+        -webkit-animation: fadeIn 1 1s ease-out;
+        -moz-animation: fadeIn 1 1s ease-out;
+        -o-animation: fadeIn 1 1s ease-out;
+        animation: fadeIn 1 1s ease-out;
+    }
+
+    body::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    body::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: orangered;
+    }
+
+    .light {
+        position: absolute;
+        width: 0px;
+        opacity: .75;
+        background-color: white;
+        box-shadow: #e9f1f1 0px 0px 20px 2px;
+        opacity: 0;
+        top: 100vh;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+
+    }
+
+    .x1 {
+        -webkit-animation: floatUp 4s infinite linear;
+        -moz-animation: floatUp 4s infinite linear;
+        -o-animation: floatUp 4s infinite linear;
+        animation: floatUp 4s infinite linear;
+        -webkit-transform: scale(1.0);
+        -moz-transform: scale(1.0);
+        -o-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+
+    .x2 {
+        -webkit-animation: floatUp 7s infinite linear;
+        -moz-animation: floatUp 7s infinite linear;
+        -o-animation: floatUp 7s infinite linear;
+        animation: floatUp 7s infinite linear;
+        -webkit-transform: scale(1.6);
+        -moz-transform: scale(1.6);
+        -o-transform: scale(1.6);
+        transform: scale(1.6);
+        left: 15%;
+    }
+
+    .x3 {
+        -webkit-animation: floatUp 2.5s infinite linear;
+        -moz-animation: floatUp 2.5s infinite linear;
+        -o-animation: floatUp 2.5s infinite linear;
+        animation: floatUp 2.5s infinite linear;
+        -webkit-transform: scale(.5);
+        -moz-transform: scale(.5);
+        -o-transform: scale(.5);
+        transform: scale(.5);
+        left: -15%;
+    }
+
+    .x4 {
+        -webkit-animation: floatUp 4.5s infinite linear;
+        -moz-animation: floatUp 4.5s infinite linear;
+        -o-animation: floatUp 4.5s infinite linear;
+        animation: floatUp 4.5s infinite linear;
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+        left: -34%;
+    }
+
+    .x5 {
+        -webkit-animation: floatUp 8s infinite linear;
+        -moz-animation: floatUp 8s infinite linear;
+        -o-animation: floatUp 8s infinite linear;
+        animation: floatUp 8s infinite linear;
+        -webkit-transform: scale(2.2);
+        -moz-transform: scale(2.2);
+        -o-transform: scale(2.2);
+        transform: scale(2.2);
+        left: -57%;
+    }
+
+    .x6 {
+        -webkit-animation: floatUp 3s infinite linear;
+        -moz-animation: floatUp 3s infinite linear;
+        -o-animation: floatUp 3s infinite linear;
+        animation: floatUp 3s infinite linear;
+        -webkit-transform: scale(.8);
+        -moz-transform: scale(.8);
+        -o-transform: scale(.8);
+        transform: scale(.8);
+        left: -81%;
+    }
+
+    .x7 {
+        -webkit-animation: floatUp 5.3s infinite linear;
+        -moz-animation: floatUp 5.3s infinite linear;
+        -o-animation: floatUp 5.3s infinite linear;
+        animation: floatUp 5.3s infinite linear;
+        -webkit-transform: scale(3.2);
+        -moz-transform: scale(3.2);
+        -o-transform: scale(3.2);
+        transform: scale(3.2);
+        left: 37%;
+    }
+
+    .x8 {
+        -webkit-animation: floatUp 4.7s infinite linear;
+        -moz-animation: floatUp 4.7s infinite linear;
+        -o-animation: floatUp 4.7s infinite linear;
+        animation: floatUp 4.7s infinite linear;
+        -webkit-transform: scale(1.7);
+        -moz-transform: scale(1.7);
+        -o-transform: scale(1.7);
+        transform: scale(1.7);
+        left: 62%;
+    }
+
+    .x9 {
+        -webkit-animation: floatUp 4.1s infinite linear;
+        -moz-animation: floatUp 4.1s infinite linear;
+        -o-animation: floatUp 4.1s infinite linear;
+        animation: floatUp 4.1s infinite linear;
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+        -o-transform: scale(0.9);
+        transform: scale(0.9);
+        left: 85%;
+    }
+
+    @-webkit-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @-moz-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @-o-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-o-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-webkit-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-moz-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-o-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @-o-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+
+    /*머리쪽 CSS 입니다. 로그인 및 기능용 버튼들이 모여 있습니다.*/
+    .header {
+        width: auto;
+        height: 150px;
+        /*border: 1px solid white;*/
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        vertical-align: center;
+    }
+
+    .logo {
+        width: 200px;
+        height: 50px;
+        /*border: 1px solid white;*/
+        margin: 35px;
+    }
+
+    .button_box {
+        width: 350px;
+        height: 50px;
+        margin: 35px;
+        /*border: 1px solid white;*/
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 7px;
+    }
+    .body {
+        width: auto;
+        height: auto;
+        /*border: 1px solid white;*/
+    }
+
+    .bodyInwrap {
+        width: auto;
+        height: auto;
+        /*border: 1px solid white;*/
+        padding: 25px;
+    }
+
+
+    /*검색 영역의 CSS 입니다.*/
+    .searchWrap {
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    /*메인 영역 CSS 입니다.*/
+    .mainWrap {
+        width: auto;
+        height: auto;
+        margin-top: 130px;
+        /*border: 1px solid white;*/
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .mainList {
+        width: 1300px;
+        height: auto;
+        /*padding: 10px;*/
+        /*border: 1px solid white;*/
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .notice{
+        width: 500px;
+        height: 470px;
+        border: 4px solid white;
+        text-align: center;
+        border-left-color: transparent;
+        border-right-color: transparent;
+    }
+
+    .noticeText{
+        font-family: 'Gothic A1', sans-serif;
+        color: ghostwhite;
+
+        font-size: 20px;
+    }
+
+    .GoodbyeButton{
+        width: 170px;
+        height: 60px;
+        margin: 50px;
+        color: ghostwhite;
+        border: 4px solid firebrick;
+        outline: none;
+        background-color: transparent;
+        text-shadow: 2px 2px 2px black;
+        font-size: 18px;
+        box-shadow: 2px 2px 2px black;
+    }
+    input[id=Goodbyechk]{
+        position: relative;
+        top: 1px;
+    }
+
+</style>
+
+<script>
+    function delete_user() {
+        let id = `{{ id }}`;
+        let check = $("input[name='check_info']:checked").val();
+        if (check == 'checked') {
+            $.ajax({
+                type: "POST",
+                url: "/withdraw/delete",
+                data: {id_give: id},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.href = "/"
+                }
+            });
+        } else {
+            alert("안내사항을 확인해주세요.")
+        }
+    }
+</script>
+
+
+<body>
+<div class="head">
+    <div class='light x1'></div>
+    <div class='light x2'></div>
+    <div class='light x3'></div>
+    <div class='light x4'></div>
+    <div class='light x5'></div>
+    <div class='light x6'></div>
+    <div class='light x7'></div>
+    <div class='light x8'></div>
+    <div class='light x9'></div>
+</div>
+<div class="header">
+    <div class="logo">
+        <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
+    </div>
+    <div class="button_box">
+    </div>
+</div>
+<div class="body">
+    <div class="bodyInwrap">
+        <div class="searchWrap">
+        </div>
+        <div class="mainWrap">
+            <div class="mainList" id="main_List">
+                <div class="notice">
+                    <div><p class="noticeText 1" style="font-size: 42px; font-weight: bold; text-shadow: 2px 2px 2px black;">회원 탈퇴</p></div>
+                    <div><p class="noticeText 2">탈퇴 전에 확인해 주세요</p></div>
+                    <div><p class="noticeText 3">사용하고 계신 아이디 : {{ id }}</p>
+                    <div><p class="noticeText 4">탈퇴하실 경우, 작성해 주신 모든 리뷰는 삭제되며, <br> 삭제 된 데이터는 복구할 수 없습니다.</p></div>
+                        <div class="chkDiv">
+                            <input type="checkbox" class="chk" value="checked" id="Goodbyechk">
+                            <label for="Goodbyechk" style="font-size: 16px; color: ghostwhite">안내 사항을 모두 확인하였으며, 이에 동의 합니다.</label>
+                        </div>
+                    <div><button id="buttonLogin" class="GoodbyeButton" onclick="delete_user()">회원 탈퇴</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+</div>
+</body>
 </html>
