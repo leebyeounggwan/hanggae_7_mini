@@ -32,15 +32,18 @@ def register():
 
 @app.route('/mypage')
 def mypage():
-    token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-    usernick = userinfo['nick']
-    print(usernick)
-    search_drama = list(db.drama.find({'$or': [{'usernick': {'$regex': usernick}},
-                                               ]}, {'_id': False}))
-    print(search_drama)
-    return render_template('mypage.html', dramas=search_drama)
+    return render_template('mypage.html')
+
+    # 아래는 jinja2 방식으로 mypage를 SSR 해본 것. 삭제기능과 어울리지 않아 버림.
+    # token_receive = request.cookies.get('mytoken')
+    # payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    # userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+    # usernick = userinfo['nick']
+    # print(usernick)
+    # search_drama = list(db.drama.find({'$or': [{'usernick': {'$regex': usernick}},
+    #                                            ]}, {'_id': False}))
+    # print(search_drama)
+    # return render_template('mypage.html', dramas=search_drama)
 
 @app.route('/write_index')
 def write_index():
@@ -118,14 +121,26 @@ def user_check():
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 해주세요.'})
 
-# 마이페이지
-# @app.route('/api/mypage/show', methods=["POST"])
-# def myreview():
-#     keyword_receive = request.form['keyword_give']
-#     search_drama = list(db.drama.find({'$or': [{'usernick': {'$regex': keyword_receive}},
-#                                                ]}, {'_id': False}))
-#     print(search_drama)
-#     return render_template('mypage.html', dramas=search_drama)
+##### 마이페이지 - 내 글만 리스팅 및 삭제 기능 #####
+
+@app.route('/api/mypage/list')
+def mypage_list():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.users.find_one({'id': payload['id']}, {'_id': False})
+    usernick = userinfo['nick']
+    my_drama = list(db.drama.find({'usernick': usernick},{'_id': False}))
+    print(my_drama)
+    return jsonify ({'result': 'success', 'my_drama': my_drama})
+
+@app.route('/api/mypage/delete', methods=['POST'])
+def mypage_delete():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.users.find_one({'id': payload['id']}, {'_id': False})
+    usernick = userinfo['nick']
+    print(usernick)
+
 
 
 ############ 혜준 ############
