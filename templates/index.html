@@ -422,7 +422,7 @@
    .bodyInwrap{
        width: 1650px;
        height: auto;
-       border: 1px solid white;
+       /*border: 1px solid white;*/
        padding: 25px;
    }
 
@@ -458,16 +458,20 @@
        height: auto;
        margin-top: 200px;
        /*border: 1px solid white;*/
-   }
-   .mainList{
-       width: 1500px;
-       height: auto;
-       padding: 10px;
-       /*border: 1px solid white;*/
        display: flex;
        flex-direction: row;
        flex-wrap: wrap;
        justify-content: center;
+   }
+   .mainList{
+       width: 1500px;
+       height: auto;
+       /*padding: 10px;*/
+       /*border: 1px solid white;*/
+       display: flex;
+       flex-direction: row;
+       flex-wrap: wrap;
+       justify-content: space-between;
 
    }
    .mainContent{
@@ -504,7 +508,7 @@
        width: 400px;
        height: auto;
        /*border: 1px solid white;*/
-       font-size: 45px;
+       font-size: 38px;
        font-family: 'Nanum Gothic', sans-serif;
        color: white;
        padding: 15px;
@@ -546,11 +550,6 @@
        /*border: 1px solid white;*/
        padding: 15px;
     }
-   .footer{
-       width: auto;
-       height: auto;
-       /*border: 1px solid white;*/
-   }
 
     </style>
 
@@ -732,20 +731,20 @@
         </div>
         <div class="mainWrap">
             <div class="mainList" id="main_List">
+                {% for drama in dramas %}
                 <div class="mainContent">
-                        {% for drama in dramas %}
-                            <div class="imgBox">
-                                <img class="imgBox" src="{{ drama.image }}">
-                            </div>
-                            <div class="textBox">
-                                <div class="text1"><b>제목_</b>{{ drama.title }}</div>
-                                <div class="text2"><b>시놉시스_</b><br>{{ drama.synopsis }}</div>
-                                <div class="text3"><b>한줄평가_</b><br>{{ drama.comment }}</div>
-                                <div class="text4"><b>작성자_</b></div>
-                                <div class="text5"><b>별점_</b></div>
-                            </div>
-                    {% endfor %}
+                    <div class="imgBox">
+                        <img class="imgBox" src="{{ drama.image }}">
+                    </div>
+                    <div class="textBox">
+                        <div class="text1"><b>제목_</b>{{ drama.title }}</div>
+                        <div class="text2"><b>시놉시스_</b><br>{{ drama.synopsis }}</div>
+                        <div class="text3"><b>한줄평가_</b><br>{{ drama.comment }}</div>
+                        <div class="text4"><b>작성자_</b></div>
+                        <div class="text5"><b>별점_</b></div>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
