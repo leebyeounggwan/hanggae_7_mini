@@ -679,6 +679,7 @@
                                                 <div class="text3"><b>한줄평가</b><br>${comment}</div>
                                                 <div class="text4"><b>작성자</b><br>${usernick}</div>
                                                 <div class="text4"><b>별점</b><br>${star_img}</div>
+                                                <div><button onclick="deletereview('${title}')">삭제하기</button></div>
                                             </div>
                                         </div>`
 
@@ -687,6 +688,20 @@
                     }
                 }
             })
+        }
+
+        async function deletereview(title) {
+            console.log(title)
+            $.ajax({
+                type: 'POST',
+                url: '/api/mypage/delete',
+                data: {title_give: title},
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload();
+                }
+
+            });
         }
 
     </script>

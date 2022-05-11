@@ -130,17 +130,20 @@ def mypage_list():
     userinfo = db.users.find_one({'id': payload['id']}, {'_id': False})
     usernick = userinfo['nick']
     my_drama = list(db.drama.find({'usernick': usernick},{'_id': False}))
-    print(my_drama)
     return jsonify ({'result': 'success', 'my_drama': my_drama})
 
 @app.route('/api/mypage/delete', methods=['POST'])
 def mypage_delete():
+    title_receive = request.form['title_give']
+
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     userinfo = db.users.find_one({'id': payload['id']}, {'_id': False})
-    usernick = userinfo['nick']
-    print(usernick)
+    nick_receive = userinfo['nick']
+    print (title_receive, nick_receive)
+    db.drama.delete_one({'usernick': nick_receive} and {'title':title_receive})
 
+    return jsonify ({'msg': 'success'})
 
 
 ############ 혜준 ############
