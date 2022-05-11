@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<!--
+<style>
+    /* 배경용 CSS입니다. 망가지면 전체 CSS가 꼬입니다. */
+
+    body {
+        margin: 15px;
+        height: 100vh;
+        background: radial-gradient(firebrick, black);
+        overflow-y: auto;
+        -webkit-animation: fadeIn 1 1s ease-out;
+        -moz-animation: fadeIn 1 1s ease-out;
+        -o-animation: fadeIn 1 1s ease-out;
+        animation: fadeIn 1 1s ease-out;
+    }
+    body::-webkit-scrollbar{
+        width: 5px;
+    }
+    body::-webkit-scrollbar-track{
+        background-color: transparent;
+    }
+    body::-webkit-scrollbar-thumb{
+        background-color: orangered;
+    }
+
+    .light {
+        position: absolute;
+        width: 0px;
+        opacity: .75;
+        background-color: white;
+        box-shadow: #e9f1f1 0px 0px 20px 2px;
+        opacity: 0;
+        top: 100vh;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+
+    }
+    .x1 {
+        -webkit-animation: floatUp 4s infinite linear;
+        -moz-animation: floatUp 4s infinite linear;
+        -o-animation: floatUp 4s infinite linear;
+        animation: floatUp 4s infinite linear;
+        -webkit-transform: scale(1.0);
+        -moz-transform: scale(1.0);
+        -o-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+    .x2 {
+        -webkit-animation: floatUp 7s infinite linear;
+        -moz-animation: floatUp 7s infinite linear;
+        -o-animation: floatUp 7s infinite linear;
+        animation: floatUp 7s infinite linear;
+        -webkit-transform: scale(1.6);
+        -moz-transform: scale(1.6);
+        -o-transform: scale(1.6);
+        transform: scale(1.6);
+        left: 15%;
+    }
+    .x3 {
+        -webkit-animation: floatUp 2.5s infinite linear;
+        -moz-animation: floatUp 2.5s infinite linear;
+        -o-animation: floatUp 2.5s infinite linear;
+        animation: floatUp 2.5s infinite linear;
+        -webkit-transform: scale(.5);
+        -moz-transform: scale(.5);
+        -o-transform: scale(.5);
+        transform: scale(.5);
+        left: -15%;
+    }
+    .x4 {
+        -webkit-animation: floatUp 4.5s infinite linear;
+        -moz-animation: floatUp 4.5s infinite linear;
+        -o-animation: floatUp 4.5s infinite linear;
+        animation: floatUp 4.5s infinite linear;
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+        left: -34%;
+    }
+    .x5 {
+        -webkit-animation: floatUp 8s infinite linear;
+        -moz-animation: floatUp 8s infinite linear;
+        -o-animation: floatUp 8s infinite linear;
+        animation: floatUp 8s infinite linear;
+        -webkit-transform: scale(2.2);
+        -moz-transform: scale(2.2);
+        -o-transform: scale(2.2);
+        transform: scale(2.2);
+        left: -57%;
+    }
+    .x6 {
+        -webkit-animation: floatUp 3s infinite linear;
+        -moz-animation: floatUp 3s infinite linear;
+        -o-animation: floatUp 3s infinite linear;
+        animation: floatUp 3s infinite linear;
+        -webkit-transform: scale(.8);
+        -moz-transform: scale(.8);
+        -o-transform: scale(.8);
+        transform: scale(.8);
+        left: -81%;
+    }
+    .x7 {
+        -webkit-animation: floatUp 5.3s infinite linear;
+        -moz-animation: floatUp 5.3s infinite linear;
+        -o-animation: floatUp 5.3s infinite linear;
+        animation: floatUp 5.3s infinite linear;
+        -webkit-transform: scale(3.2);
+        -moz-transform: scale(3.2);
+        -o-transform: scale(3.2);
+        transform: scale(3.2);
+        left: 37%;
+    }
+    .x8 {
+        -webkit-animation: floatUp 4.7s infinite linear;
+        -moz-animation: floatUp 4.7s infinite linear;
+        -o-animation: floatUp 4.7s infinite linear;
+        animation: floatUp 4.7s infinite linear;
+        -webkit-transform: scale(1.7);
+        -moz-transform: scale(1.7);
+        -o-transform: scale(1.7);
+        transform: scale(1.7);
+        left: 62%;
+    }
+    .x9 {
+        -webkit-animation: floatUp 4.1s infinite linear;
+        -moz-animation: floatUp 4.1s infinite linear;
+        -o-animation: floatUp 4.1s infinite linear;
+        animation: floatUp 4.1s infinite linear;
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+        -o-transform: scale(0.9);
+        transform: scale(0.9);
+        left: 85%;
+    }
+
+    @-webkit-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @-moz-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @-o-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-o-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-webkit-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-moz-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-o-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @-o-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+
+
+    /*머리쪽 CSS 입니다. 로그인 및 기능용 버튼들이 모여 있습니다.*/
+   .header{
+       width: auto;
+       height: 150px;
+       /*border: 1px solid white;*/
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: space-between;
+       vertical-align: center;
+   }
+   .logo{
+       width: 200px;
+       height: 50px;
+       /*border: 1px solid white;*/
+       margin: 35px;
+   }
+   .button_box{
+       width: 350px;
+       height: 50px;
+       margin: 35px;
+       /*border: 1px solid white;*/
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: space-between;
+       padding: 7px;
+   }
+
+   .body{
+       width: auto;
+       height: auto;
+       /*border: 1px solid white;*/
+   }
+   .bodyInwrap{
+       width: auto;
+       height: auto;
+       /*border: 1px solid white;*/
+       padding: 25px;
+   }
+
+   /*메인 영역 CSS 입니다.*/
+   .mainWrap{
+       width: auto;
+       height: auto;
+       margin-top: 100px;
+       /*border: 1px solid white;*/
+   }
+   .mainList{
+       width: auto;
+       height: auto;
+       padding: 10px;
+       /*border: 1px solid white;*/
+       display: flex;
+       flex-direction: row;
+       flex-wrap: wrap;
+       justify-content: center;
+   }
+   .mainContent{
+       display: flex;
+       flex-direction: column;
+       flex-wrap: wrap;
+       justify-content: center;
+   }
+   .inputInfo{
+       /*margin: 30px;*/
+       display: flex;
+       flex-direction: column;
+       flex-wrap: wrap;
+       justify-content: left;
+   }
+   .chk{
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: left;
+       vertical-align: center;
+       width: 600px;
+       border: 1px solid white;
+       margin: 20px;
+   }
+   .reg{
+       width: 650px;
+       padding: 10px;
+       background-color: transparent;
+       font-size: 17px;
+       border-radius: 25px;
+       outline: none;
+       border: none;
+       /*margin-bottom: -20px;*/
+       color: ghostwhite;
+       /*border: 1px solid white;*/
+   }
+   .PW{
+       margin-top: 20px;
+   }
+   .buttonBox{
+       margin: 50px;
+       width: auto;
+       display: flex;
+       flex-direction: row;
+       /*flex-wrap: wrap;*/
+       justify-content: space-between;
+       /*border: 1px solid white;*/
+   }
+
+   .Idchk{
+       width: 120px;
+       height: 40px;
+       border: none;
+       outline: none;
+       background-color: firebrick;
+       color: white;
+       font-size: 15px;
+       /*text-shadow: 2px 2px 2px black;*/
+   }
+
+   .button{
+       width: 230px;
+       height: 50px;
+       border: 1px solid white;
+       outline: none;
+       background-color: transparent;
+       color: white;
+       font-size: 15px;
+       text-shadow: 2px 2px 2px black;
+   }
+
+   .pText{
+       font-family: 'Nanum Gothic', sans-serif;
+       font-size: 13px;
+       color: ghostwhite;
+       text-align: left;
+       margin-left: 25px;
+       margin-top: -15px;
+   }
+
+   .footer{
+       width: auto;
+       height: auto;
+       /*border: 1px solid white;*/
+   }
+
+    </style>
+-->
+<script>
+
+    function gomain() {
+            window.location.href = "/"
+        }
+
+    function update_pw() {
+        let crrpassword = $("#input-crrpassword").val()
+        let password = $("#input-password").val()
+        let password2 = $("#input-password2").val()
+
+        if (crrpassword == "") {
+            $("#help-crrpassword").text("현재 사용 중인 비밀번호를 입력해주세요.")
+            $("#help-crrpassword").css("color", "red")
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/check_pw",
+            data: {
+                pw_give: crrpassword
+            },
+            success: function (response) {
+                console.log(response)
+                if (response["same"] == "fail") {
+                    $("#help-crrpassword").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+                    $("#help-crrpassword").css("color", "red")
+                    return;
+                } else {
+                    $("#help-crrpassword").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+                    $("#help-crrpassword").css("color", "green")
+                }
+            }
+        });
+
+        // 비밀번호 체크
+        if (password == "") { // 입력하지 않은 경우
+            $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+            $("#help-password").css("color", "red")
+            return;
+        } else if (!is_password(password)) {  // 정규표현식에 맞지 않는 경우
+            $("#help-password").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자").removeClass("is-safe").addClass("is-danger")
+            $("#help-password").css("color", "red")
+            return;
+        } else {
+            $("#help-password").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
+            $("#help-password").css("color", "green")
+        }
+
+        // 비밀번호 재입력 체크
+        if (password2 == "") {  // 입력하지 않은 경우
+            $("#help-password2").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+            $("#help-password2").css("color", "red")
+            return;
+        } else if (password2 != password) {  // 첫번째 인풋과 일치하진 않는 경우
+            $("#help-password2").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+            $("#help-password2").css("color", "red")
+            return;
+        } else {
+            $("#help-password2").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+            $("#help-password2").css("color", "green")
+        }
+
+        // 모든 조건 통과 시 서버로 정보 전달
+        $.ajax({
+            type: "POST",
+            url: "/change_pw/update",
+            data: {
+                pw_give: password,
+            },
+            success: function (response) {
+                alert("비밀번호 변경을 완료했습니다!")
+                window.location.replace("/mypage")
+            }
+        });
+
+    }
+
+    // 영문, 숫자는 1개 씩 무조건 포함, 일부 특수문자 사용 가능, 8-20자 길이
+    function is_password(asValue) {
+        let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+        return regExp.test(asValue);
+    }
+
+
+</script>
+
+<body>
+<div class="head">
+    <div class='light x1'></div>
+    <div class='light x2'></div>
+    <div class='light x3'></div>
+    <div class='light x4'></div>
+    <div class='light x5'></div>
+    <div class='light x6'></div>
+    <div class='light x7'></div>
+    <div class='light x8'></div>
+    <div class='light x9'></div>
+</div>
+<div class="header">
+    <div class="logo">
+        <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
+    </div>
+    <div class="button_box">
+    </div>
+</div>
+<div class="body">
+    <div class="bodyInwrap">
+        <div class="mainWrap">
+            <div class="mainList" id="main_List">
+                <div class="mainContent">
+
+                    <div class="inputInfo">
+                        <div class="chk PW">
+                            <input type="password" class="reg pw1" id="input-crrpassword" placeholder="현재 비밀번호">
+                        </div>
+                        <p id="help-crrpassword" class="pText">현재 사용 중인 비밀번호를 입력해주세요.</p>
+
+                        <div class="chk PW">
+                            <input type="password" class="reg pw1" id="input-password" placeholder="새 비밀번호">
+                        </div>
+                        <p id="help-password" class="pText">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요. 특수문자(!@#$%^&*)도 사용 가능합니다.</p>
+
+                        <div class="chk PW">
+                            <input type="password" class="reg pw2" id="input-password2" placeholder="새 비밀번호 확인">
+                        </div>
+                        <p id="help-password2" class="pText">비밀번호를 다시 한 번 입력해주세요.</p>
+                    </div>
+
+                    <div class="buttonBox">
+                        <button onclick="update_pw()" class="button Login">C O N F I R M</button>
+                        <a href="/mypage"><button class="button Signin">B A C K</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+</div>
+
+</body>
+</html>
