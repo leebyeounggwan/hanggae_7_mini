@@ -425,6 +425,10 @@
        height: auto;
        /*border: 1px solid white;*/
        padding: 25px;
+       display: flex;
+       flex-direction: column;
+       flex-wrap: nowrap;
+       justify-content: center;
    }
 
    /*검색 영역의 CSS 입니다.*/
@@ -440,9 +444,10 @@
        margin-top: 80px;
        /*border: 1px solid white;*/
        display: flex;
-       flex-direction: row;
-       flex-wrap: wrap;
+       flex-direction: column;
+       flex-wrap: nowrap;
        justify-content: center;
+       align-items: center;
    }
    .mainList{
        width: 1300px;
@@ -451,7 +456,7 @@
        /*border: 1px solid white;*/
        display: flex;
        flex-direction: row;
-       flex-wrap: nowrap;
+       flex-wrap: wrap;
        justify-content: center;
        align-items: center;
 
@@ -536,10 +541,10 @@
     .inputSynopsis::placeholder{
         font-weight: bold;
         text-align: center;
-        font-size: 25px;
+        font-size: 20px;
         position: absolute;
-        top: 45%;
-        left: 13%;
+        top: 50%;
+        left: 20%;
         color:ghostwhite;
     }
 
@@ -593,6 +598,7 @@
         color: ghostwhite;
         font-size: 25px;
         margin-right: 50px;
+        text-shadow: 2px 2px 2px black;
     }
 
     .button_back{
@@ -605,6 +611,7 @@
         color: ghostwhite;
         font-size: 25px;
         margin-right: 50px;
+        text-shadow: 2px 2px 2px black;
     }
 
 
