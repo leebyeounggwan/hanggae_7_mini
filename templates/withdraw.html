@@ -490,6 +490,18 @@
         font-size: 18px;
         box-shadow: 2px 2px 2px black;
     }
+
+    .buttonTop {
+        width: 80px;
+        height: 45px;
+        border: none;
+        color: ghostwhite;
+        font-size: 15px;
+        background-color: transparent;
+        text-shadow: 3px 3px 4px black;
+        font-family: 'Gothic A1', sans-serif;
+    }
+
     input[id=Goodbyechk]{
         position: relative;
         top: 1px;
@@ -515,6 +527,11 @@
             alert("안내사항을 확인해주세요.")
         }
     }
+    function logout() {
+        $.removeCookie('mytoken');
+        alert('로그아웃!')
+        window.location.href = '/'
+    }
 </script>
 
 
@@ -528,16 +545,21 @@
     <div class='light x6'></div>
     <div class='light x7'></div>
     <div class='light x8'></div>
-    <div class='light x9'></div>
+
 </div>
 <div class="header">
     <div class="logo">
-        <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
+        <div class='light x9'></div>
+        <img onclick="window.location.href='/'" src="/static/naeflix.png" style="width: 100%">
     </div>
-    <div class="button_box">
+    <div class="button_head">
+        <button class="buttonTop" id="btn-logout" onclick="logout()">로그아웃</button>
+        <button class="buttonTop" id="btn-signout" onclick="window.location.href='/mypage'">내페이지</button>
+        <button class="buttonTop" onclick="window.location.href='/write_index'">리뷰쓰기</button>
     </div>
 </div>
 <div class="body">
+
     <div class="bodyInwrap">
         <div class="searchWrap">
         </div>
@@ -546,13 +568,16 @@
                 <div class="notice">
                     <div><p class="noticeText 1" style="font-size: 42px; font-weight: bold; text-shadow: 2px 2px 2px black;">회원 탈퇴</p></div>
                     <div><p class="noticeText 2">탈퇴 전에 확인해 주세요</p></div>
-                    <div><p class="noticeText 3">사용하고 계신 아이디 : {{ id }}</p>
+                    <div><p class="noticeText 3">사용하고 계신 아이디 : {{ id }}</p></div>
                     <div><p class="noticeText 4">탈퇴하실 경우, 작성해 주신 모든 리뷰는 삭제되며, <br> 삭제 된 데이터는 복구할 수 없습니다.</p></div>
                         <div class="chkDiv">
                             <input type="checkbox" class="chk" value="checked" id="Goodbyechk">
                             <label for="Goodbyechk" style="font-size: 16px; color: ghostwhite">안내 사항을 모두 확인하였으며, 이에 동의 합니다.</label>
                         </div>
-                    <div><button id="buttonLogin" class="GoodbyeButton" onclick="delete_user()">회원 탈퇴</button></div>
+                    <div>
+                        <button id="buttonLogin" class="GoodbyeButton" onclick="delete_user()">회원 탈퇴</button>
+                    </div>
+
                 </div>
             </div>
         </div>
