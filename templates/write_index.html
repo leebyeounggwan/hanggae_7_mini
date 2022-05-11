@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 <style>
     *{
         background-color: black;
@@ -117,8 +121,8 @@
     </style>
 </head>
 
-<body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
 <script>
 
     $(document).ready(function () {
@@ -129,6 +133,8 @@
                     if (response['result'] == 'success') {
                         userinfo = response['userinfo']
                         console.log(userinfo)
+                        const btnElement = document.getElementById('btn-user');
+                        btnElement.innerText = userinfo;
                     } else {
                         // 로그인이 안되면 에러메시지를 띄웁니다.
                         alert(response['msg'])
@@ -140,12 +146,26 @@
     function gomain() {
         window.location.href = "/"
     }
-    
-    function check(){
+
+    function mypage() {
+        window.location.href = "/mypage"
+    }
+
+    function logout() {
+        $.removeCookie('mytoken');
+        alert('로그아웃!')
+        window.location.href = '/'
+    }
+
+    function check() {
         if ($("#title").val().length == "") {
-            alert("제목을 입력 하세요");$("#title").focus(); return false;
+            alert("제목을 입력 하세요");
+            $("#title").focus();
+            return false;
         } else {
-            posting(); $("#title").focus(); return true;
+            posting();
+            $("#title").focus();
+            return true;
         }
     }
 
@@ -160,21 +180,34 @@
         $.ajax({
             type: 'POST',
             url: '/drama',
-            data: { usernick_give : usernick, title_give: title, star_give: star, comment_give: comment, synopsis_give: synopsis, image_give: image },
+            data: {
+                usernick_give: usernick,
+                title_give: title,
+                star_give: star,
+                comment_give: comment,
+                synopsis_give: synopsis,
+                image_give: image
+            },
             success: function (response) {
                 alert(response['msg'])
                 window.location.reload()
             }
         });
     }
-    
-    function gomain() {
-            window.location.href = "/"
-        }
+
+
+
 </script>
+
+<body>
+
 <div class="header">
     <div class="logo">
         <img src="/static/naeflix.png" onclick="gomain()" width="25%" style="margin-left: 25px; margin-top: 25px;">
+    </div>
+    <div class="button_head">
+        <button class="button 1" id="btn-user" onclick="mypage()">mypage</button>
+        <button class="button 1" id="btn-logout" onclick="logout()">Logout</button>
     </div>
 </div>
 

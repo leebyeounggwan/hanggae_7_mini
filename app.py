@@ -29,6 +29,10 @@ def login():
 def register():
     return render_template('register.html')
 
+@app.route('/mypage')
+def mypage():
+    return render_template('mypage.html')
+
 @app.route('/write_index')
 def write_index():
     token_receive = request.cookies.get('mytoken')
