@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 </head>
+
+<!--
 <style>
     /* 배경용 CSS입니다. 망가지면 전체 CSS가 꼬입니다. */
 
@@ -405,16 +404,7 @@
        justify-content: space-between;
        padding: 7px;
    }
-   .buttonTop{
-       width: 200px;
-       height: 45px;
-       border: none;
-       color: ghostwhite;
-       font-size: 15px;
-       background-color: transparent;
-       text-shadow: 3px 3px 4px black;
-       font-family: 'Gothic A1', sans-serif;
-   }
+
    .body{
        width: auto;
        height: auto;
@@ -425,272 +415,199 @@
        height: auto;
        /*border: 1px solid white;*/
        padding: 25px;
-       display: flex;
-       flex-direction: column;
-       flex-wrap: nowrap;
-       justify-content: center;
-   }
-
-   /*검색 영역의 CSS 입니다.*/
-   .searchWrap{
-       text-align: center;
-       margin-top: 60px;
    }
 
    /*메인 영역 CSS 입니다.*/
    .mainWrap{
        width: auto;
        height: auto;
-       margin-top: 80px;
+       margin-top: 100px;
        /*border: 1px solid white;*/
-       display: flex;
-       flex-direction: column;
-       flex-wrap: nowrap;
-       justify-content: center;
-       align-items: center;
    }
    .mainList{
-       width: 1300px;
+       width: auto;
        height: auto;
-       /*padding: 10px;*/
+       padding: 10px;
        /*border: 1px solid white;*/
        display: flex;
        flex-direction: row;
        flex-wrap: wrap;
        justify-content: center;
-       align-items: center;
-
    }
-   .Write{
-       width: auto;
-       height: 300px;
-       /*border: 1px solid white;*/
-       display: block;
+   .mainContent{
+       display: flex;
        flex-direction: column;
-       flex-wrap: nowrap;
+       flex-wrap: wrap;
        justify-content: center;
-       align-items: flex-start;
    }
-   .Titlearea{
-        margin-bottom: 40px;
+   .inputInfo{
+       /*margin: 30px;*/
+       display: flex;
+       flex-direction: column;
+       flex-wrap: wrap;
+       justify-content: left;
    }
-   .inputTitle{
-       width: 400px;
+   .chk{
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: left;
+       vertical-align: center;
+       width: 600px;
+       border: 1px solid white;
+       margin: 20px;
+   }
+   .reg{
+       width: 650px;
        padding: 10px;
-       font-size: 18px;
        background-color: transparent;
+       font-size: 17px;
+       border-radius: 25px;
+       outline: none;
+       border: none;
+       /*margin-bottom: -20px;*/
        color: ghostwhite;
+       /*border: 1px solid white;*/
+   }
+   .PW{
+       margin-top: 20px;
+   }
+   .buttonBox{
+       margin: 50px;
+       width: auto;
+       display: flex;
+       flex-direction: row;
+       /*flex-wrap: wrap;*/
+       justify-content: space-between;
+       /*border: 1px solid white;*/
+   }
+
+   .Idchk{
+       width: 120px;
+       height: 40px;
        border: none;
        outline: none;
+       background-color: firebrick;
+       color: white;
+       font-size: 15px;
+       /*text-shadow: 2px 2px 2px black;*/
    }
-   .inputTitle::placeholder{
-        color: ghostwhite;
-    }
 
-    .Urlarea {
-        margin-bottom: 35px;
-    }
+   .button{
+       width: 230px;
+       height: 50px;
+       border: 1px solid white;
+       outline: none;
+       background-color: transparent;
+       color: white;
+       font-size: 15px;
+       text-shadow: 2px 2px 2px black;
+   }
 
-    .inputURL {
-        width: 400px;
-        height: 35px;
-        padding: 10px;
-        font-size: 14px;
-        background-color: transparent;
-        color: ghostwhite;
-        border: none;
-        outline: none;
-        margin-bottom: -20px;
-    }
+   .pText{
+       font-family: 'Nanum Gothic', sans-serif;
+       font-size: 13px;
+       color: ghostwhite;
+       text-align: left;
+       margin-left: 25px;
+       margin-top: -15px;
+   }
 
-    .inputURL::placeholder{
-        color: ghostwhite;
-    }
-
-    .Synoparea {
-        margin-bottom: 15px;
-        margin-left: 50px;
-        text-align: center;
-    }
-
-    .inputSynopsis {
-        width: 400px;
-        height: 270px;
-        padding: 25px;
-        font-size: 15px;
-        background-color: transparent;
-        color: ghostwhite;
-        border: 5px solid whitesmoke;
-        border-top-color: transparent;
-        border-bottom-color: transparent;
-        border-radius: 80px;
-        outline: none;
-        /*margin-bottom: -20px;*/
-        overflow: auto;
-        resize: none;
-    }
-    .inputSynopsis::-webkit-scrollbar{
-        width: 5px;
-    }
-    .inputSynopsis::-webkit-scrollbar-track{
-        background-color: transparent;
-    }
-    .inputSynopsis::-webkit-scrollbar-thumb{
-        background-color: transparent;
-    }
-    .inputSynopsis::placeholder{
-        font-weight: bold;
-        text-align: center;
-        font-size: 20px;
-        position: absolute;
-        top: 50%;
-        left: 20%;
-        color:ghostwhite;
-    }
-
-
-    .Commarea {
-        margin-bottom: 30px;
-    }
-
-    .inputComment {
-        width: 400px;
-        height: 35px;
-        padding: 10px;
-        font-size: 14px;
-        background-color: transparent;
-        color: ghostwhite;
-        border: none;
-        outline: none;
-        margin-bottom: -20px;
-    }
-
-    .inputComment::placeholder{
-        color: ghostwhite;
-    }
-
-    .Stararea {
-        margin-bottom: 15px;
-    }
-
-    .SelectStar {
-        width: 400px;
-        height: 35px;
-        padding: 10px;
-        font-size: 14px;
-        background-color: transparent;
-        color: grey;
-        border: none;
-        outline: none;
-        margin-bottom: -20px;
-    }
-    .SelectStar::placeholder{
-        color: ghostwhite;
-    }
-
-    .button_write{
-        margin-top: 50px;
-        border: none;
-        outline: none;
-        width: 200px;
-        height: 40px;
-        background-color: transparent;
-        color: ghostwhite;
-        font-size: 25px;
-        margin-right: 50px;
-        text-shadow: 2px 2px 2px black;
-    }
-
-    .button_back{
-        margin-top: 50px;
-        border: none;
-        outline: none;
-        width: 200px;
-        height: 40px;
-        background-color: transparent;
-        color: ghostwhite;
-        font-size: 25px;
-        margin-right: 50px;
-        text-shadow: 2px 2px 2px black;
-    }
-
+   .footer{
+       width: auto;
+       height: auto;
+       /*border: 1px solid white;*/
+   }
 
     </style>
-
+-->
 <script>
 
-    $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: "/api/login/user_check",
-                success: function (response) {
-                    if (response['result'] == 'success') {
-                        userinfo = response['userinfo']
-                        console.log(userinfo)
-                        const btnElement = document.getElementById('btn-user');
-                        btnElement.innerText = userinfo['nick'];
-                    } else {
-                        // 로그인이 안되면 에러메시지를 띄웁니다.
-                        alert(response['msg'])
-                    }
-                }
-            })
-    });
-
     function gomain() {
-        window.location.href = "/"
-    }
-
-    function mypage() {
-        window.location.href = "/mypage"
-    }
-
-    function logout() {
-        $.removeCookie('mytoken');
-        alert('로그아웃!')
-        window.location.href = '/'
-    }
-
-    function check() {
-        if ($("#title").val().length == "") {
-            alert("제목을 입력 하세요");
-            $("#title").focus();
-            return false;
-        } else {
-            posting();
-            $("#title").focus();
-            return true;
+            window.location.href = "/"
         }
-    }
 
-    function posting() {
-        let userid = userinfo['id']
-        let usernick = userinfo['nick']
-        let title = $('#title').val()
-        let star = $('#star').val()
-        let synopsis = $('#synopsis').val()
-        let comment = $('#comment').val()
-        let image = $('#image_url').val()
+    function update_pw() {
+        let crrpassword = $("#input-crrpassword").val()
+        let password = $("#input-password").val()
+        let password2 = $("#input-password2").val()
+
+        if (crrpassword == "") {
+            $("#help-crrpassword").text("현재 사용 중인 비밀번호를 입력해주세요.")
+            $("#help-crrpassword").css("color", "red")
+            return;
+        }
 
         $.ajax({
-            type: 'POST',
-            url: '/drama',
+            type: "POST",
+            url: "/check_pw",
             data: {
-                userid_give : userid,
-                usernick_give : usernick,
-                title_give: title,
-                star_give: star,
-                comment_give: comment,
-                synopsis_give: synopsis,
-                image_give: image
+                pw_give: crrpassword
             },
             success: function (response) {
-                alert(response['msg'])
-                window.location.reload()
+                console.log(response)
+                if (response["same"] == "fail") {
+                    $("#help-crrpassword").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+                    $("#help-crrpassword").css("color", "red")
+                    return;
+                } else {
+                    $("#help-crrpassword").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+                    $("#help-crrpassword").css("color", "green")
+                }
             }
         });
+
+        // 비밀번호 체크
+        if (password == "") { // 입력하지 않은 경우
+            $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+            $("#help-password").css("color", "red")
+            return;
+        } else if (!is_password(password)) {  // 정규표현식에 맞지 않는 경우
+            $("#help-password").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자").removeClass("is-safe").addClass("is-danger")
+            $("#help-password").css("color", "red")
+            return;
+        } else {
+            $("#help-password").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
+            $("#help-password").css("color", "green")
+        }
+
+        // 비밀번호 재입력 체크
+        if (password2 == "") {  // 입력하지 않은 경우
+            $("#help-password2").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+            $("#help-password2").css("color", "red")
+            return;
+        } else if (password2 != password) {  // 첫번째 인풋과 일치하진 않는 경우
+            $("#help-password2").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+            $("#help-password2").css("color", "red")
+            return;
+        } else {
+            $("#help-password2").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+            $("#help-password2").css("color", "green")
+        }
+
+        // 모든 조건 통과 시 서버로 정보 전달
+        $.ajax({
+            type: "POST",
+            url: "/change_pw/update",
+            data: {
+                pw_give: password,
+            },
+            success: function (response) {
+                alert("비밀번호 변경을 완료했습니다!")
+                window.location.replace("/mypage")
+            }
+        });
+
     }
-    </script>
+
+    // 영문, 숫자는 1개 씩 무조건 포함, 일부 특수문자 사용 가능, 8-20자 길이
+    function is_password(asValue) {
+        let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+        return regExp.test(asValue);
+    }
+
+
+</script>
 
 <body>
 <div class="head">
@@ -709,53 +626,42 @@
         <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
     </div>
     <div class="button_box">
-        <button id="buttonLogin" class="buttonTop" onclick="login()">로그인</button>
-        <button id="buttonMypage" class="buttonTop" onclick="mypage()">내페이지</button>
-        <button id="buttonLogout" class="buttonTop" onclick="logout()">로그아웃</button>
-        <button id="buttonSignin" class="buttonTop" onclick="signin()">회원가입</button>
-        <button id="buttonWrite" class="buttonTop" onclick="write_click()">리뷰쓰기</button>
     </div>
 </div>
 <div class="body">
     <div class="bodyInwrap">
         <div class="mainWrap">
             <div class="mainList" id="main_List">
-                <div class="Write">
-                    <div class="Titlearea">
-                        <input id="title" class="inputTitle" placeholder="제목을 입력해 주세요">
-                        <hr>
+                <div class="mainContent">
+
+                    <div class="inputInfo">
+                        <div class="chk PW">
+                            <input type="password" class="reg pw1" id="input-crrpassword" placeholder="현재 비밀번호">
+                        </div>
+                        <p id="help-crrpassword" class="pText">현재 사용 중인 비밀번호를 입력해주세요.</p>
+
+                        <div class="chk PW">
+                            <input type="password" class="reg pw1" id="input-password" placeholder="새 비밀번호">
+                        </div>
+                        <p id="help-password" class="pText">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요. 특수문자(!@#$%^&*)도 사용 가능합니다.</p>
+
+                        <div class="chk PW">
+                            <input type="password" class="reg pw2" id="input-password2" placeholder="새 비밀번호 확인">
+                        </div>
+                        <p id="help-password2" class="pText">비밀번호를 다시 한 번 입력해주세요.</p>
                     </div>
-                    <div class="Urlarea">
-                        <input id="image_url" class="inputURL" placeholder="썸네일 이미지의 url을 입력해 주세요">
-                        <hr>
+
+                    <div class="buttonBox">
+                        <button onclick="update_pw()" class="button Login">C O N F I R M</button>
+                        <a href="/mypage"><button class="button Signin">B A C K</button></a>
                     </div>
-                    <div class="Commarea">
-                        <input id="comment" class="inputComment" placeholder="작품의 감상평을 남겨 주세요">
-                        <hr>
-                    </div>
-                    <div class="Stararea">
-                        <select id="star" class="SelectStar">
-                            <option selected="">작품의 평점을 남겨 주세요</option>
-                            <option value="1">⭐</option>
-                            <option value="2">⭐⭐</option>
-                            <option value="3">⭐⭐⭐</option>
-                            <option value="4">⭐⭐⭐⭐</option>
-                            <option value="5">⭐⭐⭐⭐⭐</option>
-                        </select>
-                    </div>
-               </div>
-                <div class="Synoparea">
-                    <textarea id="synopsis" class="inputSynopsis" placeholder="작품의 줄거리를 입력해 주세요"></textarea>
                 </div>
             </div>
-        <div>
-            <button onclick="check()" class="button_write">작성 하기</button>
-            <button onclick="gomain()" class="button_back">뒤로 가기</button>
-        </div>
         </div>
     </div>
 </div>
 <div class="footer">
 </div>
+
 </body>
 </html>

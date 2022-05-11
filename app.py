@@ -182,13 +182,69 @@ def withdraw_delete():
     return jsonify({'msg': '탈퇴가 완료되었습니다.'})
 
 
+@app.route('/change_pw')
+def change_pw():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        # userinfo = db.users.find_one({'id': payload['id']}, {'_id': False})
+        # user_id = userinfo['id']
+        return render_template('change_pw.html')
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("home", msg="로그인 정보가 존재하지 않습니다."))
+
+
+# 현재 비밀번호 확인
+@app.route('/check_pw', methods=['POST'])
+def check_pw():
+    pw_receive = request.form['pw_give']
+    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.users.find_one({'id': payload['id']}, {'_id': False})
+        user_pw = userinfo['pw']
+        if user_pw == pw_hash:
+            return jsonify({'result': 'success', 'same': 'pass'})
+        else:
+            return jsonify({'result': 'fail', 'same': 'fail'})
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("home", msg="로그인 정보가 존재하지 않습니다."))
+
+
+# 비밀번호 변경
+@app.route("/change_pw/update", methods=["POST"])
+def update_pw():
+    pw_receive = request.form['pw_give']
+    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.users.find_one({'id': payload['id']}, {'_id': False})
+        user_id = userinfo['id']
+        db.users.update_one({'id': str(user_id)}, {'$set': {'pw': pw_hash}})
+        return jsonify({'result': 'success'})
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("home", msg="로그인 정보가 존재하지 않습니다."))
+
+
 ############ 병관 ############
 
-# #검색
-# @app.route('/search_drama', methods=["GET"])
-# def drama_get():
-#     drama_list = list(db.drama.find({},{'_id':False}))
-#     return jsonify({'dramas': drama_list})
+
+
+@app.route('/search_drama', methods=["POST"])
+def drama_get():
+    search_d_receive = request.form['search_d_give']
+
+    drama_list = list(db.drama.find({},{'_id':False}))
+    return jsonify({'dramas': drama_list})
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
