@@ -669,13 +669,31 @@
         window.location.href = '/'
     }
 
-    function check() {
-        if ($("#title").val().length == "" || $("#image_url").val().length == "" || $("#star").val().length == "" || $("#synopsis").val().length == "" || $("#comment").val().length == "") {
-            alert("모든 칸을 입력해 주세요"); $("#title").focus(); return false;
-        } else {
-            posting(); $("#title").focus(); return true;
+
+       function check() {
+            if ($("#title").val().length == "") {
+
+                alert("제목을 입력해 주세요"); $("#title").focus(); return false;
+
+            } else if ($("#image_url").val()== "") {
+
+                alert("URL을 입력해 주세요"); $("#image_url").focus(); return false;
+
+            } else if ($("#star option:selected").val() == "작품의 평점을 남겨 주세요") {
+
+                alert("평점을 선택해 주세요"); $("#star").css("color", "red", "font" , "bold"); return false;
+
+            } else if ($("#synopsis").val().length == "") {
+
+                alert("줄거리를 입력해 주세요"); $("#synopsis").focus(); return false;
+
+            } else if ($("#comment").val().length == "") {
+
+                alert("감상평을 입력해 주세요"); $("#comment").focus() ; return false;
+            } else {
+                posting(); $("#title").focus(); return true;
+            }
         }
-    }
 
     function posting() {
         let userid = userinfo['id']
@@ -746,7 +764,7 @@
                     </div>
                                         <div class="Stararea">
                         <select id="star" class="SelectStar">
-                            <option selected="">작품의 평점을 남겨 주세요</option>
+                            <option id="n" selected="">작품의 평점을 남겨 주세요</option>
                             <option value="1">⭐</option>
                             <option value="2">⭐⭐</option>
                             <option value="3">⭐⭐⭐</option>
