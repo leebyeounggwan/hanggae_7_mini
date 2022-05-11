@@ -615,57 +615,25 @@
             })
         }
 
-        function listing() {
-            $('#post-box').empty()
-            $.ajax({
-                type: "GET",
-                url: "/drama",
-
-                success: function (response) {
-                    let rows = response['dramas']
-                    for (let i = 0; i < rows.length; i++) {
-                        let title = rows[i]['title']
-                        let image = rows[i]['image']
-                        let star = rows[i]['star']
-                        let synopsis = rows[i]['synopsis']
-                        let comment = rows[i]['comment']
-
-                        let temp_html = `<div class="mainContent">
-                                            <div class="imgBox">
-                                                <img class="imgBox" src="${image}">
-                                            </div>
-                                            <div class="textBox">
-                                                <div class="text1"><b>제목_</b>${title}</div>
-                                                <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
-                                                <div class="text3"><b>한줄평가_</b><br>${comment}</div>
-                                                <div class="text4"><b>작성자_</b></div>
-                                            </div>
-                                        </div>`
-                        $('#main_List').append(temp_html)
-                    }
-                    console.log(response)
-                }
-            });
-        }
-
         function find_word() {
-            $('#mainList').empty()
+            $('#main_List').empty()
             let check = false
-
-
+            let drama = $('#search_Bar').val()
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: '/search_drama',
-                data: {},
+                data: {search_d_give: drama},
                 success: function (response) {
                     let rows = response['dramas']
 
                     for (let i = 0; i < rows.length; i++) {
 
                         let title = rows[i]["title"]
-                        let drama = $('#searchBar').val()
+                        let synopsis = rows[i]['synopsis']
+                        let comment = rows[i]['comment']
+                        //let drama = $('#search_Bar').val()
 
-                        if (title.includes(drama)) {
+                        if (title.includes(drama)||synopsis.includes(drama)||comment.includes(drama)){
                             let title = rows[i]['title']
                             let image = rows[i]['image']
                             let star = rows[i]['star']
@@ -685,7 +653,7 @@
                                                 <div class="text4"><b>작성자_</b></div>
                                             </div>
                                         </div>`
-                            $('#mainList').append(temp_html)
+                            $('#main_List').append(temp_html)
 
                             check = true
                         }
@@ -726,7 +694,7 @@
 <div class="body">
     <div class="bodyInwrap">
         <div class="searchWrap">
-            <input class="searchBar">
+            <input class="searchBar" id = "search_Bar">
             <button class="buttonSearch" onclick="find_word()">S E A R C H</button>
             <hr style="width: 650px;">
         </div>
