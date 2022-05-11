@@ -154,12 +154,10 @@ def check_dup():
 
 
 #검색
-@app.route('/search_drama', methods=["POST"])
-def drama_search():
-    search_d_receive = request.form['search_d_give']
-
-    result = list(db.drama.find({},{'_id': False}))
-    return jsonify({'result':result,'search_d_receive':search_d_receive})
+@app.route('/search_drama', methods=["GET"])
+def drama_get():
+    drama_list = list(db.drama.find({},{'_id':False}))
+    return jsonify({'dramas': drama_list})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
