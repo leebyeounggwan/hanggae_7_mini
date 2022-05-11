@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 import certifi
 import jwt, datetime, hashlib
-import pandas as pd
 
 ca = certifi.where()
 
