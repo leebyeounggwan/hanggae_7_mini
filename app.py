@@ -167,8 +167,10 @@ def withdraw_delete():
 
 
 #검색
-@app.route('/search_drama', methods=["GET"])
+@app.route('/search_drama', methods=["POST"])
 def drama_get():
+    search_d_receive = request.form['search_d_give']
+
     drama_list = list(db.drama.find({},{'_id':False}))
     return jsonify({'dramas': drama_list})
 
