@@ -643,7 +643,7 @@
                     if (response['result'] == 'success') {
                         userinfo = response['userinfo']
                         console.log(userinfo)
-                        const btnElement = document.getElementById('btn-user');
+                        const btnElement = document.getElementById('buttonMypage');
                         btnElement.innerText = userinfo['nick'];
                     } else {
                         // 로그인이 안되면 에러메시지를 띄웁니다.
