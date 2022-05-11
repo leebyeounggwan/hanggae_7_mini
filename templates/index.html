@@ -3,188 +3,619 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/a47033c40a.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    /* 배경용 CSS입니다. 망가지면 전체 CSS가 꼬입니다. */
 
-    <style>
-        * {
-            background-color: black;
-            color: white;
+    body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(firebrick, black);
+        /*!*#a23982*! #1f1013*/
+        -webkit-overflow-Y: hidden;
+        -moz-overflow-Y: hidden;
+        -o-overflow-Y: hidden;
+        overflow-y: hidden;
+        -webkit-animation: fadeIn 1 1s ease-out;
+        -moz-animation: fadeIn 1 1s ease-out;
+        -o-animation: fadeIn 1 1s ease-out;
+        animation: fadeIn 1 1s ease-out;
+    }
+
+    .light {
+        position: absolute;
+        width: 0px;
+        opacity: .75;
+        background-color: white;
+        box-shadow: #e9f1f1 0px 0px 20px 2px;
+        opacity: 0;
+        top: 100vh;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+    .x1 {
+        -webkit-animation: floatUp 4s infinite linear;
+        -moz-animation: floatUp 4s infinite linear;
+        -o-animation: floatUp 4s infinite linear;
+        animation: floatUp 4s infinite linear;
+        -webkit-transform: scale(1.0);
+        -moz-transform: scale(1.0);
+        -o-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+    .x2 {
+        -webkit-animation: floatUp 7s infinite linear;
+        -moz-animation: floatUp 7s infinite linear;
+        -o-animation: floatUp 7s infinite linear;
+        animation: floatUp 7s infinite linear;
+        -webkit-transform: scale(1.6);
+        -moz-transform: scale(1.6);
+        -o-transform: scale(1.6);
+        transform: scale(1.6);
+        left: 15%;
+    }
+    .x3 {
+        -webkit-animation: floatUp 2.5s infinite linear;
+        -moz-animation: floatUp 2.5s infinite linear;
+        -o-animation: floatUp 2.5s infinite linear;
+        animation: floatUp 2.5s infinite linear;
+        -webkit-transform: scale(.5);
+        -moz-transform: scale(.5);
+        -o-transform: scale(.5);
+        transform: scale(.5);
+        left: -15%;
+    }
+    .x4 {
+        -webkit-animation: floatUp 4.5s infinite linear;
+        -moz-animation: floatUp 4.5s infinite linear;
+        -o-animation: floatUp 4.5s infinite linear;
+        animation: floatUp 4.5s infinite linear;
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+        left: -34%;
+    }
+    .x5 {
+        -webkit-animation: floatUp 8s infinite linear;
+        -moz-animation: floatUp 8s infinite linear;
+        -o-animation: floatUp 8s infinite linear;
+        animation: floatUp 8s infinite linear;
+        -webkit-transform: scale(2.2);
+        -moz-transform: scale(2.2);
+        -o-transform: scale(2.2);
+        transform: scale(2.2);
+        left: -57%;
+    }
+    .x6 {
+        -webkit-animation: floatUp 3s infinite linear;
+        -moz-animation: floatUp 3s infinite linear;
+        -o-animation: floatUp 3s infinite linear;
+        animation: floatUp 3s infinite linear;
+        -webkit-transform: scale(.8);
+        -moz-transform: scale(.8);
+        -o-transform: scale(.8);
+        transform: scale(.8);
+        left: -81%;
+    }
+    .x7 {
+        -webkit-animation: floatUp 5.3s infinite linear;
+        -moz-animation: floatUp 5.3s infinite linear;
+        -o-animation: floatUp 5.3s infinite linear;
+        animation: floatUp 5.3s infinite linear;
+        -webkit-transform: scale(3.2);
+        -moz-transform: scale(3.2);
+        -o-transform: scale(3.2);
+        transform: scale(3.2);
+        left: 37%;
+    }
+    .x8 {
+        -webkit-animation: floatUp 4.7s infinite linear;
+        -moz-animation: floatUp 4.7s infinite linear;
+        -o-animation: floatUp 4.7s infinite linear;
+        animation: floatUp 4.7s infinite linear;
+        -webkit-transform: scale(1.7);
+        -moz-transform: scale(1.7);
+        -o-transform: scale(1.7);
+        transform: scale(1.7);
+        left: 62%;
+    }
+    .x9 {
+        -webkit-animation: floatUp 4.1s infinite linear;
+        -moz-animation: floatUp 4.1s infinite linear;
+        -o-animation: floatUp 4.1s infinite linear;
+        animation: floatUp 4.1s infinite linear;
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+        -o-transform: scale(0.9);
+        transform: scale(0.9);
+        left: 85%;
+    }
+
+    @-webkit-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
         }
-
-        .header {
-            /*border: 1px solid white;*/
-            width: auto;
-            height: 100px;
-            background-color: black;
-            color: white;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-            vertical-align: center;
+        25% {
+            opacity: 1;
         }
-
-        .logo {
-            /*border: 1px solid white;*/
-            height: 50px;
+        50% {
+            top: 0vh;
+            opacity: .8;
         }
-
-        .button_head {
-
-            margin-top: 25px;
-            height: 50px;
-            margin-right: 40px;
+        75% {
+            opacity: 1;
         }
-
-        .button {
-            color: white;
-            background-color: transparent;
-            font-size: 15px;
-            border-radius: 10px;
-            padding: 10px;
-            border: 1px white;
+        100% {
+            top: -100vh;
+            opacity: 0;
         }
-
-        .search_box {
-
-            width: auto;
-            padding: 20px;
-            height: 300px;
-            background-color: black;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Nanum Gothic', sans-serif;
+    }
+    @-moz-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
         }
-
-        .search_bar {
-            margin-top: 30px;
-            margin-bottom: 30px;
-            width: 40%;
-            padding: 20px;
-            height: 70px;
-            border: 5px solid rgb(255, 27, 0);
-            border-radius: 15px;
-            max-width: 700px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
+        25% {
+            opacity: 1;
         }
-
-        .search_icon {
-            font-size: 250%;
-            margin-left: 20px;
-            color: rgb(255, 27, 0);
-            border: none;
-
+        50% {
+            top: 0vh;
+            opacity: .8;
         }
-
-        .body {
-            /*border: 1px solid white;*/
-            width: auto;
-            padding: 30px;
-            height: auto;
-            background-color: black;
-            color: white;
-            font-family: 'Nanum Gothic', sans-serif;
+        75% {
+            opacity: 1;
         }
-
-        .wrap {
-            border: solid 3px rgb(255, 27, 0);
-            border-radius: 10px;
-            background-color: black;
-            max-width: 1000px;
-            width: 900px;
-            height: 310px;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-            margin: 25px;
+        100% {
+            top: -100vh;
+            opacity: 0;
         }
-
-        .wrap_head {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: center;
+    }
+    @-o-keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
         }
-
-        .image {
-            /*border: 1px solid white;*/
-            width: 250px;
-            height: 300px;
-            border-radius: 10px;
+        25% {
+            opacity: 1;
         }
-
-        .movie_image{
-            width: 250px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
+        50% {
+            top: 0vh;
+            opacity: .8;
         }
-
-        .content-box {
-            /*border: 1px solid white;*/
-            width: 600px;
-            height: 300px;
-            border-radius: 10px;
+        75% {
+            opacity: 1;
         }
-
-        .content {
-            margin-bottom: 20px;
-            padding: 10px;
-            overflow: hidden;
-            /*border: 1px solid white;*/
-            font-size: 15px;
+        100% {
+            top: -100vh;
+            opacity: 0;
         }
+    }
+    @keyframes floatUp {
+        0% {
+            top: 100vh;
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            top: 0vh;
+            opacity: .8;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            top: -100vh;
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-o-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-webkit-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-moz-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-o-keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @-o-keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes finalFade {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        80% {
+            opacity: .9;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    footer {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.2em;
+        color: white;
+        position: fixed;
+        -webkit-transform: translate(95vw, 90vh);
+        -moz-transform: translate(95vw, 90vh);
+        transform: translate(95vw, 90vh);
+        transform: translate(95vw, 90vh);
+    }
+
+    /*머리쪽 CSS 입니다. 로그인 및 기능용 버튼들이 모여 있습니다.*/
+   .header{
+       width: auto;
+       height: 150px;
+       /*border: 1px solid white;*/
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: space-between;
+       vertical-align: center;
+   }
+   .logo{
+       width: 200px;
+       height: 50px;
+       /*border: 1px solid white;*/
+       margin: 35px;
+   }
+   .button_box{
+       width: 350px;
+       height: 50px;
+       margin: 35px;
+       /*border: 1px solid white;*/
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: space-between;
+       padding: 7px;
+   }
+   .buttonTop{
+       width: 100px;
+       height: 47px;
+       border: none;
+       color: ghostwhite;
+       font-size: 22px;
+       background-color: transparent;
+       text-shadow: 3px 3px 4px black;
+   }
+   .body{
+       width: auto;
+       height: auto;
+       /*border: 1px solid white;*/
+   }
+   .bodyInwrap{
+       width: auto;
+       height: auto;
+       /*border: 1px solid white;*/
+       padding: 25px;
+   }
+
+   /*검색 영역의 CSS 입니다.*/
+   .searchWrap{
+       text-align: center;
+       margin-top: 80px;
+   }
+   .searchBar{
+       width: 500px;
+       height: 25px;
+       padding: 10px;
+       border-radius: 25px;
+       border: none;
+       outline: none;
+       color: ghostwhite;
+       font-size: 25px;
+       background-color: transparent;
+   }
+   .buttonSearch{
+       width: 120px;
+       height: 25px;
+       background-color: transparent;
+       color: ghostwhite;
+       border: none;
+       /*border-bottom-right-radius: 10px;*/
+       /*border-start-end-radius: 10px;*/
+   }
+
+   /*메인 영역 CSS 입니다.*/
+   .mainWrap{
+       width: auto;
+       height: auto;
+       margin-top: 200px;
+       /*border: 1px solid white;*/
+   }
+   .mainList{
+       width: auto;
+       height: auto;
+       padding: 25px;
+       /*border: 1px solid white;*/
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: center;
+   }
+
+   .imgBox{
+       width: 250px;
+       height: 370px;
+       object-fit: cover;
+       border: 2px solid firebrick;
+       border-radius: 10px;
+       padding: 5px;
+   }
+
+   .textBox{
+       width: 500px;
+       height: 380px;
+       /*border: 1px solid white;*/
+       display: flex;
+       flex-direction: column;
+       flex-wrap: nowrap;
+       justify-content: center;
+   }
+   .text1{
+       width: auto;
+       height: auto;
+       /*border: 1px solid white;*/
+       font-size: 45px;
+       font-family: 'Nanum Gothic', sans-serif;
+       color: white;
+       padding: 30px;
+       text-shadow: 2px 2px 4px black;
+    }
+   .text2{
+       width: auto;
+       height: auto;
+       font-family: 'Nanum Gothic', sans-serif;
+       font-size: 14px;
+       color: white;
+       /*border: 1px solid white;*/
+       overflow: hidden;
+       padding: 30px;
+    }
+   .text3{
+       width: auto;
+       height: 90px;
+       font-family: 'Nanum Gothic', sans-serif;
+       font-size: 14px;
+       color: white;
+       /*border: 1px solid white;*/
+       overflow: hidden;
+       padding: 30px;
+    }
+   .text4{
+       width: auto;
+       height: 40px;
+       font-family: 'Nanum Gothic', sans-serif;
+       color: white;
+       /*border: 1px solid white;*/
+       padding: 30px;
+    }
+   .footer{
+       width: auto;
+       height: 100px;
+       /*border: 1px solid white;*/
+   }
+
     </style>
+
+<body>
+<div class="head">
+    <div class='light x1'></div>
+    <div class='light x2'></div>
+    <div class='light x3'></div>
+    <div class='light x4'></div>
+    <div class='light x5'></div>
+    <div class='light x6'></div>
+    <div class='light x7'></div>
+    <div class='light x8'></div>
+    <div class='light x9'></div>
+</div>
+<div class="header">
+    <div class="logo">
+        <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
+    </div>
+    <div class="button_box">
+        <button id="buttonLogin" class="buttonTop" onclick="login()">Log-in</button>
+        <button id="buttonMypage" class="buttonTop" onclick="">My page</button>
+        <button id="buttonLogout" class="buttonTop" onclick="logout()">Log-out</button>
+<!--        <button id="buttonSignin" class="buttonTop" onclick="signin()">Sign-in</button>-->
+<!--        <button id="buttonWrite" class="buttonTop" onclick="write_click()">Write</button>-->
+    </div>
+</div>
+<div class="body">
+    <div class="bodyInwrap">
+        <div class="searchWrap">
+            <input class="searchBar">
+            <button class="buttonSearch" onclick="find_word()">S E A R C H</button>
+            <hr style="width: 650px;">
+        </div>
+        <div class="mainWrap">
+            <div class="mainList" id="main_List">
+                <div class="imgBox">
+                    <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
+                </div>
+                <div class="textBox">
+                    <div class="text1"><b>제목_</b>호텔 델루나</div>
+                    <div class="text2"><b>시놉시스_</b><br>서울 도심에 수상한 호텔이 있다. 천년 영업에 숙박한 사람이 없다. 왜? 산 사람은 안 받으니까. 귀신만 묵는 그곳에 인간 지배인이 왔다. 알고 보면 심약한 이 남자, 고객 응대 잘 해낼까? 외모와 달리 괴팍한 사장은 어찌 감당하누</div>
+                    <div class="text3"><b>한줄평가_</b><br>설렘주의, 유쾌발랄, 진심 어린</div>
+                    <div class="text4"><b>작성자_</b></div>
+                </div>
+                <div class="imgBox">
+                    <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
+                </div>
+                <div class="textBox">
+                    <div class="text1"><b>제목_</b>호텔 델루나</div>
+                    <div class="text2"><b>시놉시스_</b><br>서울 도심에 수상한 호텔이 있다. 천년 영업에 숙박한 사람이 없다. 왜? 산 사람은 안 받으니까. 귀신만 묵는 그곳에 인간 지배인이 왔다. 알고 보면 심약한 이 남자, 고객 응대 잘 해낼까? 외모와 달리 괴팍한 사장은 어찌 감당하누</div>
+                    <div class="text3"><b>한줄평가_</b><br>설렘주의, 유쾌발랄, 진심 어린</div>
+                    <div class="text4"><b>작성자_</b></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script>
         $(document).ready(function () {
             listing();
+        });
 
-            $.ajax({
+        $.ajax({
                 type: "GET",
                 url: "user_check",
                 success: function (response) {
                     if (response['result'] == 'success') {
                         userinfo = response['userinfo']
                         console.log(userinfo)
-                        document.getElementById("btn-login").style.display = "none";
-                        const btnElement = document.getElementById('btn-user');
+                        document.getElementById("buttonLogin").style.display = "none";
+                        const btnElement = document.getElementById('buttonMypage');
                         btnElement.innerText = userinfo;
-                        document.getElementById("btn-user").style.display = "";
-                        document.getElementById("btn-logout").style.display = "";
+                        document.getElementById("buttonMypage").style.display = "";
+                        document.getElementById("buttonLogout").style.display = "";
                     } else {
-                        document.getElementById("btn-login").style.display = "";
-                        document.getElementById("btn-logout").style.display = "none";
-                        document.getElementById("btn-user").style.display = "none";
+                        document.getElementById("buttonLogin").style.display = "";
+                        document.getElementById("buttonLogout").style.display = "none";
+                        document.getElementById("buttonMypage").style.display = "none";
                     }
                 }
             })
-
-        });
 
         function gomain() {
             window.location.href = "/"
@@ -219,7 +650,6 @@
             })
         }
 
-
         function listing() {
             $('#post-box').empty()
             $.ajax({
@@ -235,18 +665,24 @@
                         let synopsis = rows[i]['synopsis']
                         let comment = rows[i]['comment']
 
-                        let temp_html = `<div class="wrap_head">
-                                            <div class="wrap">
-                                                <div class="image">
-                                                    <img class=movie_image src="${image}"/>
-                                                </div>
-                                                <div class="content-box">
-                                                    <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
-                                                    <p class="content" style="height: 100px;">${synopsis}</p>
-                                                    <p class="content" style="height: 100px;">${comment}</p>
-                                                </div>
+                        let temp_html = `<div class="imgBox">
+                                                <img class="imgBox" src="${image}">
                                             </div>
-                                        </div>`
+                                            <div class="textBox">
+                                                <div class="text1"><b>제목_</b>${title}</div>
+                                                <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
+                                                <div class="text3"><b>한줄평가_</b><br>${comment}</div>
+                                                <div class="text4"><b>작성자_</b></div>
+                                            </div>
+                                            <div class="imgBox">
+                                                <img class="imgBox" src="${image}">
+                                            </div>
+                                            <div class="textBox">
+                                                <div class="text1"><b>제목_</b>${title}</div>
+                                                <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
+                                                <div class="text3"><b>한줄평가_</b><br>${comment}</div>
+                                                <div class="text4"><b>작성자_</b></div>
+                                            </div>`
                         $('#post-box').append(temp_html)
                     }
                     console.log(response)
@@ -279,17 +715,23 @@
 
                             let star_img = '💙'.repeat(star)
 
-                            let temp_html = `<div class="wrap_head">
-                                                <div class="wrap">
-                                                    <div class="image">
-                                                        <img class=movie_image src="${image}"/>
-                                                    </div>
-                                                    <div class="content-box">
-                                                        <p class="content" style="height: 55px; font-size: 20px;"><b>${title}</b></p>
-                                                        <p class="content" style="height: 100px;">${synopsis}</p>
-                                                        <p class="content" style="height: 100px;">${comment}</p>
-                                                    </div>
-                                                </div>
+                            let temp_html = `<div class="imgBox">
+                                                <img class="imgBox" src="${image}">
+                                            </div>
+                                            <div class="textBox">
+                                                <div class="text1"><b>제목_</b>${title}</div>
+                                                <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
+                                                <div class="text3"><b>한줄평가_</b><br>${comment}</div>
+                                                <div class="text4"><b>작성자_</b></div>
+                                            </div>
+                                            <div class="imgBox">
+                                                <img class="imgBox" src="${image}">
+                                            </div>
+                                            <div class="textBox">
+                                                <div class="text1"><b>제목_</b>${title}</div>
+                                                <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
+                                                <div class="text3"><b>한줄평가_</b><br>${comment}</div>
+                                                <div class="text4"><b>작성자_</b></div>
                                             </div>`
                             $('#post-box').append(temp_html)
                             {#$(`#` + movie_num).addClass("highlight")#}
@@ -304,33 +746,6 @@
                 }
             })
         }
-
     </script>
-</head>
-
-<body>
-
-<div class="header">
-    <div class="logo">
-        <img src="/static/naeflix.png" onclick="gomain()" width="25%" style="margin-left: 25px; margin-top: 25px;">
-    </div>
-    <div class="button_head">
-        <button class="button 1" id="btn-login" onclick="login()">Login</button>
-        <button class="button 1" id="btn-user" onclick="userpage()">mypage</button>
-        <button class="button 1" id="btn-logout" onclick="logout()">Logout</button>
-        <button class="button 2" onclick="write_click()">Write</button>
-    </div>
-</div>
-<div class="body">
-    <div class="search_box">
-        <input id="search_bars" class="search_bar" type="text" placeholder="드라마 제목 입력">
-        <button class="search_icon" onclick="find_word()"><i class="fa fa-search"></i></button>
-    </div>
-    <div id="post-box">
-    </div>
-    <div class="footer">
-    </div>
-</div>
-<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 </body>
 </html>
