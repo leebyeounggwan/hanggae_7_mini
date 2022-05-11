@@ -551,73 +551,8 @@
 
     </style>
 
-<body>
-<div class="head">
-    <div class='light x1'></div>
-    <div class='light x2'></div>
-    <div class='light x3'></div>
-    <div class='light x4'></div>
-    <div class='light x5'></div>
-    <div class='light x6'></div>
-    <div class='light x7'></div>
-    <div class='light x8'></div>
-    <div class='light x9'></div>
-</div>
-<div class="header">
-    <div class="logo">
-        <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
-    </div>
-    <div class="button_box">
-        <button id="buttonLogin" class="buttonTop" onclick="login()">Log-in</button>
-        <button id="buttonMypage" class="buttonTop" onclick="mypage()">My page</button>
-        <button id="buttonLogout" class="buttonTop" onclick="logout()">Log-out</button>
-        <button id="buttonSignin" class="buttonTop" onclick="signin()">Sign-in</button>
-        <button id="buttonWrite" class="buttonTop" onclick="write_click()">Write</button>
-    </div>
-</div>
-<div class="body">
-    <div class="bodyInwrap">
-        <div class="searchWrap">
-            <input class="searchBar">
-            <button class="buttonSearch" onclick="find_word()">S E A R C H</button>
-            <hr style="width: 650px;">
-        </div>
-        <div class="mainWrap">
-            <div class="mainContent">
-
-                {% for drama in dramas %}
-                        <div class="imgBox">
-                            <img class="imgBox" src="{{ drama.image }}">
-                        </div>
-                        <div class="textBox">
-                            <div class="text1"><b>제목_</b>{{ drama.title }}</div>
-                            <div class="text2"><b>시놉시스_</b><br>{{ drama.synopsis }}</div>
-                            <div class="text3"><b>한줄평가_</b><br>{{ drama.comment }}</div>
-                            <div class="text4"><b>작성자_</b></div>
-                        </div>
-                        <div class="imgBox">
-                            <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
-                        </div>
-                        <div class="textBox">
-                            <div class="text1"><b>제목_</b>호텔 델루나</div>
-                            <div class="text2"><b>시놉시스_</b><br>서울 도심에 수상한 호텔이 있다. 천년 영업에 숙박한 사람이 없다. 왜? 산 사람은 안 받으니까. 귀신만 묵는 그곳에 인간 지배인이 왔다. 알고 보면 심약한 이 남자, 고객 응대 잘 해낼까? 외모와 달리 괴팍한 사장은 어찌 감당하누</div>
-                            <div class="text3"><b>한줄평가_</b><br>설렘주의, 유쾌발랄, 진심 어린</div>
-                            <div class="text4"><b>작성자_</b></div>
-                        </div>
-                    </div>
-                {% endfor %}
-
-            </div>
-
-        </div>
-    </div>
-</div>
-<div class="footer">
-</div>
-
-    <script>
+<script>
         $(document).ready(function () {
-
         });
 
         $.ajax({
@@ -735,31 +670,17 @@
 
                             //let star_img = '💙'.repeat(star)
 
-
-
-                            let temp_html = `
-                                                <div class="imgBox">
-                                                    <img class="imgBox" src="${image}">
-                                                </div>
-                                                <div class="textBox">
-                                                <div class="textBox">
-                                                    <div class="text1"><b>제목_</b>${title}</div>
-                                                    <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
-                                                    <div class="text3"><b>한줄평가_</b><br>${comment}</div>
-                                                    <div class="text4"><b>작성자_</b></div>
-                                                </div>
-                                                <div class="imgBox">
-                                                    <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
-                                                </div>
-                                                <div class="textBox">
-                                                    <div class="text1"><b>제목_</b>호텔 델루나</div>
-                                                    <div class="text2"><b>시놉시스_</b><br>서울 도심에 수상한 호텔이 있다. 천년 영업에 숙박한 사람이 없다. 왜? 산 사람은 안 받으니까. 귀신만 묵는 그곳에 인간 지배인이 왔다. 알고 보면 심약한 이 남자, 고객 응대 잘 해낼까? 외모와 달리 괴팍한 사장은 어찌 감당하누</div>
-                                                    <div class="text3"><b>한줄평가_</b><br>설렘주의, 유쾌발랄, 진심 어린</div>
-                                                    <div class="text4"><b>작성자_</b></div>
-                                                </div>
-                                            `
-
-                                            
+                            let temp_html = `<div class="mainContent">
+                                            <div class="imgBox">
+                                                <img class="imgBox" src="${image}">
+                                            </div>
+                                            <div class="textBox">
+                                                <div class="text1"><b>제목_</b>${title}</div>
+                                                <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
+                                                <div class="text3"><b>한줄평가_</b><br>${comment}</div>
+                                                <div class="text4"><b>작성자_</b></div>
+                                            </div>
+                                        </div>`
                             $('#mainList').append(temp_html)
 
                             check = true
@@ -773,5 +694,68 @@
             })
         }
     </script>
+
+<body>
+<div class="head">
+    <div class='light x1'></div>
+    <div class='light x2'></div>
+    <div class='light x3'></div>
+    <div class='light x4'></div>
+    <div class='light x5'></div>
+    <div class='light x6'></div>
+    <div class='light x7'></div>
+    <div class='light x8'></div>
+    <div class='light x9'></div>
+</div>
+<div class="header">
+    <div class="logo">
+        <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
+    </div>
+    <div class="button_box">
+        <button id="buttonLogin" class="buttonTop" onclick="login()">Log-in</button>
+        <button id="buttonMypage" class="buttonTop" onclick="mypage()">My page</button>
+        <button id="buttonLogout" class="buttonTop" onclick="logout()">Log-out</button>
+        <button id="buttonSignin" class="buttonTop" onclick="signin()">Sign-in</button>
+        <button id="buttonWrite" class="buttonTop" onclick="write_click()">Write</button>
+    </div>
+</div>
+<div class="body">
+    <div class="bodyInwrap">
+        <div class="searchWrap">
+            <input class="searchBar">
+            <button class="buttonSearch" onclick="find_word()">S E A R C H</button>
+            <hr style="width: 650px;">
+        </div>
+        <div class="mainWrap">
+            <div class="mainList" id="main_List">
+                <div class="mainContent">
+                        {% for drama in dramas %}
+                            <div class="imgBox">
+                                <img class="imgBox" src="{{ drama.image }}">
+                            </div>
+                            <div class="textBox">
+                                <div class="text1"><b>제목_</b>{{ drama.title }}</div>
+                                <div class="text2"><b>시놉시스_</b><br>{{ drama.synopsis }}</div>
+                                <div class="text3"><b>한줄평가_</b><br>{{ drama.comment }}</div>
+                                <div class="text4"><b>작성자_</b></div>
+                            </div>
+                            <div class="imgBox">
+                                <img class="imgBox" src="{{ drama.image }}">
+                            </div>
+                            <div class="textBox">
+                                <div class="text1"><b>제목_</b>{{ drama.title }}</div>
+                                <div class="text2"><b>시놉시스_</b><br>{{ drama.synopsis }}</div>
+                                <div class="text3"><b>한줄평가_</b><br>{{ drama.comment }}</div>
+                                <div class="text4"><b>작성자_</b></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+</div>
 </body>
 </html>
