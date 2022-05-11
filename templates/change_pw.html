@@ -12,7 +12,7 @@
 
 </head>
 
-<!--
+
 <style>
     /* 배경용 CSS입니다. 망가지면 전체 CSS가 꼬입니다. */
 
@@ -520,21 +520,17 @@
    }
 
     </style>
--->
+
 <script>
 
     function gomain() {
             window.location.href = "/"
         }
 
-    function update_pw() {
+    function check_update() {
         let crrpassword = $("#input-crrpassword").val()
-        let password = $("#input-password").val()
-        let password2 = $("#input-password2").val()
-
         if (crrpassword == "") {
-            $("#help-crrpassword").text("현재 사용 중인 비밀번호를 입력해주세요.")
-            $("#help-crrpassword").css("color", "red")
+            alert("현재 사용 중인 비밀번호를 확인해주세요.")
             return;
         }
 
@@ -547,18 +543,23 @@
             success: function (response) {
                 console.log(response)
                 if (response["same"] == "fail") {
-                    $("#help-crrpassword").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+                    $("#help-crrpassword").text("현재 비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
                     $("#help-crrpassword").css("color", "red")
-                    return;
                 } else {
                     $("#help-crrpassword").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
                     $("#help-crrpassword").css("color", "green")
+                    update_pw()
+
                 }
             }
         });
+    }
 
-        // 비밀번호 체크
-        if (password == "") { // 입력하지 않은 경우
+    function update_pw() {
+        let password = $("#input-password").val()
+        let password2 = $("#input-password2").val()
+
+        if (password == "") {
             $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
             $("#help-password").css("color", "red")
             return;
@@ -585,27 +586,23 @@
             $("#help-password2").css("color", "green")
         }
 
-        // 모든 조건 통과 시 서버로 정보 전달
-        $.ajax({
-            type: "POST",
-            url: "/change_pw/update",
-            data: {
-                pw_give: password,
-            },
-            success: function (response) {
-                alert("비밀번호 변경을 완료했습니다!")
-                window.location.replace("/mypage")
-            }
-        });
-
+            $.ajax({
+                type: "POST",
+                url: "/change_pw/update",
+                data: {
+                    pw_give: password,
+                },
+                success: function (response) {
+                    alert("비밀번호 변경을 완료했습니다!")
+                    window.location.replace("/mypage")
+                }
+            });
     }
-
     // 영문, 숫자는 1개 씩 무조건 포함, 일부 특수문자 사용 가능, 8-20자 길이
     function is_password(asValue) {
         let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
         return regExp.test(asValue);
     }
-
 
 </script>
 
@@ -652,7 +649,7 @@
                     </div>
 
                     <div class="buttonBox">
-                        <button onclick="update_pw()" class="button Login">C O N F I R M</button>
+                        <button onclick="check_update()" class="button Login">C O N F I R M</button>
                         <a href="/mypage"><button class="button Signin">B A C K</button></a>
                     </div>
                 </div>
