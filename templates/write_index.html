@@ -455,29 +455,38 @@
        /*padding: 10px;*/
        /*border: 1px solid white;*/
        display: flex;
-       flex-direction: row;
-       flex-wrap: wrap;
+       flex-direction: column;
+       flex-wrap: nowrap;
        justify-content: center;
        align-items: center;
 
    }
-   .Write{
+  .Write{
        width: auto;
-       height: 300px;
+       height: 200px;
        /*border: 1px solid white;*/
        display: block;
        flex-direction: column;
        flex-wrap: nowrap;
        justify-content: center;
        align-items: flex-start;
+      margin-bottom: 70px;
+      text-align: center;
    }
+  .comsyInput{
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: center;
+  }
    .Titlearea{
         margin-bottom: 40px;
    }
    .inputTitle{
-       width: 400px;
+       width: 600px;
        padding: 10px;
-       font-size: 18px;
+       font-size: 30px;
+       font-weight: bold;
        background-color: transparent;
        color: ghostwhite;
        border: none;
@@ -492,7 +501,7 @@
     }
 
     .inputURL {
-        width: 400px;
+        width: 600px;
         height: 35px;
         padding: 10px;
         font-size: 14px;
@@ -508,22 +517,21 @@
     }
 
     .Synoparea {
-        margin-bottom: 15px;
-        margin-left: 50px;
+        margin-bottom: 30px;
+        margin-left: 35px;
         text-align: center;
     }
 
     .inputSynopsis {
-        width: 400px;
-        height: 270px;
+        width: 300px;
+        height: 130px;
         padding: 25px;
         font-size: 15px;
         background-color: transparent;
         color: ghostwhite;
-        border: 5px solid whitesmoke;
+        border: 1px solid whitesmoke;
         border-top-color: transparent;
         border-bottom-color: transparent;
-        border-radius: 80px;
         outline: none;
         /*margin-bottom: -20px;*/
         overflow: auto;
@@ -541,32 +549,40 @@
     .inputSynopsis::placeholder{
         font-weight: bold;
         text-align: center;
-        font-size: 20px;
+        font-size: 15px;
         position: absolute;
-        top: 50%;
-        left: 20%;
         color:ghostwhite;
     }
 
 
     .Commarea {
         margin-bottom: 30px;
+        margin-right: 35px;
     }
 
     .inputComment {
-        width: 400px;
-        height: 35px;
-        padding: 10px;
-        font-size: 14px;
+        width: 300px;
+        height: 130px;
+        padding: 25px;
+        font-size: 15px;
         background-color: transparent;
         color: ghostwhite;
-        border: none;
+        border: 1px solid whitesmoke;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
         outline: none;
-        margin-bottom: -20px;
+        /*margin-bottom: -20px;*/
+        overflow: auto;
+        resize: none;
     }
-
-    .inputComment::placeholder{
-        color: ghostwhite;
+    .inputComment::-webkit-scrollbar{
+        width: 5px;
+    }
+    .inputComment::-webkit-scrollbar-track{
+        background-color: transparent;
+    }
+    .inputComment::-webkit-scrollbar-thumb{
+        background-color: transparent;
     }
 
     .Stararea {
@@ -574,7 +590,7 @@
     }
 
     .SelectStar {
-        width: 400px;
+        width: 550px;
         height: 35px;
         padding: 10px;
         font-size: 14px;
@@ -719,18 +735,18 @@
             <div class="mainList" id="main_List">
                 <div class="Write">
                     <div class="Titlearea">
-                        <input id="title" class="inputTitle" placeholder="제목을 입력해 주세요">
+                        <form>
+                        <input id="title" class="inputTitle" placeholder="제목을 입력해 주세요" type="text" required>
                         <hr>
+                        </form>
                     </div>
                     <div class="Urlarea">
-                        <input id="image_url" class="inputURL" placeholder="썸네일 이미지의 url을 입력해 주세요">
+                        <form>
+                        <input id="image_url" class="inputURL" placeholder="썸네일 이미지의 url을 입력해 주세요" type="text" required>
                         <hr>
+                        </form>
                     </div>
-                    <div class="Commarea">
-                        <input id="comment" class="inputComment" placeholder="작품의 감상평을 남겨 주세요">
-                        <hr>
-                    </div>
-                    <div class="Stararea">
+                                        <div class="Stararea">
                         <select id="star" class="SelectStar">
                             <option selected="">작품의 평점을 남겨 주세요</option>
                             <option value="1">⭐</option>
@@ -740,15 +756,22 @@
                             <option value="5">⭐⭐⭐⭐⭐</option>
                         </select>
                     </div>
-               </div>
-                <div class="Synoparea">
-                    <textarea id="synopsis" class="inputSynopsis" placeholder="작품의 줄거리를 입력해 주세요"></textarea>
+                </div>
+                <div class="comsyInput">
+                    <div class="Commarea">
+                        <p style="color: white; text-align: center; margin-bottom: -20px;">작품의 감상평을 남겨 주세요</p>
+                        <textarea id="comment" class="inputComment" type="text" required></textarea>
+                    </div>
+                    <div class="Synoparea">
+                        <p style="color: white; text-align: center; margin-bottom: -20px;">작품의 줄거리를 입력해 주세요</p>
+                        <textarea id="synopsis" class="inputSynopsis"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <button onclick="check()" class="button_write">작성 하기</button>
+                    <button onclick="gomain()" class="button_back">뒤로 가기</button>
                 </div>
             </div>
-        <div>
-            <button onclick="check()" class="button_write">작성 하기</button>
-            <button onclick="gomain()" class="button_back">뒤로 가기</button>
-        </div>
         </div>
     </div>
 </div>
