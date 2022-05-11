@@ -622,7 +622,7 @@
 
     $.ajax({
         type: "GET",
-        url: "user_check",
+        url: "/api/login/user_check",
         success: function (response) {
             if (response['result'] == 'success') {
                 userinfo = response['userinfo']
@@ -666,7 +666,7 @@
     function write_click() {
         $.ajax({
             type: "GET",
-            url: "/user_check",
+            url: "/api/login/user_check",
             success: function (response) {
                 if (response['result'] == 'success') {
                     window.location.href = '/write_index'
