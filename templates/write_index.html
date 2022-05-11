@@ -134,7 +134,7 @@
                         userinfo = response['userinfo']
                         console.log(userinfo)
                         const btnElement = document.getElementById('btn-user');
-                        btnElement.innerText = userinfo;
+                        btnElement.innerText = userinfo['nick'];
                     } else {
                         // 로그인이 안되면 에러메시지를 띄웁니다.
                         alert(response['msg'])
@@ -170,7 +170,8 @@
     }
 
     function posting() {
-        let usernick = userinfo
+        let userid = userinfo['id']
+        let usernick = userinfo['nick']
         let title = $('#title').val()
         let star = $('#star').val()
         let synopsis = $('#synopsis').val()
@@ -181,7 +182,8 @@
             type: 'POST',
             url: '/drama',
             data: {
-                usernick_give: usernick,
+                userid_give : userid,
+                usernick_give : usernick,
                 title_give: title,
                 star_give: star,
                 comment_give: comment,

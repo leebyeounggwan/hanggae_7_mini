@@ -35,46 +35,14 @@ def mypage():
 
 @app.route('/write_index')
 def write_index():
-    token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    print(payload)
-    userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-    print (userinfo)
-    return render_template('write_index.html', usernick=userinfo['nick'])
-
-@app.route('/write_click')
-def write_click():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-        print (userinfo)
-        return jsonify({'result': 'success', 'userinfo':userinfo['nick']})
-
-    except jwt.ExpiredSignatureError:
-        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    except jwt.exceptions.DecodeError:
-        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
-
-
-@app.route('/user_check')
-def user_check():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-        print (userinfo)
-        return jsonify({'result': 'success', 'userinfo': userinfo['nick']})
-    except jwt.ExpiredSignatureError:
-        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    except jwt.exceptions.DecodeError:
-        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+    return render_template('write_index.html')
 
 
 ########## 게시물 기입 - 천희님 ##########
 
 @app.route('/drama', methods=["POST"])
 def write_post():
+    userid_receive = request.form['userid_give']
     usernick_receive = request.form['usernick_give']
     title_receive = request.form['title_give']
     star_receive = request.form['star_give']
@@ -83,6 +51,7 @@ def write_post():
     image_receive = request.form['image_give']
 
     doc = {
+        'userid' : userid_receive,
         'usernick' : usernick_receive,
         'title': title_receive,
         'image': image_receive,
@@ -114,13 +83,29 @@ def api_login():
     if result is not None:
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=600)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         return jsonify({'result': 'success', 'token': token, 'nick': result['nick']})
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
+########## 재영 -유저 확인 API ##########
+
+@app.route('/user_check')
+def user_check():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+        id_nick = {'id': userinfo['id'], 'nick': userinfo['nick']}
+        print(id_nick)
+        return jsonify({'result': 'success', 'userinfo': id_nick})
+    except jwt.ExpiredSignatureError:
+        return jsonify({'result': 'fail', 'msg': '로그인 해주세요.'})
+    except jwt.exceptions.DecodeError:
+        return jsonify({'result': 'fail', 'msg': '로그인 해주세요.'})
 
 
 ############ 혜준 ############
