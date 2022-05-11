@@ -255,7 +255,7 @@ def update_pw():
 
 
 
-@app.route('/search_drama', methods=["POST"])
+@app.route('/api/search_drama', methods=["POST"])
 def drama_get():
     search_d_receive = request.form['search_d_give']
     drama_list = list(db.drama.find( {},{'_id':False}) )

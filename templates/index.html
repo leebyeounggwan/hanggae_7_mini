@@ -677,24 +677,24 @@
             }
         })
     }
-
+    // 검색 기능
     function find_word() {
         $('#main_List').empty()
         let check = false
         let drama = $('#search_Bar').val()
         $.ajax({
             type: 'POST',
-            url: '/search_drama',
+            url: '/api/search_drama',
             data: {search_d_give: drama},
             success: function (response) {
                 let rows = response['dramas']
 
                 for (let i = 0; i < rows.length; i++) {
-
-                    let title = rows[i]["title"]
-                    let synopsis = rows[i]['synopsis']
-                    let comment = rows[i]['comment']
-                    let drama = $('#search_Bar').val()
+                    // 검색어 && 전달받은 데이터 공백제거
+                    let title = rows[i]["title"].replace(/\s/gi, "")
+                    let synopsis = rows[i]['synopsis'].replace(/\s/gi, "")
+                    let comment = rows[i]['comment'].replace(/\s/gi, "")
+                    let drama = $('#search_Bar').val().replace(/\s/gi, "")
 
                     if (title.includes(drama) || synopsis.includes(drama) || comment.includes(drama)) {
                         let title = rows[i]['title']
@@ -779,7 +779,6 @@
                             <div class="text4"><b>작성자<br></b>{{ drama.usernick }}</div>
                             <div class="text5"><b>별점<br></b>
                                 <script>document.write('⭐'.repeat({{ drama.star }}))</script>
-
                             </div>
                         </div>
                     </div>
