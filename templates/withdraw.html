@@ -498,6 +498,10 @@
 </style>
 
 <script>
+    function gomain() {
+        window.location.href = "/"
+    }
+
     function delete_user() {
         let id = `{{ id }}`;
         let check = $("input[name='check_info']:checked").val();
