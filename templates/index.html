@@ -557,6 +557,7 @@
                         userinfo = response['userinfo']
                         console.log(userinfo)
                         document.getElementById("buttonLogin").style.display = "none";
+                        document.getElementById("buttonSignin").style.display = "none";
                         const btnElement = document.getElementById('buttonMypage');
                         btnElement.innerText = userinfo['nick'];
                         document.getElementById("buttonMypage").style.display = "";
