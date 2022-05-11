@@ -622,7 +622,7 @@
     $(document).ready(function () {
             $.ajax({
                 type: "GET",
-                url: "user_check",
+                url: "/api/login/user_check",
                 success: function (response) {
                     if (response['result'] == 'success') {
                         userinfo = response['userinfo']
