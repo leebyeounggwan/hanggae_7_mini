@@ -518,7 +518,21 @@
        height: auto;
        /*border: 1px solid white;*/
    }
+    .buttonTop {
+        width: 80px;
+        height: 45px;
+        border: none;
+        color: ghostwhite;
+        font-size: 15px;
+        background-color: transparent;
+        text-shadow: 3px 3px 4px black;
+        font-family: 'Gothic A1', sans-serif;
+    }
 
+    h1 {
+        color: white;
+        padding-left: 20px;
+    }
     </style>
 
 <script>
@@ -603,7 +617,11 @@
         let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
         return regExp.test(asValue);
     }
-
+    function logout() {
+        $.removeCookie('mytoken');
+        alert('로그아웃!')
+        window.location.href = '/'
+    }
 </script>
 
 <body>
@@ -620,9 +638,13 @@
 </div>
 <div class="header">
     <div class="logo">
+        <div class='light x9'></div>
         <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
     </div>
-    <div class="button_box">
+    <div class="button_head">
+        <button class="buttonTop" id="btn-logout" onclick="logout()">로그아웃</button>
+        <button class="buttonTop" id="btn-signout" onclick="window.location.href='/mypage'">내페이지</button>
+        <button class="buttonTop" onclick="window.location.href='/write_index'">리뷰쓰기</button>
     </div>
 </div>
 <div class="body">
@@ -630,7 +652,7 @@
         <div class="mainWrap">
             <div class="mainList" id="main_List">
                 <div class="mainContent">
-
+                    <h1>비밀번호 변경</h1>
                     <div class="inputInfo">
                         <div class="chk PW">
                             <input type="password" class="reg pw1" id="input-crrpassword" placeholder="현재 비밀번호">
