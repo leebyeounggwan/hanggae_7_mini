@@ -726,7 +726,7 @@
                 }
                 if (check === false) {
                     alert('해당하는 영화가 없습니다')
-                    //window.location.href = '/'
+                    window.location.href = '/'
                 }
             }
         })
@@ -759,11 +759,11 @@
 </div>
 <div class="body">
     <div class="bodyInwrap">
-        <div class="searchWrap">
-            <input class="searchBar" id="search_Bar">
+        <form onsubmit="return false;"class="searchWrap">
+            <input class="searchBar" id="search_Bar" onkeydown="javascript:if(event.keyCode==13)add();">
             <button class="buttonSearch" onclick="find_word()">S E A R C H</button>
             <hr style="width: 650px;">
-        </div>
+        </form>
         <div class="mainWrap">
             <div class="mainList" id="main_List">
                 {% for drama in dramas %}

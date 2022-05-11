@@ -170,9 +170,10 @@ def withdraw_delete():
 @app.route('/search_drama', methods=["POST"])
 def drama_get():
     search_d_receive = request.form['search_d_give']
-
-    drama_list = list(db.drama.find({},{'_id':False}))
+    drama_list = list(db.drama.find( {},{'_id':False}) )
+    print(drama_list)
     return jsonify({'dramas': drama_list})
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
