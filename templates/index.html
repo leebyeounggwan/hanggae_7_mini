@@ -11,7 +11,12 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
@@ -157,8 +162,7 @@
             font-size: 15px;
         }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 
     <script>
         $(document).ready(function () {
@@ -198,6 +202,10 @@
             window.location.href = "/login"
         }
 
+        function mypage() {
+            window.location.href = "/mypage"
+        }
+
         function logout() {
             $.removeCookie('mytoken');
             alert('로그아웃!')
@@ -218,7 +226,6 @@
                 }
             })
         }
-
 
         function listing() {
             $('#post-box').empty()
@@ -316,9 +323,9 @@
     </div>
     <div class="button_head">
         <button class="button 1" id="btn-login" onclick="login()">Login</button>
-        <button class="button 1" id="btn-user" onclick="userpage()">mypage</button>
-        <button class="button 1" id="btn-logout" onclick="logout()">Logout</button>
+        <button class="button 1" id="btn-user" onclick="mypage()">mypage</button>
         <button class="button 2" onclick="write_click()">Write</button>
+        <button class="button 1" id="btn-logout" onclick="logout()">Logout</button>
     </div>
 </div>
 <div class="body">
