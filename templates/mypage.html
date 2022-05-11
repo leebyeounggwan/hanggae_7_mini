@@ -610,33 +610,13 @@
 
 
     <script>
-        $(document).ready(function () {
 
-            $.ajax({
-                type: "GET",
-                url: "/api/login/user_check",
-                success: function (response) {
-                    if (response['result'] == 'success') {
-                        userinfo = response['userinfo']
-                        console.log(userinfo)
-                        document.getElementById("nickname").innerHTML = userinfo;
-                        document.getElementById("btn-user").style.display = "";
-                        document.getElementById("btn-logout").style.display = "";
-                    } else {
-                        document.getElementById("btn-login").style.display = "";
-                        document.getElementById("btn-logout").style.display = "none";
-                        document.getElementById("btn-user").style.display = "none";
-                    }
-                }
-            })
+        $(document).ready(function () {
+            my_list();
         });
 
         function gomain() {
             window.location.href = "/"
-        }
-
-        function signin() {
-            window.location.href = "/register"
         }
 
         function login() {
@@ -644,7 +624,7 @@
         }
 
         function signout() {
-            window.location.href = "withdraw"
+            window.location.href = "/withdraw"
         }
 
         function logout() {
@@ -668,6 +648,47 @@
             })
         }
 
+        function my_list() {
+            $('#main_List').empty()
+            $.ajax({
+                type: "GET",
+                url: '/api/mypage/list',
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        console.log(response['my_drama']);
+                        let my_drama = response['my_drama']
+
+                        for (i=0; i < my_drama.length ; i++) {
+
+                            let title = my_drama[i]['title']
+                            let image = my_drama[i]['image']
+                            let star = my_drama[i]['star']
+                            let synopsis = my_drama[i]['synopsis']
+                            let comment = my_drama[i]['comment']
+                            let usernick = my_drama[i]['usernick']
+
+                            let star_img = '⭐'.repeat(star)
+
+                            let temp_html = `<div class="mainContent">
+                                                <div class="imgBox">
+                                                    <img class="imgBox" src="${image}">
+                                                </div>
+                                            <div class="textBox">
+                                                <div class="text1"><b></b>${title}</div>
+                                                <div class="text2"><b>시놉시스</b><br>${synopsis}</div>
+                                                <div class="text3"><b>한줄평가</b><br>${comment}</div>
+                                                <div class="text4"><b>작성자</b><br>${usernick}</div>
+                                                <div class="text4"><b>별점</b><br>${star_img}</div>
+                                            </div>
+                                        </div>`
+
+                            $('#main_List').append(temp_html)
+                        }
+                    }
+                }
+            })
+        }
+
     </script>
 </head>
 
@@ -686,28 +707,11 @@
 </div>
 
 
-    <h3>유저페이지입니다</h3>
-
-
 <div class="body">
     <div class="bodyInwrap">
 
         <div class="mainWrap">
             <div class="mainList" id="main_List">
-                <div class="mainContent">
-                    {% for drama in dramas %}
-                        <div class="imgBox">
-                            <img class="imgBox" src="{{ drama.image }}">
-                        </div>
-                        <div class="textBox">
-                            <div class="text1"><b>제목_</b>{{ drama.title }}</div>
-                            <div class="text2"><b>시놉시스_</b><br>{{ drama.synopsis }}</div>
-                            <div class="text3"><b>한줄평가_</b><br>{{ drama.comment }}</div>
-                            <div class="text4"><b>작성자_</b><br>{{ drama.usernick }}</div>
-                            <div class="text5"><b>별점_</b></div>
-                        </div>
-                    {% endfor %}
-                </div>
             </div>
         </div>
 
