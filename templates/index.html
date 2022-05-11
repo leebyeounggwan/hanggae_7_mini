@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+
         <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
 </head>
+
 <style>
     /* 배경용 CSS입니다. 망가지면 전체 CSS가 꼬입니다. */
 
@@ -532,6 +545,8 @@
 
     </style>
 
+
+
 <body>
 <div class="head">
     <div class='light x1'></div>
@@ -544,17 +559,25 @@
     <div class='light x8'></div>
     <div class='light x9'></div>
 </div>
+  
 <div class="header">
-    <div class="logo">
+  
+      <div class="logo">
         <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
-    </div>
+    </div>  
+    
     <div class="button_box">
         <button id="buttonLogin" class="buttonTop" onclick="login()">Log-in</button>
         <button id="buttonMypage" class="buttonTop" onclick="">My page</button>
         <button id="buttonLogout" class="buttonTop" onclick="logout()">Log-out</button>
-<!--        <button id="buttonSignin" class="buttonTop" onclick="signin()">Sign-in</button>-->
-<!--        <button id="buttonWrite" class="buttonTop" onclick="write_click()">Write</button>-->
+        <button id="buttonSignin" class="buttonTop" onclick="signin()">Sign-in</button>
+        <button id="buttonWrite" class="buttonTop" onclick="write_click()">Write</button>
     </div>
+  
+  
+  
+  
+  
 </div>
 <div class="body">
     <div class="bodyInwrap">
@@ -589,8 +612,6 @@
 </div>
 <div class="footer">
 </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -627,6 +648,10 @@
 
         function login() {
             window.location.href = "/login"
+        }
+
+        function mypage() {
+            window.location.href = "/mypage"
         }
 
         function logout() {
@@ -747,5 +772,8 @@
             })
         }
     </script>
+
+</head>   
+
 </body>
 </html>
