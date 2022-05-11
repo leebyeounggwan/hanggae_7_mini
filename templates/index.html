@@ -415,12 +415,12 @@
        text-shadow: 3px 3px 4px black;
    }
    .body{
-       width: 1700px;
+       width: auto;
        height: auto;
        /*border: 1px solid white;*/
    }
    .bodyInwrap{
-       width: 1650px;
+       width: auto;
        height: auto;
        /*border: 1px solid white;*/
        padding: 25px;
@@ -464,7 +464,7 @@
        justify-content: center;
    }
    .mainList{
-       width: 1500px;
+       width: auto;
        height: auto;
        /*padding: 10px;*/
        /*border: 1px solid white;*/
@@ -482,22 +482,22 @@
        margin-left: 15px;
        margin-top: 60px;
        /*border: 1px solid white;*/
-       width: 700px;
+       width: 600px;
 
    }
    .imgBox{
-       width: 240px;
-       height: 360px;
+       width: 250px;
+       height: 370px;
        object-fit: cover;
-       border: 2px solid firebrick;
-       border-radius: 10px;
-       padding: 5px;
-       margin-right: 10px;
+       /*border: 2px solid firebrick;*/
+       border-bottom-right-radius: 25px;
+       /*padding: 5px;*/
+       /*margin-right: 10px;*/
    }
 
    .textBox{
-       width: 430px;
-       height: 350px;
+       width: 400px;
+       height: 390px;
        /*border: 1px solid white;*/
        display: flex;
        flex-direction: column;
@@ -505,27 +505,37 @@
        justify-content: center;
    }
    .text1{
-       width: 400px;
+       width: 350px;
        height: auto;
        /*border: 1px solid white;*/
-       font-size: 38px;
+       font-size: 34px;
        font-family: 'Nanum Gothic', sans-serif;
        color: white;
        padding: 15px;
        text-shadow: 2px 2px 4px black;
     }
    .text2{
-       width: 400px;
-       height: auto;
+       width: 350px;
+       height: 35px;
        font-family: 'Nanum Gothic', sans-serif;
        font-size: 14px;
        color: white;
-       /*border: 1px solid white;*/
-       overflow: hidden;
+       border: 1px solid white;
+       overflow: auto;
        padding: 15px;
     }
+    .text2::-webkit-scrollbar{
+        width: 3px;
+    }
+    .text2::-webkit-scrollbar-track{
+        background-color: transparent;
+    }
+    .text2::-webkit-scrollbar-thumb{
+        background-color: transparent;
+    }
+
    .text3{
-       width: 400px;
+       width: 350px;
        height: 19px;
        font-family: 'Nanum Gothic', sans-serif;
        font-size: 14px;
@@ -535,7 +545,7 @@
        padding: 15px;
     }
    .text4{
-       width: 400px;
+       width: 350px;
        height: 19px;
        font-family: 'Nanum Gothic', sans-serif;
        color: white;
@@ -543,7 +553,7 @@
        padding: 15px;
     }
    .text5{
-       width: 400px;
+       width: 350px;
        height: 19px;
        font-family: 'Nanum Gothic', sans-serif;
        color: white;
