@@ -177,7 +177,7 @@
                         userinfo = response['userinfo']
                         console.log(userinfo)
                         const btnElement = document.getElementById('btn-user');
-                        btnElement.innerText = userinfo;
+                        btnElement.innerText = userinfo['nick'];
                         document.getElementById("nickname").innerHTML=userinfo;
                         document.getElementById("btn-user").style.display = "";
                         document.getElementById("btn-logout").style.display = "";
