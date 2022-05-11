@@ -13,7 +13,7 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -591,25 +591,27 @@
         </div>
         <div class="mainWrap">
             <div class="mainList" id="main_List">
-                <div class="imgBox">
-                    <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
-                </div>
-                <div class="textBox">
-                    <div class="text1"><b>제목_</b>호텔 델루나</div>
-                    <div class="text2"><b>시놉시스_</b><br>서울 도심에 수상한 호텔이 있다. 천년 영업에 숙박한 사람이 없다. 왜? 산 사람은 안 받으니까. 귀신만 묵는 그곳에 인간 지배인이 왔다. 알고 보면 심약한 이 남자, 고객 응대 잘 해낼까? 외모와 달리 괴팍한 사장은 어찌 감당하누</div>
-                    <div class="text3"><b>한줄평가_</b><br>설렘주의, 유쾌발랄, 진심 어린</div>
-                    <div class="text4"><b>작성자_</b></div>
-                </div>
-                <div class="imgBox">
-                    <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
-                </div>
-                <div class="textBox">
-                    <div class="text1"><b>제목_</b>호텔 델루나</div>
-                    <div class="text2"><b>시놉시스_</b><br>서울 도심에 수상한 호텔이 있다. 천년 영업에 숙박한 사람이 없다. 왜? 산 사람은 안 받으니까. 귀신만 묵는 그곳에 인간 지배인이 왔다. 알고 보면 심약한 이 남자, 고객 응대 잘 해낼까? 외모와 달리 괴팍한 사장은 어찌 감당하누</div>
-                    <div class="text3"><b>한줄평가_</b><br>설렘주의, 유쾌발랄, 진심 어린</div>
-                    <div class="text4"><b>작성자_</b></div>
-                </div>
-            </div>
+                {% for drama in dramas %}
+                        <div class="imgBox">
+                            <img class="imgBox" src="{{ drama.image }}">
+                        </div>
+                        <div class="textBox">
+                            <div class="text1"><b>제목_</b>{{ drama.title }}</div>
+                            <div class="text2"><b>시놉시스_</b><br>{{ drama.synopsis }}</div>
+                            <div class="text3"><b>한줄평가_</b><br>{{ drama.comment }}</div>
+                            <div class="text4"><b>작성자_</b></div>
+                        </div>
+                        <div class="imgBox">
+                            <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
+                        </div>
+                        <div class="textBox">
+                            <div class="text1"><b>제목_</b>호텔 델루나</div>
+                            <div class="text2"><b>시놉시스_</b><br>서울 도심에 수상한 호텔이 있다. 천년 영업에 숙박한 사람이 없다. 왜? 산 사람은 안 받으니까. 귀신만 묵는 그곳에 인간 지배인이 왔다. 알고 보면 심약한 이 남자, 고객 응대 잘 해낼까? 외모와 달리 괴팍한 사장은 어찌 감당하누</div>
+                            <div class="text3"><b>한줄평가_</b><br>설렘주의, 유쾌발랄, 진심 어린</div>
+                            <div class="text4"><b>작성자_</b></div>
+                        </div>
+                    </div>
+                {% endfor %}
         </div>
     </div>
 </div>
@@ -684,20 +686,21 @@
 
 
         function find_word() {
-            $('#post-box').empty()
-            let drama = $('#search_bars').val()
+            $('#mainList').empty()
+            let check = false
+
+
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: '/search_drama',
-                data: {
-                    search_d_give: drama
-                },
+                data: {},
                 success: function (response) {
-                    let rows = response['result']
+                    let rows = response['dramas']
 
                     for (let i = 0; i < rows.length; i++) {
 
                         let title = rows[i]["title"]
+                        let drama = $('#searchBar').val()
 
                         if (title.includes(drama)) {
                             let title = rows[i]['title']
@@ -710,17 +713,30 @@
 
 
 
-                            let temp_html = `<div class="imgBox">
-                                                <img class="imgBox" src="${image}">
-                                            </div>
-                                            <div class="textBox">
-                                                <div class="text1"><b>제목_</b>${title}</div>
-                                                <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
-                                                <div class="text3"><b>한줄평가_</b><br>${comment}</div>
-                                                <div class="text4"><b>작성자_</b></div>
-                                            </div>`
+                            let temp_html = `
+                                                <div class="imgBox">
+                                                    <img class="imgBox" src="${image}">
+                                                </div>
+                                                <div class="textBox">
+                                                <div class="textBox">
+                                                    <div class="text1"><b>제목_</b>${title}</div>
+                                                    <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
+                                                    <div class="text3"><b>한줄평가_</b><br>${comment}</div>
+                                                    <div class="text4"><b>작성자_</b></div>
+                                                </div>
+                                                <div class="imgBox">
+                                                    <img class="imgBox" src="https://ww.namu.la/s/a5a149479dd5b12247cdc2552773d2d1fd79c0fb81af1b7c6e4328aabcf9b3eff22dd0902b89652f720a6a61332ccae4b3cb64d8dfbfdd466581ef93020c3b95d51577216ae0e55a5d54366104022b11882a088a520cafe54ec27a42062c6d4f">
+                                                </div>
+                                                <div class="textBox">
+                                                    <div class="text1"><b>제목_</b>호텔 델루나</div>
+                                                    <div class="text2"><b>시놉시스_</b><br>서울 도심에 수상한 호텔이 있다. 천년 영업에 숙박한 사람이 없다. 왜? 산 사람은 안 받으니까. 귀신만 묵는 그곳에 인간 지배인이 왔다. 알고 보면 심약한 이 남자, 고객 응대 잘 해낼까? 외모와 달리 괴팍한 사장은 어찌 감당하누</div>
+                                                    <div class="text3"><b>한줄평가_</b><br>설렘주의, 유쾌발랄, 진심 어린</div>
+                                                    <div class="text4"><b>작성자_</b></div>
+                                                </div>
+                                            `
+
                                             
-                            $('#post-box').append(temp_html)
+                            $('#mainList').append(temp_html)
 
                             check = true
                         }
