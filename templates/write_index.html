@@ -653,6 +653,8 @@
             })
     });
 
+
+
     function gomain() {
         window.location.href = "/"
     }
@@ -668,14 +670,10 @@
     }
 
     function check() {
-        if ($("#title").val().length == "") {
-            alert("제목을 입력 하세요");
-            $("#title").focus();
-            return false;
+        if ($("#title").val().length == "" || $("#image_url").val().length == "" || $("#star").val().length == "" || $("#synopsis").val().length == "" || $("#comment").val().length == "") {
+            alert("모든 칸을 입력해 주세요"); $("#title").focus(); return false;
         } else {
-            posting();
-            $("#title").focus();
-            return true;
+            posting(); $("#title").focus(); return true;
         }
     }
 
