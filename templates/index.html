@@ -3,44 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 </head>
-
-
 <style>
     /* 배경용 CSS입니다. 망가지면 전체 CSS가 꼬입니다. */
 
     body {
-        margin: 0;
+        margin: 15px;
         height: 100vh;
         background: radial-gradient(firebrick, black);
-        /*!*#a23982*! #1f1013*/
-        -webkit-overflow-Y: hidden;
-        -moz-overflow-Y: hidden;
-        -o-overflow-Y: hidden;
-        overflow-y: hidden;
+        overflow-y: auto;
         -webkit-animation: fadeIn 1 1s ease-out;
         -moz-animation: fadeIn 1 1s ease-out;
         -o-animation: fadeIn 1 1s ease-out;
         animation: fadeIn 1 1s ease-out;
+    }
+    body::-webkit-scrollbar{
+        width: 5px;
+    }
+    body::-webkit-scrollbar-track{
+        background-color: transparent;
+    }
+    body::-webkit-scrollbar-thumb{
+        background-color: orangered;
     }
 
     .light {
@@ -55,6 +55,7 @@
         left: 0px;
         right: 0px;
         margin: auto;
+
     }
     .x1 {
         -webkit-animation: floatUp 4s infinite linear;
@@ -380,16 +381,7 @@
         }
     }
 
-    footer {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.2em;
-        color: white;
-        position: fixed;
-        -webkit-transform: translate(95vw, 90vh);
-        -moz-transform: translate(95vw, 90vh);
-        transform: translate(95vw, 90vh);
-        transform: translate(95vw, 90vh);
-    }
+
 
     /*머리쪽 CSS 입니다. 로그인 및 기능용 버튼들이 모여 있습니다.*/
    .header{
@@ -420,11 +412,11 @@
        padding: 7px;
    }
    .buttonTop{
-       width: 100px;
-       height: 47px;
+       width: 200px;
+       height: 45px;
        border: none;
        color: ghostwhite;
-       font-size: 22px;
+       font-size: 15px;
        background-color: transparent;
        text-shadow: 3px 3px 4px black;
    }
@@ -476,26 +468,37 @@
    .mainList{
        width: auto;
        height: auto;
-       padding: 25px;
+       padding: 10px;
        /*border: 1px solid white;*/
        display: flex;
        flex-direction: row;
-       flex-wrap: nowrap;
+       flex-wrap: wrap;
        justify-content: center;
-   }
 
+   }
+   .mainContent{
+       display: flex;
+       flex-direction: row;
+       flex-wrap: wrap;
+       justify-content: center;
+       margin-left: 15px;
+       margin-top: 60px;
+       /*border: 1px solid white;*/
+
+   }
    .imgBox{
-       width: 250px;
-       height: 370px;
+       width: 240px;
+       height: 360px;
        object-fit: cover;
        border: 2px solid firebrick;
        border-radius: 10px;
        padding: 5px;
+       margin-right: 10px;
    }
 
    .textBox{
-       width: 500px;
-       height: 380px;
+       width: 430px;
+       height: 350px;
        /*border: 1px solid white;*/
        display: flex;
        flex-direction: column;
@@ -509,7 +512,7 @@
        font-size: 45px;
        font-family: 'Nanum Gothic', sans-serif;
        color: white;
-       padding: 30px;
+       padding: 15px;
        text-shadow: 2px 2px 4px black;
     }
    .text2{
@@ -520,7 +523,7 @@
        color: white;
        /*border: 1px solid white;*/
        overflow: hidden;
-       padding: 30px;
+       padding: 15px;
     }
    .text3{
        width: auto;
@@ -530,7 +533,7 @@
        color: white;
        /*border: 1px solid white;*/
        overflow: hidden;
-       padding: 30px;
+       padding: 15px;
     }
    .text4{
        width: auto;
@@ -538,17 +541,15 @@
        font-family: 'Nanum Gothic', sans-serif;
        color: white;
        /*border: 1px solid white;*/
-       padding: 30px;
+       padding: 15px;
     }
    .footer{
        width: auto;
-       height: 100px;
+       height: auto;
        /*border: 1px solid white;*/
    }
 
     </style>
-
-
 
 <body>
 <div class="head">
@@ -562,25 +563,17 @@
     <div class='light x8'></div>
     <div class='light x9'></div>
 </div>
-  
 <div class="header">
-  
-      <div class="logo">
+    <div class="logo">
         <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
-    </div>  
-    
+    </div>
     <div class="button_box">
         <button id="buttonLogin" class="buttonTop" onclick="login()">Log-in</button>
-        <button id="buttonMypage" class="buttonTop" onclick="">My page</button>
+        <button id="buttonMypage" class="buttonTop" onclick="mypage()">My page</button>
         <button id="buttonLogout" class="buttonTop" onclick="logout()">Log-out</button>
         <button id="buttonSignin" class="buttonTop" onclick="signin()">Sign-in</button>
         <button id="buttonWrite" class="buttonTop" onclick="write_click()">Write</button>
     </div>
-  
-  
-  
-  
-  
 </div>
 <div class="body">
     <div class="bodyInwrap">
@@ -590,7 +583,8 @@
             <hr style="width: 650px;">
         </div>
         <div class="mainWrap">
-            <div class="mainList" id="main_List">
+            <div class="mainContent">
+
                 {% for drama in dramas %}
                         <div class="imgBox">
                             <img class="imgBox" src="{{ drama.image }}">
@@ -612,6 +606,9 @@
                         </div>
                     </div>
                 {% endfor %}
+
+            </div>
+
         </div>
     </div>
 </div>
@@ -621,11 +618,7 @@
     <script>
         $(document).ready(function () {
 
-            //listing();
-
-
         });
-
 
         $.ajax({
                 type: "GET",
@@ -659,14 +652,13 @@
             window.location.href = "/login"
         }
 
-        function mypage() {
-            window.location.href = "/mypage"
-        }
-
         function logout() {
             $.removeCookie('mytoken');
             alert('로그아웃!')
             window.location.href = '/'
+        }
+         function mypage() {
+            window.location.href = "/mypage"
         }
 
         function write_click() {
@@ -684,6 +676,38 @@
             })
         }
 
+        function listing() {
+            $('#post-box').empty()
+            $.ajax({
+                type: "GET",
+                url: "/drama",
+
+                success: function (response) {
+                    let rows = response['dramas']
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['title']
+                        let image = rows[i]['image']
+                        let star = rows[i]['star']
+                        let synopsis = rows[i]['synopsis']
+                        let comment = rows[i]['comment']
+
+                        let temp_html = `<div class="mainContent">
+                                            <div class="imgBox">
+                                                <img class="imgBox" src="${image}">
+                                            </div>
+                                            <div class="textBox">
+                                                <div class="text1"><b>제목_</b>${title}</div>
+                                                <div class="text2"><b>시놉시스_</b><br>${synopsis}</div>
+                                                <div class="text3"><b>한줄평가_</b><br>${comment}</div>
+                                                <div class="text4"><b>작성자_</b></div>
+                                            </div>
+                                        </div>`
+                        $('#main_List').append(temp_html)
+                    }
+                    console.log(response)
+                }
+            });
+        }
 
         function find_word() {
             $('#mainList').empty()
@@ -743,16 +767,11 @@
                     }
                     if (check === false) {
                         alert('해당하는 영화가 없습니다')
-                        window.location.href = "/"
+                        window.location.href = '/'
                     }
                 }
-
             })
-
         }
     </script>
-
-</head>   
-
 </body>
 </html>
