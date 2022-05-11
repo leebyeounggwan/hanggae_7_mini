@@ -143,7 +143,7 @@ def mypage_delete():
     print (title_receive, nick_receive)
     db.drama.delete_one({'usernick': nick_receive} and {'title':title_receive})
 
-    return jsonify ({'msg': 'success'})
+    return jsonify ({'msg': '게시물을 삭제했습니다.'})
 
 
 ############ 혜준 ############
