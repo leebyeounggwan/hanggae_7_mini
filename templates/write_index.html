@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>작성하기 | Naeflix</title>
+    <link rel="icon" href="../static/favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -12,6 +12,11 @@
             crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <meta property="og:url" content="http://3.34.42.87/"/>
+    <meta property="og:title" content="Naeflix"/>
+    <meta property="og:description" content="나의 넷플릭스 시청 기록 - Naeflix"/>
+    <meta property="og:image" content="http://3.34.42.87/static/naeflix.png"/>
 
 </head>
 <style>
@@ -672,24 +677,54 @@
 
 
        function check() {
-            if ($("#title").val().length == "") {
-                alert("제목을 입력해 주세요"); $("#title").focus(); return false;
+            $.ajax({
+                type: "GET",
+                url: "/api/login/user_check",
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        userinfo = response['userinfo']
+                        console.log(userinfo) // 작성하기 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음, 예외처리 진행
 
-            } else if ($("#image_url").val()== "") {
-                alert("URL을 입력해 주세요"); $("#image_url").focus(); return false;
+                        /// 여기부터 로그인 만료 처리 전 코드
+                        if ($("#title").val().length == "") {
+                            alert("제목을 입력해 주세요");
+                            $("#title").focus();
+                            return false;
 
-            } else if ($("#star option:selected").val() == "작품의 평점을 남겨 주세요") {
-                alert("평점을 선택해 주세요"); $("#star").css("color", "red", "font" , "bold"); return false;
+                        } else if ($("#image_url").val() == "") {
+                            alert("URL을 입력해 주세요");
+                            $("#image_url").focus();
+                            return false;
 
-            } else if ($("#synopsis").val().length == "") {
-                alert("줄거리를 입력해 주세요"); $("#synopsis").focus(); return false;
+                        } else if ($("#star option:selected").val() == "작품의 평점을 남겨 주세요") {
+                            alert("평점을 선택해 주세요");
+                            $("#star").css("color", "red", "font", "bold");
+                            return false;
 
-            } else if ($("#comment").val().length == "") {
-                alert("감상평을 입력해 주세요"); $("#comment").focus() ; return false;
-            } else {
-                posting(); $("#title").focus();
-                return true;
-            }
+                        } else if ($("#synopsis").val().length == "") {
+                            alert("줄거리를 입력해 주세요");
+                            $("#synopsis").focus();
+                            return false;
+
+                        } else if ($("#comment").val().length == "") {
+                            alert("감상평을 입력해 주세요");
+                            $("#comment").focus();
+                            return false;
+                        } else {
+                            posting();
+                            $("#title").focus();
+                            return true;
+                        }
+                        /// 여기까지 로그인 만료 처리 전 코드
+
+                    } else {
+                        // 작성하기 버튼 클릭시 로그인이 안되어 있다면 에러메시지를 띄웁니다. 로그인페이지로 이탈함.
+                        alert(response['msg'])
+                        window.location.href = "/login"
+                    }
+                }
+            })
+
         }
 
     function posting() {

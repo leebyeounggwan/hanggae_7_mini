@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>회원탈퇴 | Naeflix</title>
+    <link rel="icon" href="../static/favicon.ico">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,6 +14,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600&family=Nanum+Gothic&display=swap"
           rel="stylesheet">
+
+    <meta property="og:url" content="http://3.34.42.87/"/>
+    <meta property="og:title" content="Naeflix"/>
+    <meta property="og:description" content="나의 넷플릭스 시청 기록 - Naeflix"/>
+    <meta property="og:image" content="http://3.34.42.87/static/naeflix.png"/>
 
 </head>
 <style>
@@ -534,23 +540,42 @@
     }
 
     function delete_user() {
-        let id = `{{ id }}`;
-        let check = $("input[name='checkinfo']:checked").val();
-        if (check == 'checked') {
-            $.ajax({
-                type: "POST",
-                url: "/withdraw/delete",
-                data: {id_give: id},
-                success: function (response) {
-                    alert(response["msg"])
-                    $.removeCookie('mytoken');
-                    window.location.href = "/"
+        $.ajax({
+            type: "GET",
+            url: "/api/login/user_check",
+            success: function (response) {
+                if (response['result'] == 'success') {
+                    userinfo = response['userinfo']
+                    console.log(userinfo) // 탈퇴하기 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음, 탈퇴처리 진행
+
+                    let id = `{{ id }}`;  // 여기부터 로그인 이탈 관련 수정 전 코드
+                    let check = $("input[name='checkinfo']:checked").val();
+                    if (check == 'checked') {
+                        $.ajax({
+                            type: "POST",
+                            url: "/withdraw/delete",
+                            data: {id_give: id},
+                            success: function (response) {
+                                alert(response["msg"])
+                                $.removeCookie('mytoken');
+                                window.location.href = "/"
+                            }
+                        });
+                    } else {
+                        alert("안내사항을 확인해주세요.")
+                    }             // 여기까지 로그인 이탈 관련 수정 전 코드
+
+                } else {
+                    // 탈퇴하기 버튼 클릭시 로그인이 안되어 있다면 에러메시지를 띄웁니다. 로그인페이지로 이탈함.
+                    alert(response['msg'])
+                    window.location.href = "/login"
                 }
-            });
-        } else {
-            alert("안내사항을 확인해주세요.")
-        }
+            }
+        })
+
+
     }
+
     function logout() {
         $.removeCookie('mytoken');
         alert('로그아웃!')
