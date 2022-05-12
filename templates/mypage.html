@@ -625,7 +625,6 @@
     <script>
 
         $(document).ready(function () {
-            my_list();
 
             $.ajax({
                 type: "GET",
@@ -638,10 +637,14 @@
                         /* $('nickname').text(userinfo['nick']); */
                     } else {
                         alert(response['msg']);
+                        window.location.href='/login'
 
                     }
                 }
             })
+
+            my_list();
+
         });
 
         function gomain() {
