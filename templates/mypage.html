@@ -738,7 +738,21 @@
                 success: function (response) {
                     if (response['result'] == 'success') {
                         userinfo = response['userinfo']
-                        console.log(userinfo) // 게시글 삭제 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음
+                        console.log(userinfo) // 게시글 삭제 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음, 삭제 진행
+
+                        /// 여기부터 로그인만료 처리 이전 코드
+                        console.log(title)
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/mypage/delete',
+                            data: {title_give: title},
+                            success: function (response) {
+                                alert(response['msg']);
+                                window.location.reload();
+                            }
+                        });
+                        /// 여기까지 로그인만료 처리 이전 코드
+
                     } else {
                         // 게시글 삭제 버튼 클릭시 로그인이 안되어 있다면 에러메시지를 띄웁니다. 로그인페이지로 이탈함.
                         alert(response['msg'])
@@ -746,16 +760,6 @@
                     }
                 }
             })
-            console.log(title)
-            $.ajax({
-                type: 'POST',
-                url: '/api/mypage/delete',
-                data: {title_give: title},
-                success: function (response) {
-                    alert(response['msg']);
-                    window.location.reload();
-                }
-            });
         }
 
     </script>

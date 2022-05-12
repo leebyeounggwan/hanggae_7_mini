@@ -540,7 +540,25 @@
             success: function (response) {
                 if (response['result'] == 'success') {
                     userinfo = response['userinfo']
-                    console.log(userinfo) // 탈퇴하기 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음
+                    console.log(userinfo) // 탈퇴하기 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음, 탈퇴처리 진행
+
+                    let id = `{{ id }}`;  // 여기부터 로그인 이탈 관련 수정 전 코드
+                    let check = $("input[name='checkinfo']:checked").val();
+                    if (check == 'checked') {
+                        $.ajax({
+                            type: "POST",
+                            url: "/withdraw/delete",
+                            data: {id_give: id},
+                            success: function (response) {
+                                alert(response["msg"])
+                                $.removeCookie('mytoken');
+                                window.location.href = "/"
+                            }
+                        });
+                    } else {
+                        alert("안내사항을 확인해주세요.")
+                    }             // 여기까지 로그인 이탈 관련 수정 전 코드
+
                 } else {
                     // 탈퇴하기 버튼 클릭시 로그인이 안되어 있다면 에러메시지를 띄웁니다. 로그인페이지로 이탈함.
                     alert(response['msg'])
@@ -549,23 +567,9 @@
             }
         })
 
-        let id = `{{ id }}`;
-        let check = $("input[name='checkinfo']:checked").val();
-        if (check == 'checked') {
-            $.ajax({
-                type: "POST",
-                url: "/withdraw/delete",
-                data: {id_give: id},
-                success: function (response) {
-                    alert(response["msg"])
-                    $.removeCookie('mytoken');
-                    window.location.href = "/"
-                }
-            });
-        } else {
-            alert("안내사항을 확인해주세요.")
-        }
+
     }
+
     function logout() {
         $.removeCookie('mytoken');
         alert('로그아웃!')
