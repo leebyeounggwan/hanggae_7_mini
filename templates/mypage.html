@@ -707,20 +707,17 @@
                             let star_img = '⭐'.repeat(star)
 
                             let temp_html = `<div class="mainContent">
-                                                <div class="imgBox">
-                                                    <img class="imgBox" src="${image}">
-                                                </div>
-                                                <div class="textBox">
-                                                    <div class="btn-deletereview">
-                                                        <button onclick="deletereview('${title}')" class="buttonDel">삭제하기</button>
-                                                    </div>
-                                                    <div class="text1"><b></b>${title}</div>
-                                                    <div class="text2"><b>시놉시스</b><br>${synopsis}</div>
-                                                    <div class="text3"><b>한줄평가</b><br>${comment}</div>
-                                                    <div class="text4"><b>작성자</b><br>${usernick}</div>
-                                                    <div class="text4"><b>별점</b><br>${star_img}</div>
-                                                </div>
-                                            </div>`
+                                            <div class="imgBox">
+                                                <img class="imgBox" src="${image}">
+                                            </div>
+                                            <div class="textBox">
+                                                <div class="text1"><b></b>${title}</div>
+                                                <hr style="margin-top: -25px; margin-bottom: 30px; width: 330px; float: left;">                                                <div class="text2"><b>시놉시스</b><br>${synopsis}</div>
+                                                <div class="text3"><b>한줄평가</b><br>${comment}</div>
+                                                <div class="text4"><b>작성자</b><br>${usernick}</div>
+                                                <div class="text4"><b>별점</b><br>${star_img}</div>
+                                            </div>
+                                        </div>`
 
                             $('#main_List').append(temp_html)
                         }
@@ -792,11 +789,17 @@
             <div class="Nickbar">
                 <div><span id="nickname">{{ my_drama }}</span>님의 리뷰 모아보기</div>
             </div>
-            <div class="mainWrap">
-                <div class="mainList" id="main_List"></div>
+            <div class="mainList" id="main_List">
+                {% for drama in dramas %}
+                <div class="mainContent">
+                    <div class="mainWrap">
+                        <div class="mainList" id="main_List"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
     <div class="footer">
     </div>
 </body>
