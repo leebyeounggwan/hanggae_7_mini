@@ -466,13 +466,8 @@
         margin-top: 80px;
     }
 
-    .searchBar {
-        width: 500px;
-        height: 25px;
+    .Nickbar {
         padding: 10px;
-        border-radius: 25px;
-        border: none;
-        outline: none;
         color: ghostwhite;
         font-size: 25px;
         background-color: transparent;
@@ -643,6 +638,7 @@
                     } else {
                         alert(response['msg']);
                         window.location.href='/login'
+
                     }
                 }
             })
@@ -792,16 +788,16 @@
 </div>
 <div class="body">
     <div class="bodyInwrap">
-
-       <p><h3><span id = "nickname">닉네임</span>님의 리뷰 모아보기</h3></p>
-
-        <div class="mainWrap">
-            <div class="mainList" id="main_List">
+        <div class="searchWrap">
+            <div class="Nickbar">
+                <div><span id="nickname">{{ my_drama }}</span>님의 리뷰 모아보기</div>
+            </div>
+            <div class="mainWrap">
+                <div class="mainList" id="main_List"></div>
             </div>
         </div>
     </div>
-</div>
-<div class="footer">
-</div>
+    <div class="footer">
+    </div>
 </body>
 </html>
