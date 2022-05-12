@@ -644,28 +644,28 @@
 
 <script>
     $(document).ready(function () {
-    });
-
-    $.ajax({
-        type: "GET",
-        url: "/api/login/user_check",
-        success: function (response) {
-            if (response['result'] == 'success') {
-                userinfo = response['userinfo']
-                console.log(userinfo)
-                document.getElementById("buttonLogin").style.display = "none";
-                document.getElementById("buttonSignin").style.display = "none";
-                const btnElement = document.getElementById('buttonMypage');
-                btnElement.innerText = userinfo['nick'];
-                document.getElementById("buttonMypage").style.display = "";
-                document.getElementById("buttonLogout").style.display = "";
-            } else {
-                document.getElementById("buttonLogin").style.display = "";
-                document.getElementById("buttonLogout").style.display = "none";
-                document.getElementById("buttonMypage").style.display = "none";
+        $.ajax({
+            type: "GET",
+            url: "/api/login/user_check",
+            success: function (response) {
+                console.log(response['result'])
+                if (response['result'] == 'success') {
+                    userinfo = response['userinfo']
+                    console.log(userinfo)
+                    document.getElementById("buttonLogin").style.display = "none";
+                    document.getElementById("buttonSignin").style.display = "none";
+                    const btnElement = document.getElementById('buttonMypage');
+                    btnElement.innerText = userinfo['nick'];
+                    document.getElementById("buttonMypage").style.display = "";
+                    document.getElementById("buttonLogout").style.display = "";
+                } else {
+                    document.getElementById("buttonLogin").style.display = "";
+                    document.getElementById("buttonLogout").style.display = "none";
+                    document.getElementById("buttonMypage").style.display = "none";
+                }
             }
-        }
-    })
+        })
+    });
 
     function gomain() {
         window.location.href = "/"
@@ -699,28 +699,29 @@
                 } else {
                     // 로그인이 안되면 에러메시지를 띄웁니다.
                     alert(response['msg'])
+                    window.location.reload()
                 }
             }
         })
     }
-
+    // 검색 기능
     function find_word() {
         $('#main_List').empty()
         let check = false
         let drama = $('#search_Bar').val()
         $.ajax({
             type: 'POST',
-            url: '/search_drama',
+            url: '/api/search_drama',
             data: {search_d_give: drama},
             success: function (response) {
                 let rows = response['dramas']
 
                 for (let i = 0; i < rows.length; i++) {
-
-                    let title = rows[i]["title"]
-                    let synopsis = rows[i]['synopsis']
-                    let comment = rows[i]['comment']
-                    let drama = $('#search_Bar').val()
+                    // 검색어 && 전달받은 데이터 공백제거
+                    let title = rows[i]["title"].replace(/\s/gi, "")
+                    let synopsis = rows[i]['synopsis'].replace(/\s/gi, "")
+                    let comment = rows[i]['comment'].replace(/\s/gi, "")
+                    let drama = $('#search_Bar').val().replace(/\s/gi, "")
 
                     if (title.includes(drama) || synopsis.includes(drama) || comment.includes(drama)) {
                         let title = rows[i]['title']
@@ -778,10 +779,10 @@
     </div>
     <div class="button_box">
         <button id="buttonLogin" class="buttonTop" onclick="login()">로그인</button>
-        <button id="buttonMypage" class="buttonTop" onclick="mypage()">내페이지</button>
-        <button id="buttonLogout" class="buttonTop" onclick="logout()">로그아웃</button>
         <button id="buttonSignin" class="buttonTop" onclick="signin()">회원가입</button>
         <button id="buttonWrite" class="buttonTop" onclick="write_click()">리뷰쓰기</button>
+        <button id="buttonMypage" class="buttonTop" onclick="mypage()">내페이지</button>
+        <button id="buttonLogout" class="buttonTop" onclick="logout()">로그아웃</button>
     </div>
 </div>
 <div class="body">
@@ -806,7 +807,6 @@
                             <div class="text4"><b>작성자<br></b>{{ drama.usernick }}</div>
                             <div class="text5"><b>별점<br></b>
                                 <script>document.write('⭐'.repeat({{ drama.star }}))</script>
-
                             </div>
                         </div>
                     </div>
