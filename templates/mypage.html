@@ -521,48 +521,59 @@
     }
 
     .imgBox {
-        width: 250px;
-        height: 375px;
+        width: 260px;
+        height: 390px;
         object-fit: cover;
         /*border: 2px solid firebrick;*/
-        border-bottom-right-radius: 25px;
+        /*border-bottom-right-radius: 55px;*/
+        border-top-left-radius: 55px;
+        border-bottom-left-radius: 55px;
         /*padding: 5px;*/
         /*margin-right: 10px;*/
     }
 
     .textBox {
         width: 400px;
-        height: 375px;
-        /*border: 1px solid white;*/
+        height: 390px;
+        {#border: 1px solid white;#}
         display: block;
         flex-direction: column;
         flex-wrap: nowrap;
         justify-content: center;
         align-items: flex-start;
+        background: linear-gradient(180deg, maroon 1%, transparent);
+        border-top-right-radius: 55px;
+        border-bottom-right-radius: 55px;
     }
 
     .text1 {
-        width: 370px;
+        width: 340px;
         height: auto;
-        /*border: 1px solid white;*/
-        font-size: 34px;
+        {#border: 1px solid white;#}
+        font-size: 26px;
+        font-weight: bolder;
         font-family: 'Gothic A1', sans-serif;
         color: white;
+        margin-top: 20px;
         margin-left: 15px;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         text-shadow: 2px 2px 4px black;
+        {#background: linear-gradient(to right, firebrick, firebrick 5%, transparent);#}
+        padding: 6px;
     }
 
     .text2 {
-        width: 370px;
+        width: 340px;
         height: 60px;
         font-family: 'Gothic A1', sans-serif;
         font-size: 14px;
         color: white;
-        /*border: 1px solid white;*/
+        {#border: 1px solid white;#}
         overflow: auto;
+        margin-top: -20px;
         margin-left: 15px;
         margin-bottom: 25px;
+        padding: 4px;
     }
 
     .text2::-webkit-scrollbar {
@@ -578,26 +589,51 @@
     }
 
     .text3 {
+        width: 340px;
+        height: 40px;
+        font-family: 'Gothic A1', sans-serif;
+        font-size: 14px;
+        color: white;
+        {#border: 1px solid white;#}
+        overflow: auto;
+        margin-left: 15px;
+        margin-bottom: 30px;
+        padding: 4px;
+    }
+
+    .text3::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    .text3::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .text3::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+
+    .text4 {
         width: 370px;
         height: 35px;
         font-family: 'Gothic A1', sans-serif;
         font-size: 14px;
         color: white;
-        /*border: 1px solid white;*/
-        overflow: hidden;
+        {#border: 1px solid white;#}
         margin-left: 15px;
-        margin-bottom: 45px;
+        margin-bottom: 10px;
+        padding: 4px;
     }
 
-    .text4 {
+    .text5 {
         width: 370px;
-        height: 25px;
+        height: 35px;
         font-family: 'Gothic A1', sans-serif;
-        font-size: 14px;
+        font-size: 11px;
         color: white;
-        /*border: 1px solid white;*/
+        {#border: 1px solid white;#}
         margin-left: 15px;
-        margin-bottom: 20px;
+        padding: 4px;
     }
 
     .btn-deletereview {
@@ -704,17 +740,19 @@
                             let star_img = '⭐'.repeat(star)
 
                             let temp_html = `<div class="mainContent">
-                                            <div class="imgBox">
-                                                <img class="imgBox" src="${image}">
-                                            </div>
-                                            <div class="textBox">
-                                                <div class="text1"><b></b>${title}</div>
-                                                <hr style="margin-top: -25px; margin-bottom: 30px; width: 330px; float: left;">                                                <div class="text2"><b>시놉시스</b><br>${synopsis}</div>
-                                                <div class="text3"><b>한줄평가</b><br>${comment}</div>
-                                                <div class="text4"><b>작성자</b><br>${usernick}</div>
-                                                <div class="text4"><b>별점</b><br>${star_img}</div>
-                                            </div>
-                                        </div>`
+                                                    <div class="imgBox">
+                                                        <img class="imgBox" src="${image}">
+                                                    </div>
+                                                    <div class="textBox">
+                                                        <div class="text1"><b></b>${title}</div>
+                                                        <hr style="margin-top: -25px; margin-bottom: 30px; width: 330px; float: left;">
+                                                        <div class="text2"><b>시놉시스</b><br>${synopsis}</div>
+                                                        <div class="text3"><b>한줄평가</b><br>${comment}</div>
+                                                        <div class="text4"><b>작성자</b><br>${usernick}</div>
+                                                        <div class="text5"><b>별점</b><br>${star_img}</div>
+                                                        <div class="btn-deletereview"> <button class="buttonDel"> 게시물삭제 </button>
+                                                    </div>
+                                                </div>`
 
                             $('#main_List').append(temp_html)
                         }
@@ -768,11 +806,9 @@
             <div class="Nickbar">
                 <div><span id="nickname">{{ my_drama }}</span>님의 리뷰 모아보기</div>
             </div>
-            <div class="mainList" id="main_List">
-                <div class="mainContent">
-                    <div class="mainWrap">
-                        <div class="mainList" id="main_List"></div>
-                    </div>
+            <div class="mainWrap">
+                <div class="mainList" id="main_List">
+
                 </div>
             </div>
         </div>
