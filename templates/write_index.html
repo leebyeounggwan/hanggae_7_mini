@@ -672,27 +672,21 @@
 
        function check() {
             if ($("#title").val().length == "") {
-
                 alert("제목을 입력해 주세요"); $("#title").focus(); return false;
 
             } else if ($("#image_url").val()== "") {
-
                 alert("URL을 입력해 주세요"); $("#image_url").focus(); return false;
 
             } else if ($("#star option:selected").val() == "작품의 평점을 남겨 주세요") {
-
                 alert("평점을 선택해 주세요"); $("#star").css("color", "red", "font" , "bold"); return false;
 
             } else if ($("#synopsis").val().length == "") {
-
                 alert("줄거리를 입력해 주세요"); $("#synopsis").focus(); return false;
 
             } else if ($("#comment").val().length == "") {
-
                 alert("감상평을 입력해 주세요"); $("#comment").focus() ; return false;
             } else {
                 posting(); $("#title").focus();
-                window.location.href = '/'
                 return true;
             }
         }
@@ -720,7 +714,7 @@
             },
             success: function (response) {
                 alert(response['msg'])
-                window.location.reload()
+                window.location.href = '/'
             }
         });
     }
