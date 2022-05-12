@@ -474,8 +474,12 @@
     .Nickbar {
         padding: 10px;
         color: ghostwhite;
-        font-size: 25px;
+        font-size: 30px;
         background-color: transparent;
+        text-shadow: 2px 2px 2px black;
+        font-family: 'Gothic A1', sans-serif;
+        font-weight: bolder;
+
     }
 
     .buttonSearch {
@@ -510,8 +514,8 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
-
     }
+
 
     .mainContent {
         display: flex;
@@ -831,7 +835,9 @@
     <div class="bodyInwrap">
         <div class="searchWrap">
             <div class="Nickbar">
-                <div><span id="nickname">닉네임</span>님의 리뷰 모아보기</div>
+
+                <div class="NickName"><span id="nickname">{{ my_drama }}</span>님의 리뷰 모아보기</div>
+
             </div>
             <div class="mainWrap">
                 <div class="mainList" id="main_List">
