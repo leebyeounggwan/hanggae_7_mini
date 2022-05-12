@@ -537,6 +537,23 @@
 
 <script>
 
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/login/user_check",
+            success: function (response) {
+                if (response['result'] == 'success') {
+                    userinfo = response['userinfo']
+                    /* console.log(userinfo) */
+                    const btnElement = document.getElementById('buttonMypage');
+                    btnElement.innerText = userinfo['nick'];
+                } else {
+                    alert (response['msg']);
+                }
+            }
+        })
+    });
+
     function gomain() {
             window.location.href = "/"
         }
@@ -642,9 +659,9 @@
         <img onclick="gomain()" src="/static/naeflix.png" style="width: 100%">
     </div>
     <div class="button_head">
-        <button class="buttonTop" id="btn-logout" onclick="logout()">로그아웃</button>
-        <button class="buttonTop" id="btn-signout" onclick="window.location.href='/mypage'">내페이지</button>
         <button class="buttonTop" onclick="window.location.href='/write_index'">리뷰쓰기</button>
+        <button class="buttonTop" id="btn-signout" onclick="window.location.href='/mypage'">내페이지</button>
+        <button class="buttonTop" id="btn-logout" onclick="logout()">로그아웃</button>
     </div>
 </div>
 <div class="body">
