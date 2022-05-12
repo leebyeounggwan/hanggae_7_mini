@@ -672,6 +672,21 @@
 
 
        function check() {
+            $.ajax({
+                type: "GET",
+                url: "/api/login/user_check",
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        userinfo = response['userinfo']
+                        console.log(userinfo) // 작성하기 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음
+                    } else {
+                        // 작성하기 버튼 클릭시 로그인이 안되어 있다면 에러메시지를 띄웁니다. 로그인페이지로 이탈함.
+                        alert(response['msg'])
+                        window.location.href = "/login"
+                    }
+                }
+            })
+
             if ($("#title").val().length == "") {
                 alert("제목을 입력해 주세요"); $("#title").focus(); return false;
 
