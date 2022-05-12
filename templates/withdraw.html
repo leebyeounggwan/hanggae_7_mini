@@ -516,7 +516,7 @@
 
     function delete_user() {
         let id = `{{ id }}`;
-        let check = $("input[name='check_info']:checked").val();
+        let check = $("input[name='Goodbyechk']:checked").val();
         if (check == 'checked') {
             $.ajax({
                 type: "POST",
