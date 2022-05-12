@@ -492,7 +492,7 @@
     }
 
     .buttonTop {
-        width: 80px;
+        width: 200px;
         height: 45px;
         border: none;
         color: ghostwhite;
@@ -510,13 +510,32 @@
 </style>
 
 <script>
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/login/user_check",
+            success: function (response) {
+                if (response['result'] == 'success') {
+                    userinfo = response['userinfo']
+                    /* console.log(userinfo) */
+                    const btnElement = document.getElementById('btn-mypage');
+                    btnElement.innerText = userinfo['nick'];
+                } else {
+                    alert (response['msg']);
+                    window.location.href = "/"
+                }
+            }
+        })
+    });
+
     function gomain() {
         window.location.href = "/"
     }
 
     function delete_user() {
         let id = `{{ id }}`;
-        let check = $("input[name='Goodbyechk']:checked").val();
+        let check = $("input[name='checkinfo']:checked").val();
         if (check == 'checked') {
             $.ajax({
                 type: "POST",
@@ -524,6 +543,7 @@
                 data: {id_give: id},
                 success: function (response) {
                     alert(response["msg"])
+                    $.removeCookie('mytoken');
                     window.location.href = "/"
                 }
             });
@@ -557,9 +577,9 @@
         <img onclick="window.location.href='/'" src="/static/naeflix.png" style="width: 100%">
     </div>
     <div class="button_head">
-        <button class="buttonTop" id="btn-logout" onclick="logout()">로그아웃</button>
-        <button class="buttonTop" id="btn-signout" onclick="window.location.href='/mypage'">내페이지</button>
         <button class="buttonTop" onclick="window.location.href='/write_index'">리뷰쓰기</button>
+        <button class="buttonTop" id="btn-mypage" onclick="window.location.href='/mypage'">내페이지</button>
+        <button class="buttonTop" id="btn-logout" onclick="logout()">로그아웃</button>
     </div>
 </div>
 <div class="body">
@@ -575,7 +595,7 @@
                     <div><p class="noticeText 3">사용하고 계신 아이디 : {{ id }}</p></div>
                     <div><p class="noticeText 4">탈퇴하실 경우, 작성해 주신 모든 리뷰는 삭제되며, <br> 삭제 된 데이터는 복구할 수 없습니다.</p></div>
                         <div class="chkDiv">
-                            <input type="checkbox" class="chk" value="checked" id="Goodbyechk">
+                            <input type="checkbox" class="chk" value="checked" name='checkinfo'>
                             <label for="Goodbyechk" style="font-size: 16px; color: ghostwhite">안내 사항을 모두 확인하였으며, 이에 동의 합니다.</label>
                         </div>
                     <div>

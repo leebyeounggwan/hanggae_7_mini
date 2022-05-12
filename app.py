@@ -97,7 +97,7 @@ def api_login():
     if result is not None:
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=600)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=20)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
@@ -255,7 +255,7 @@ def update_pw():
 
 
 
-@app.route('/search_drama', methods=["POST"])
+@app.route('/api/search_drama', methods=["POST"])
 def drama_get():
     search_d_receive = request.form['search_d_give']
     drama_list = list(db.drama.find( {},{'_id':False}) )
