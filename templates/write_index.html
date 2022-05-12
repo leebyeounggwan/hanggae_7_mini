@@ -678,7 +678,40 @@
                 success: function (response) {
                     if (response['result'] == 'success') {
                         userinfo = response['userinfo']
-                        console.log(userinfo) // 작성하기 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음
+                        console.log(userinfo) // 작성하기 버튼 클릭시 로그인 되어 있다면 별다른 처리 없음, 예외처리 진행
+
+                        /// 여기부터 로그인 만료 처리 전 코드
+                        if ($("#title").val().length == "") {
+                            alert("제목을 입력해 주세요");
+                            $("#title").focus();
+                            return false;
+
+                        } else if ($("#image_url").val() == "") {
+                            alert("URL을 입력해 주세요");
+                            $("#image_url").focus();
+                            return false;
+
+                        } else if ($("#star option:selected").val() == "작품의 평점을 남겨 주세요") {
+                            alert("평점을 선택해 주세요");
+                            $("#star").css("color", "red", "font", "bold");
+                            return false;
+
+                        } else if ($("#synopsis").val().length == "") {
+                            alert("줄거리를 입력해 주세요");
+                            $("#synopsis").focus();
+                            return false;
+
+                        } else if ($("#comment").val().length == "") {
+                            alert("감상평을 입력해 주세요");
+                            $("#comment").focus();
+                            return false;
+                        } else {
+                            posting();
+                            $("#title").focus();
+                            return true;
+                        }
+                        /// 여기까지 로그인 만료 처리 전 코드
+
                     } else {
                         // 작성하기 버튼 클릭시 로그인이 안되어 있다면 에러메시지를 띄웁니다. 로그인페이지로 이탈함.
                         alert(response['msg'])
@@ -687,24 +720,6 @@
                 }
             })
 
-            if ($("#title").val().length == "") {
-                alert("제목을 입력해 주세요"); $("#title").focus(); return false;
-
-            } else if ($("#image_url").val()== "") {
-                alert("URL을 입력해 주세요"); $("#image_url").focus(); return false;
-
-            } else if ($("#star option:selected").val() == "작품의 평점을 남겨 주세요") {
-                alert("평점을 선택해 주세요"); $("#star").css("color", "red", "font" , "bold"); return false;
-
-            } else if ($("#synopsis").val().length == "") {
-                alert("줄거리를 입력해 주세요"); $("#synopsis").focus(); return false;
-
-            } else if ($("#comment").val().length == "") {
-                alert("감상평을 입력해 주세요"); $("#comment").focus() ; return false;
-            } else {
-                posting(); $("#title").focus();
-                return true;
-            }
         }
 
     function posting() {

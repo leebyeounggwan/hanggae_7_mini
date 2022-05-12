@@ -560,14 +560,41 @@
         }
 
     function check_update() {
-
         $.ajax({
             type: "GET",
             url: "/api/login/user_check",
             success: function (response) {
                 if (response['result'] == 'success') {
                     userinfo = response['userinfo']
-                    console.log(userinfo) // 비번변경 시도시 로그인 되어 있다면 별다른 처리 없음
+                    console.log(userinfo) // 비번변경 시도시 로그인 되어 있다면 별다른 처리 없음, 비번변경 절차로 진행
+
+                    ////여기부터 로그인 만료 처리 전 코드
+                    let crrpassword = $("#input-crrpassword").val()
+                    if (crrpassword == "") {
+                        alert("현재 사용 중인 비밀번호를 확인해주세요.")
+                        return;
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/check_pw",
+                        data: {
+                            pw_give: crrpassword
+                        },
+                        success: function (response) {
+                            console.log(response)
+                            if (response["same"] == "fail") {
+                                $("#help-crrpassword").text("현재 비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+                                $("#help-crrpassword").css("color", "red")
+                            } else {
+                                $("#help-crrpassword").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+                                $("#help-crrpassword").css("color", "green")
+                                update_pw()
+                            }
+                        }
+                    });
+                    ////여기까지 로그인 만료 처리 전 코드
+
                 } else {
                     // 비번변경 시도시 로그인이 안되어 있다면 에러메시지를 띄웁니다. 로그인 페이지로 이탈.
                     alert(response['msg'])
@@ -576,31 +603,6 @@
             }
         })
 
-        let crrpassword = $("#input-crrpassword").val()
-        if (crrpassword == "") {
-            alert("현재 사용 중인 비밀번호를 확인해주세요.")
-            return;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/check_pw",
-            data: {
-                pw_give: crrpassword
-            },
-            success: function (response) {
-                console.log(response)
-                if (response["same"] == "fail") {
-                    $("#help-crrpassword").text("현재 비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
-                    $("#help-crrpassword").css("color", "red")
-                } else {
-                    $("#help-crrpassword").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
-                    $("#help-crrpassword").css("color", "green")
-                    update_pw()
-
-                }
-            }
-        });
     }
 
     function update_pw() {
