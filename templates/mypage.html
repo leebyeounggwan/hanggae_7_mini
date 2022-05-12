@@ -631,6 +631,21 @@
 
         $(document).ready(function () {
             my_list();
+
+            $.ajax({
+                type: "GET",
+                url: "/api/login/user_check",
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        userinfo = response['userinfo']
+                        console.log(userinfo)
+                        document.getElementById('nickname').innerText = userinfo['nick'];
+                        /* $('nickname').text(userinfo['nick']); */
+                    } else {
+                        alert(response['msg']);
+                    }
+                }
+            })
         });
 
         function gomain() {
@@ -756,11 +771,10 @@
 <div class="body">
     <div class="bodyInwrap">
 
+       <p><h3><span id = "nickname">닉네임</span>님의 리뷰 모아보기</h3></p>
+
         <div class="mainWrap">
             <div class="mainList" id="main_List">
-
-
-
             </div>
         </div>
     </div>
